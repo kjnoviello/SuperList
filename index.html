@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Super List App</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap" rel="stylesheet" />
-    <link href="fontawesome/css/all.min.css" rel="stylesheet" />
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap" rel="stylesheet" /> -->
     <link href="css/default.css" rel="stylesheet" />
   </head>
   <body>
     <div class="container">
       <div class="container_text">
-        <i class="fas fa-list fa-2x container_text_icon"></i>
+        <img width="60" height="60" src="./img/icons8-lista-64.png" class="container_text_icon" alt="lista-icon"/>
         <h1 class="container_text_h1">Super List</h1>
       </div>
       <div class="container_img">
@@ -21,14 +20,16 @@
         <!-- Actual List -->
         <section class="section">
           <h2 class="section_header">Today List</h2>
+          <table>
+            <tr class="section_table_header">
+              <th><strong><em>Product</em></strong></th>
+              <th><strong><em>Unit</em></strong></th>
+              <th><strong><em>Price</em></strong></th>
+              <th><strong><em>Total</em></th>
+            </tr>
+          </table>
           <div class="section_table">
             <table>
-              <tr class="section_table_header">
-                <th><strong><em>Product</em></strong></th>
-                <th><strong><em>Unit</em></strong></th>
-                <th><strong><em>Price</em></strong></th>
-                <th><strong><em>Total</em></th>
-              </tr>
               <tr>
                 <td>Bananas</td>        <!--producto-->
                 <td>1 (by default)</td> <!--unidades-->
@@ -77,6 +78,31 @@
                 <td>$30</td>
                 <td>$120</td>
               </tr>
+              <tr>
+                <td>Potatoes</td>
+                <td>4</td>
+                <td>$30</td>
+                <td>$120</td>
+              </tr>
+              <tr>
+                <td>Potatoes</td>
+                <td>4</td>
+                <td>$30</td>
+                <td>$120</td>
+              </tr>
+              <tr>
+                <td>Potatoes</td>
+                <td>4</td>
+                <td>$30</td>
+                <td>$120</td>
+              </tr>
+              <tr>
+                <td>Potatoes</td>
+                <td>4</td>
+                <td>$30</td>
+                <td>$120</td>
+              </tr>
+              
             </table>
           </div>
         </section>
@@ -86,6 +112,21 @@
           <h2 class="section_header">Saved List</h2>
           <div class="section_div_img">
             <figure class="section_img">
+              <img src="./img/saved_list_01.jpg" alt="Image"/>
+              <figcaption>
+                <span class="section_img_list_name">Tonight´s dinner list</span>
+                <span class="section_img_list_name">13/05/2023</span>
+              </figcaption>
+            </figure>
+             <figure class="section_img">
+              <img src="./img/saved_list_01.jpg" alt="Image"/>
+              <figcaption>
+                <span class="section_img_list_name">Tonight´s dinner list</span>
+                <span class="section_img_list_name">13/05/2023</span>
+              </figcaption>
+            </figure>
+           
+             <figure class="section_img">
               <img src="./img/saved_list_01.jpg" alt="Image"/>
               <figcaption>
                 <span class="section_img_list_name">Tonight´s dinner list</span>
@@ -134,31 +175,29 @@
           <div class="section_social_icon">
             <div class="section_social_container">
               <a href="https://es-la.facebook.com/" title="facebook"  class="section_social">
-                <i class="fab fa-facebook"></i>
+                <img width="50" height="50" src="./img/icons8-facebook.svg" alt="facebook-icon"/>
               </a>
             </div>
             <div class="section_social_container">
               <a href="https://twitter.com/?lang=es" title="twitter" class="section_social">
-                <i class="fab fa-twitter"></i>
+                <img width="50" height="50" src="./img/icons8-twitter.svg" alt="twitter-icon"/>
               </a>
             </div>
             <div class="section_social_container">
               <a href="https://www.instagram.com/" title="instagram" class="section_social">
-                <i class="fab fa-instagram"></i>
+                <img width="50" height="50" src="./img/icons8-instagram.svg" alt="instgram-icon"/>
               </a>
             </div>
             <div class="section_social_container">
               <a href="https://wa.me/3416851106" title="whatsapp" class="section_social">
-                <i class="fab fa-whatsapp"></i>
+                <img width="50" height="50" src="./img/icons8-whatsapp.svg" alt="whatsapp-icon"/>
               </a>
             </div>
           </div>
         </section>
       </div>
       <footer>
-        <p class="tm-text-white footer_text">
-          Copyright &copy; 2023 Developed by Kevin Joel Noviello
-          <a href="https://github.com/kjnoviello" title="github" class="footer_text_link"></a>
+        <p class="footer_text">Copyright &copy; 2023 Developed by <a href="https://github.com/kjnoviello" title="github" class="footer_text_link"><strong>Kevin Joel Noviello</strong></a>
         </p>
       </footer>
     </div>

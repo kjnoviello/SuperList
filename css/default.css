@@ -9,7 +9,7 @@
 
 body{
   background-color: #3a4a58;
-  color: #8c8c8c;
+  color: #666565;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-size: 17px;
   font-weight: 400;
@@ -22,7 +22,10 @@ hr {
   border: 0.5px solid #ccc;
 }
 
-img { max-width: 100%; }
+img { 
+  max-width: 100%;
+  width: 250px;
+}
 img:hover{
   scale: 110%;
   transition: all 0.3s ease;
@@ -34,13 +37,41 @@ figcaption {
 
 figcaption span {
   display: block;
-  color: #333333;
   font-size: 18px;
 }
 
+
+table {
+  width: 100%;
+  border-spacing: 0;
+}
+
+td {
+  text-align: center;
+  padding: 10px 15px;
+  color: #333333;
+}
+
+tr:nth-child(odd) { background-color: #e5e8ed; }
+
+th {
+  color: #333333;
+  font-weight: 400;
+  font-size: 1.2rem;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+
 /* CONTAINER */
 .container{
-  max-width: 840px;
+  max-width: 850px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -48,6 +79,8 @@ figcaption span {
 .container_text{
   color: white;
   text-align: center;
+  justify-content: center;
+  display: flex;
 }
 
 .container_text_icon{
@@ -63,6 +96,7 @@ figcaption span {
   margin-bottom: 35px;
   font-size: 2.1rem;
   font-weight: 600;
+  padding: 10px;
 }
 
 .container_img{
@@ -73,7 +107,8 @@ figcaption span {
   background-image: url(../img/main.jpg);
   background-position: center;
   background-size: cover;
-  min-height: 425px;
+  object-fit: fill;
+  min-height: 300px;
 }
 
 /* ACTUAL LIST */
@@ -86,6 +121,12 @@ figcaption span {
   height: 50px;
 }
 
+.section_table{ 
+  overflow-x: auto;
+  overflow-y: scroll;
+  height: 400px;
+}
+
 .section_header {
   color: #996633;
   text-align: center;
@@ -95,30 +136,12 @@ figcaption span {
   margin-bottom: 30px;
 }
 
-table {
-  width: 100%;
-  border-spacing: 0;
-}
-
-td {
-  text-align: center;
-  padding: 10px 15px;
-}
-
-tr:nth-child(odd) { background-color: #e5e8ed; }
-
-th {
-  color: #333333;
-  font-weight: 400;
-  font-size: 1.2rem;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
 /* SAVED LIST */
 
 .section_div_img{
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin-left: -15px;
   margin-right: -15px;
 }
@@ -131,7 +154,6 @@ th {
 .section_img_list_name{
   margin-top: 20px;
   margin-bottom: 10px;
-  font-size: 16px;
 }
 
 
@@ -143,16 +165,10 @@ th {
   padding-top: 0;
 }
 
-p {
-  font-size: 1rem;
-  line-height: 1.7;
-  text-align: center;
-}
-
 /* SOCIAL */
 .section_social{
   color: white;
-  background-color: #c5ced8;
+  /* background-color: #c5ced8; */
   border-radius: 2px;
   width: 35px;
   height: 35px;
@@ -165,7 +181,7 @@ p {
 }
 
 .section_social:hover{
-  background-color: #808e9e;
+  /* background-color: #808e9e; */
   scale: 110%;
   transition: all 0.3s ease;
 }
@@ -174,9 +190,7 @@ p {
   text-align: center;
   margin-top: 30px;
 }
-.section_social_icon i{
-  font-size: 1.2rem;
-}
+
 
 .section_social_container{
   display: inline-block;
@@ -193,29 +207,29 @@ a {
 }
 
 /* FOOTER */
-.footer_text{
-  font-size: 0.9rem;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  text-align: center;
-  color: white;
-}
-
-.footer_text:hover{
-  color: #c5ced8;
-}
 
 .footer_text_link{
   color: #fff;
   text-decoration: none;
 }
 
+.footer_text{
+  color: #fff;
+}
+
 /* MEDIA */
 @media (max-width: 430px) {
+  img{
+    width: auto;
+  }
   .section_table{ 
     overflow-x: auto;}
   table {width: auto;}
-  .section_div_img{ flex-direction: column;}
+  .section_div_img{ 
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
   .section_img{margin-bottom: 40px;}
   figcaption p {
     margin-bottom: 0;
@@ -224,23 +238,25 @@ a {
 }
 
 @media (max-width: 550px) {
+  img{
+    width: auto;
+  }
   .section_div_img {
     padding-left: 10px;
     padding-right: 10px;
-  }
-  .section_img {
-    margin-left: -10px;
-    margin-right: -10px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 
 @media (max-width: 480px) {
+  img{
+    width: auto;
+  }
   .section_div_img {
     padding-left: 5px;
     padding-right: 5px;
-  }
-  .section_img {
-    margin-left: -5px;
-    margin-right: -5px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
