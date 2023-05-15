@@ -87,6 +87,7 @@ p {
   display: inline-block;
   vertical-align: baseline;
   padding: 15px;
+  width: auto;
 }
 
 .container_text_h1{
