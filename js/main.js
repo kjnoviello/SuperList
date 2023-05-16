@@ -1,4 +1,4 @@
-class Producto {
+/* class Producto {
     sku;            // Identificador único del producto
     nombre;         // Su nombre
     precio;         // Su precio
@@ -199,4 +199,4 @@ setTimeout(() => {
         .finally(() => {
             console.log("dentro de finally");
         });
-}, 6000);
+}, 6000); */

@@ -16,7 +16,9 @@ body{
   padding: 15px;
   margin: 0;
 }
-
+.bodyColor{
+  background-color: greenyellow;
+}
 hr {
   width: 60%;
   border: 0.5px solid #ccc;
@@ -52,7 +54,7 @@ td {
   color: #333333;
 }
 
-tr:nth-child(odd) { background-color: #e5e8ed; }
+tr:nth-child(even) { background-color: #e5e8ed; }
 
 th {
   color: #333333;
@@ -125,7 +127,7 @@ p {
 .section_table{ 
   overflow-x: auto;
   overflow-y: scroll;
-  height: 400px;
+  max-height: 500px;
 }
 
 .section_header {
@@ -163,7 +165,6 @@ p {
   max-width: 490px;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 0;
 }
 
 /* SOCIAL */
