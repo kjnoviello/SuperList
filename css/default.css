@@ -50,6 +50,7 @@ table {
 
 td {
   text-align: center;
+  width: 25%;
   padding: 10px 15px;
   color: #333333;
 }
@@ -62,6 +63,7 @@ th {
   font-size: 1.2rem;
   padding-left: 15px;
   padding-right: 15px;
+  width: 25%;
 }
 
 p {

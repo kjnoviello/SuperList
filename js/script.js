@@ -1,15 +1,16 @@
 
 // DEFINO LA CLASE ENTRADA DEL PRODUCTO
 class Entrada {
-    nombre;       // Nombre del producto
-    cantidad;    // Cantidad del producto a ingresar
-    precio;       // Precio por unidad del producto
+    nombre;         // Nombre del producto
+    cantidad;       // Cantidad del producto a ingresar
+    precio;         // Precio por unidad del producto
 
     constructor(nombre, cantidad, precio,) {
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.precio = precio;
 
+        // dejo por default 1 unidad
         if (cantidad) {
             this.cantidad = cantidad;
         } else {
@@ -19,16 +20,16 @@ class Entrada {
     };
 };
 
+
+// DECLARO VARIABLES SIN INICIAR
 let nombre; 
 let cantidad; 
 let precio; 
 let total = cantidad*precio;
-
 const array = [];
 
 
-
-
+// DEFINO LA CLASE PARA ENTRADA DEL PRODUCTO CON EL PRECIO ACUMULATIVO A LA TABLA
 class ListaEntradas {
     listaEntrada;
     totalAcumulado;
@@ -38,6 +39,7 @@ class ListaEntradas {
             this.totalAcumulado = 0;
         };
         
+        // DEFINO LA FUNCION PARA AGREGAR LA ENTRADA A LA TABLA
         agregarListaEntrada(){
             do {
                 nombre = prompt("ingrese el nombre del producto. En este campo ingresar ESC para salir");
@@ -49,7 +51,7 @@ class ListaEntradas {
                     this.totalAcumulado = this.totalAcumulado + cantidad*precio
                     
                     const array = new Entrada(nombre, cantidad, precio);
-                    console.log(array);
+                    console.log(array);         // prueba de control
                     
                     let contenedor = document.getElementById("tablas");
                     
@@ -61,16 +63,18 @@ class ListaEntradas {
                     <td>$ ${array.precio}</td>
                     <td>$ ${this.totalAcumulado}</td>
                     `;
-                    
+    
                     contenedor.append(nuevo);
                 };
             } while (nombre !== "ESC");
         };
 };
 
+// EJECUTO LA FUNCION PARA AGREGAR PRODUCTOS A LA LISTA
 const productoAgregado = new ListaEntradas;
 const productoEnTabla = productoAgregado.agregarListaEntrada()
 console.log(productoEnTabla);
+console.log(productoAgregado.listaEntrada);
 
 
 
