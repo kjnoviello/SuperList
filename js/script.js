@@ -2,7 +2,7 @@
 // DEFINO LA CLASE ENTRADA DEL PRODUCTO
 class Entrada {
     nombre;         // Nombre del producto
-    cantidad;       // Cantidad del producto a ingresar
+    cantidad = 0;       // Cantidad del producto a ingresar
     precio;         // Precio por unidad del producto
 
     constructor(nombre, cantidad, precio,) {
@@ -25,14 +25,14 @@ class Entrada {
 let nombre; 
 let cantidad; 
 let precio; 
-let total = cantidad*precio;
+let total;
 // const array = [];
 
 
 // DEFINO LA CLASE PARA ENTRADA DEL PRODUCTO CON EL PRECIO ACUMULATIVO A LA TABLA
 class ListaEntradas {
     listaEntrada;
-    totalAcumulado;
+    totalAcumulado = 0;
 
         constructor() {
             this.listaEntrada = [];
@@ -41,18 +41,33 @@ class ListaEntradas {
         
         // DEFINO LA FUNCION PARA AGREGAR LA ENTRADA A LA TABLA
         agregarListaEntrada(){
-            do {
+
+            // CON ESC SALGO DEL PROGRAMA
+            while (nombre !== "ESC") {
                 nombre = prompt("ingrese el nombre del producto. En este campo ingresar ESC para salir");
                 
-                if (nombre !== "ESC") {
-            
-                    cantidad = prompt("ingrese la cantidad del producto");
+                // SI LA ENTRADA ESTA VACIA O ES NULA DA UN AVISO
+                if (nombre === "" || nombre === null) {
+
+                    alert(`El producto ${nombre} no es válido`);
+                   
+                // CON ESC SALGO DEL PROGRAMA    
+                } else if (nombre === "ESC"){
+                    alert("adios")
+                   
+                // SI NO ES NINGUNA DE LAS ANTERIORES Y MIENTRAS NO SEA ESC SE EJECUTA EL CODIGO    
+                } else {
+                    const cantidadIngresada = prompt("Ingrese la cantidad del producto");
+                    cantidad = cantidadIngresada ? parseInt(cantidadIngresada) : 1;
+
+                    console.log(cantidad);
                     precio = parseFloat(prompt("ingrese el precio del producto"));
-                    this.totalAcumulado = this.totalAcumulado + cantidad*precio
+                    console.log(precio);
                     
                     const nuevaEntrada = new Entrada(nombre, cantidad, precio);
                     this.listaEntrada.push(nuevaEntrada);
-                    console.log(this.listaEntrada);         // prueba de control
+                    console.log(this.listaEntrada);         // prueba de control (da undefined)
+                    this.totalAcumulado = Number(this.totalAcumulado + cantidad*precio)
                     
                     let contenedor = document.getElementById("tablas");
                     
@@ -66,8 +81,9 @@ class ListaEntradas {
                     `;
     
                     contenedor.append(nuevo);
+                    
                 };
-            } while (nombre !== "ESC");
+            };
         };
 
         // DEFINO LA FUNCION PARA BUSCAR UN PRODUCTO SEGUN EL NOMBRE
