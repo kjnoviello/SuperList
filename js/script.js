@@ -71,7 +71,7 @@ if (inicio) {
     
                             // SI ES UN ENTERO POSITIVO EJECUTO EL CODIGO
                             precio = parseFloat(prompt("ingrese el precio del producto"));
-                            console.log(precio);
+                            console.log(precio);        //PRUBA DE CONTROL
     
                             // VALIDO QUE LA ENTRADA PRECIO SEA MAYOR A 0
                             while (precio <0 || isNaN(precio)) {
