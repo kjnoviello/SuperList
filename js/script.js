@@ -91,8 +91,8 @@ if (inicio) {
                             nuevo.innerHTML = `
                             <td class ="td_especial">${nuevaEntrada.nombre}</td>
                             <td>${nuevaEntrada.cantidad}</td>
-                            <td>$ ${nuevaEntrada.precio}</td>
-                            <td>$ ${this.totalAcumulado}</td>
+                            <td>$ ${nuevaEntrada.precio.toFixed(2)}</td>
+                            <td>$ ${this.totalAcumulado.toFixed(2)}</td>
                             `;
             
                             contenedor.append(nuevo);            
