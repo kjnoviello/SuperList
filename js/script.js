@@ -89,7 +89,7 @@ if (inicio) {
                             let nuevo = document.createElement("tr");
                             
                             nuevo.innerHTML = `
-                            <td>${nuevaEntrada.nombre}</td>
+                            <td class ="td_especial">${nuevaEntrada.nombre}</td>
                             <td>${nuevaEntrada.cantidad}</td>
                             <td>$ ${nuevaEntrada.precio}</td>
                             <td>$ ${this.totalAcumulado}</td>
@@ -98,6 +98,7 @@ if (inicio) {
                             contenedor.append(nuevo);            
                     };
                 };
+                return this.listaEntrada;
             };
     
             // DEFINO LA FUNCION PARA BUSCAR UN PRODUCTO SEGUN EL NOMBRE
@@ -121,6 +122,6 @@ if (inicio) {
     // SE LE AGREGA EL TIME OUT PARA ESPERAR A CARGAR EL PRODUCTO
     setTimeout(() => {
         const nuevoBuscar = productoAgregado.buscarListaEntrada("arroz")
-        console.log(nuevoBuscar);
+        console.log(`Producto ${nuevoBuscar.nombre} encontrado en la lista`);
     }, 10000);
 };

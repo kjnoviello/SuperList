@@ -55,6 +55,12 @@ td {
   color: #333333;
 }
 
+/* .td_especial{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
 tr:nth-child(even) { background-color: #e5e8ed; }
 
 th {
