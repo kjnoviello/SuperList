@@ -60,28 +60,38 @@ class ListaEntradas {
                     const cantidadIngresada = prompt("Ingrese la cantidad del producto");
                     cantidad = cantidadIngresada ? parseInt(cantidadIngresada) : 1;
 
-                    console.log(cantidad);
-                    precio = parseFloat(prompt("ingrese el precio del producto"));
-                    console.log(precio);
-                    
-                    const nuevaEntrada = new Entrada(nombre, cantidad, precio);
-                    this.listaEntrada.push(nuevaEntrada);
-                    console.log(this.listaEntrada);         // prueba de control (da undefined)
-                    this.totalAcumulado = Number(this.totalAcumulado + cantidad*precio)
-                    
-                    let contenedor = document.getElementById("tablas");
-                    
-                    let nuevo = document.createElement("tr");
-                    
-                    nuevo.innerHTML = `
-                    <td>${nuevaEntrada.nombre}</td>
-                    <td>${nuevaEntrada.cantidad}</td>
-                    <td>$ ${nuevaEntrada.precio}</td>
-                    <td>$ ${this.totalAcumulado}</td>
-                    `;
-    
-                    contenedor.append(nuevo);
-                    
+                        // VALIDO QUE LA ENTRADA CANTIDAD SEA UN ENTERO POSITIVO
+                        while (cantidad <1 || isNaN(cantidad)) {
+                            alert("Debe ingresar un numero entero positivo")
+                            const cantidadIngresada = prompt("Ingrese la cantidad del producto");
+                            cantidad = cantidadIngresada ? parseInt(cantidadIngresada) : 1;
+                        };
+                        console.log(cantidad);      //PRUEBA DE CONTROL
+
+                        // SI ES UN ENTERO POSITIVO EJECUTO EL CODIGO
+                        precio = parseFloat(prompt("ingrese el precio del producto"));
+                        console.log(precio);
+                        
+                        const nuevaEntrada = new Entrada(nombre, cantidad, precio);
+                        this.listaEntrada.push(nuevaEntrada);
+                        console.log(this.listaEntrada);         // prueba de control (da undefined)
+                        this.totalAcumulado = Number(this.totalAcumulado + cantidad*precio)
+                        
+                        let contenedor = document.getElementById("tablas");
+                        
+                        let nuevo = document.createElement("tr");
+                        
+                        nuevo.innerHTML = `
+                        <td>${nuevaEntrada.nombre}</td>
+                        <td>${nuevaEntrada.cantidad}</td>
+                        <td>$ ${nuevaEntrada.precio}</td>
+                        <td>$ ${this.totalAcumulado}</td>
+                        `;
+        
+                        contenedor.append(nuevo);
+                            
+                        
+                        
                 };
             };
         };
