@@ -68,9 +68,9 @@ class ListaEntradas {
         };
 };
 
-const campo = new ListaEntradas;
-let lineas = campo.agregarListaEntrada()
-console.log(lineas);
+const productoAgregado = new ListaEntradas;
+const productoEnTabla = productoAgregado.agregarListaEntrada()
+console.log(productoEnTabla);
 
 
 
