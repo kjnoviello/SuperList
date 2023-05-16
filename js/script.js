@@ -49,7 +49,7 @@ class ListaEntradas {
                 // SI LA ENTRADA ESTA VACIA O ES NULA DA UN AVISO
                 if (nombre === "" || nombre === null) {
 
-                    alert(`El producto ${nombre} no es válido`);
+                    alert("Debe ingresar un producto");
                    
                 // CON ESC SALGO DEL PROGRAMA    
                 } else if (nombre === "ESC"){
