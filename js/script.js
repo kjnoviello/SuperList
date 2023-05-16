@@ -121,7 +121,7 @@ if (inicio) {
     // EJECUTO LA FUNCION PARA BUSCAR UN PRODUCTO EN LA TABLA
     // SE LE AGREGA EL TIME OUT PARA ESPERAR A CARGAR EL PRODUCTO
     setTimeout(() => {
-        const nuevoBuscar = productoAgregado.buscarListaEntrada("arroz")
+        const nuevoBuscar = productoAgregado.buscarListaEntrada("arroz")        //HAY QUE ESCRIBIR ARROZ EN EL INGRESO DEL PRODUCTO
         console.log(`Producto ${nuevoBuscar.nombre} encontrado en la lista`);
     }, 10000);
 };
