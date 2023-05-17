@@ -16,9 +16,6 @@ body{
   padding: 15px;
   margin: 0;
 }
-.bodyColor{
-  background-color: greenyellow;
-}
 
 hr {
   width: 60%;
@@ -55,12 +52,6 @@ td {
   padding: 10px 15px;
   color: #333333;
 }
-
-/* .td_especial{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
 
 tr:nth-child(even) { background-color: #e5e8ed; }
 
