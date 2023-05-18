@@ -11,11 +11,7 @@ class Entrada {
         this.precio = precio;
 
         // dejo por default 1 unidad
-        if (cantidad) {
-            this.cantidad = cantidad;
-        } else {
-            this.cantidad = 1;
-        };
+        cantidad ? this.cantidad : 1;
     };
 };
 
@@ -82,7 +78,7 @@ if (inicio) {
                             const nuevaEntrada = new Entrada(nombre, cantidad, precio);
                             this.listaEntrada.push(nuevaEntrada);
                             console.log(this.listaEntrada);       // PRUEBA DE CONTROL
-                            this.totalAcumulado = Number(this.totalAcumulado + cantidad*precio)
+                            this.totalAcumulado += cantidad*precio
                             
                             // AGREGO AL DOM
                             let contenedor = document.getElementById("tablas");
@@ -104,11 +100,7 @@ if (inicio) {
             // DEFINO LA FUNCION PARA BUSCAR UN PRODUCTO SEGUN EL NOMBRE
             buscarListaEntrada(nombre){
                 const buscarProducto = this.listaEntrada.find(item => item.nombre === nombre);
-                if (buscarProducto) {
-                   return (`Producto ${nombre} encontrado en la lista`);
-                } else {
-                   return (`No existe el producto ${nombre}`);
-                }
+                return buscarProducto ? `Producto ${nombre} encontrado en la lista` : `No existe el producto ${nombre}`;
             };
 
             // DEFINO LA FUNCION PARA BORRAR UN PRODUCTO SEGUN EL NOMBRE
@@ -124,7 +116,7 @@ if (inicio) {
                     let subtotal = this.listaEntrada[indexProducto].cantidad * this.listaEntrada[indexProducto].precio
                     console.log("subtotal", subtotal);  // PRUEBA DE CONTROL
 
-                    // ELIMINO EL PRODUCTO
+                    // ELIMINO EL PRODUCTO (probar con un while para hacer un ciclo hasta borrar todos los productos iguales)
                     const borrarProducto = this.listaEntrada.splice(indexProducto, 1);
                     console.log("esto es borrarProducto", borrarProducto);  // PRUEBA DE CONTROL
                     console.log("esto es totalAcumulado antes de restar el subtotal", this.totalAcumulado);     // PRUEBA DE CONTROL
