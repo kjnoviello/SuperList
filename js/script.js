@@ -114,7 +114,7 @@ if (inicio) {
             // DEFINO LA FUNCION PARA BORRAR UN PRODUCTO SEGUN EL NOMBRE
             borrarListaEntrada(nombre){
 
-                // BUSCO EL PRODUCTO
+                // BUSCO EL PRODUCTO POR EL INDEX
                 const indexProducto = this.listaEntrada.findIndex(item => item.nombre === nombre)
                 console.log(`esto es indexProducto`, indexProducto);      // PRUEBA DE CONTROL
 
@@ -126,11 +126,9 @@ if (inicio) {
 
                     // ELIMINO EL PRODUCTO
                     const borrarProducto = this.listaEntrada.splice(indexProducto, 1);
-                    console.log("esto es borrarProducto", borrarProducto);
-                    // console.log("esto es antes de borrar el precio y busca cantidad del indexProducto", this.listaEntrada[indexProducto].cantidad + "esto es el precio", this.listaEntrada[indexProducto].precio);
+                    console.log("esto es borrarProducto", borrarProducto);  // PRUEBA DE CONTROL
+                    console.log("esto es totalAcumulado antes de restar el subtotal", this.totalAcumulado);     // PRUEBA DE CONTROL
 
-
-                    console.log("totalAcumulado", this.totalAcumulado);
                     this.totalAcumulado -= subtotal
                     return (`Producto ${nombre} eliminado de la lista`);
                  } else {
@@ -164,10 +162,14 @@ if (inicio) {
         alert(nuevoBuscar)
     }, 5000);
 
+
+    // EJECUTO LA FUNCION PARA BORRAR UN PRODUCTO EN LA TABLA
+    // SE LE AGREGA EL TIME OUT PARA ESPERAR A CARGAR EL PRODUCTO
     setTimeout(() => {
-        let valor = prompt("ingrese el producto a borrar (uno que se haya agregado antes)")
-        const nuevoBorrar = productoAgregado.borrarListaEntrada(valor)        //HAY QUE ESCRIBIR ARROZ EN EL INGRESO DEL PRODUCTO PARA QUE LO ELIMINE
-        console.log(nuevoBorrar);
+        let valor = prompt("ingrese el producto a borrar (uno que se haya agregado antes)")     //EL USUARIO ELIGE EL PRODUCTO A BORRAR SEGUN ALGUNO QUE YA HAYA INGRESADO
+        const nuevoBorrar = productoAgregado.borrarListaEntrada(valor)        
+        console.log(nuevoBorrar);       //PRUEBA DE CONTROL
+
         // MUESTRO POR PANTALLA EL RESULTADO DE BUSCAR UN PRODUCTO
         alert(nuevoBorrar)
 
