@@ -54,7 +54,7 @@ if (inicio) {
                        
                     // SI NO ES NINGUNA DE LAS ANTERIORES Y MIENTRAS NO SEA ESC SE EJECUTA EL CODIGO    
                     } else {
-                        const cantidadIngresada = prompt("Ingrese la cantidad del producto");
+                        const cantidadIngresada = prompt("Ingrese la cantidad del producto o enter para 1");
                         cantidad = cantidadIngresada ? parseInt(cantidadIngresada) : 1;
     
                             // VALIDO QUE LA ENTRADA CANTIDAD SEA UN ENTERO POSITIVO
