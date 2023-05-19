@@ -50,7 +50,7 @@ if (inicio) {
                        
                     // CON ESC SALGO DEL PROGRAMA    
                     } else if (nombre === "ESC"){
-                        alert("adios")
+                        alert("Saliendo de ingreso de productos.....")
                        
                     // SI NO ES NINGUNA DE LAS ANTERIORES Y MIENTRAS NO SEA ESC SE EJECUTA EL CODIGO    
                     } else {
@@ -100,7 +100,7 @@ if (inicio) {
             // DEFINO LA FUNCION PARA BUSCAR UN PRODUCTO SEGUN EL NOMBRE
             buscarListaEntrada(nombre){
                 const buscarProducto = this.listaEntrada.find(item => item.nombre === nombre);
-                return buscarProducto ? `Producto ${nombre} encontrado en la lista` : `No existe el producto ${nombre}`;
+                return buscarProducto ? `El producto ${nombre} se encuentra en la lista` : `No existe el producto ${nombre} en la lista`;
             };
 
             // DEFINO LA FUNCION PARA BORRAR UN PRODUCTO SEGUN EL NOMBRE
@@ -145,35 +145,54 @@ if (inicio) {
     por un valor total de $${productoAgregado.totalAcumulado}
     `)
     
-    // EJECUTO LA FUNCION PARA BUSCAR UN PRODUCTO EN LA TABLA
-    // SE LE AGREGA EL TIME OUT PARA ESPERAR A CARGAR EL PRODUCTO
-    setTimeout(() => {
-        const nuevoBuscar = productoAgregado.buscarListaEntrada("arroz")        //HAY QUE ESCRIBIR ARROZ EN EL INGRESO DEL PRODUCTO PARA QUE LO ENCUENTRE
-        console.log(nuevoBuscar);
-        // MUESTRO POR PANTALLA EL RESULTADO DE BUSCAR UN PRODUCTO
-        alert(nuevoBuscar)
-    }, 5000);
 
-
-    // EJECUTO LA FUNCION PARA BORRAR UN PRODUCTO EN LA TABLA
-    // SE LE AGREGA EL TIME OUT PARA ESPERAR A CARGAR EL PRODUCTO
-    setTimeout(() => {
-        let valor = prompt("ingrese el producto a borrar (uno que se haya agregado antes)")     //EL USUARIO ELIGE EL PRODUCTO A BORRAR SEGUN ALGUNO QUE YA HAYA INGRESADO
-        const nuevoBorrar = productoAgregado.borrarListaEntrada(valor)        
-        console.log(nuevoBorrar);       //PRUEBA DE CONTROL
-
-        // MUESTRO POR PANTALLA EL RESULTADO DE BUSCAR UN PRODUCTO
-        alert(nuevoBorrar)
-
-        let nuevoMensaje = "";
-        for (let i = 0; i < productoAgregado.listaEntrada.length; i++) {  
-            nuevoMensaje = nuevoMensaje + " " + `${productoAgregado.listaEntrada[i].nombre} x ${productoAgregado.listaEntrada[i].cantidad} unidad/es con un valor de $${productoAgregado.listaEntrada[i].precio} \n`
+    const consultarBuscar = confirm("Si desea buscar un producto haga click en aceptar. Para continuar presione cancelar");
+    if (consultarBuscar) {
+        let ingresoProductoBuscar;
+        while (ingresoProductoBuscar !== "ESC") {
+            ingresoProductoBuscar = prompt("ingrese el nombre del producto a buscar. Escriba ESC para salir")
+                if (ingresoProductoBuscar === "" || ingresoProductoBuscar === null) {
+                    alert("no ingreso el nombre del producto")
+                } else if (ingresoProductoBuscar === "ESC"){
+                    alert("Saliendo de busqueda de productos...");
+                } else {
+                    const nuevoBuscar = productoAgregado.buscarListaEntrada(ingresoProductoBuscar)
+                    console.log(nuevoBuscar);   // PRUEBA DE CONTROL
+                    alert(nuevoBuscar);         // MUESTRO POR PANTALLA EL RESULTADO DE BUSCAR UN PRODUCTO
+                };
         };
+    }; 
 
-        alert(`Agrego:
-        ${nuevoMensaje}
-        por un valor total de $${productoAgregado.totalAcumulado}
-        `)
-        console.log(productoEnTabla);       //PRUEBA DE CONTROL
-    }, 10000);
+   
+
+
+    const consultarBorrar = confirm("Si desea borrar un producto haga click en aceptar");
+    if (consultarBorrar) {
+        let ingresoProductoBorrar;
+        while (ingresoProductoBorrar !== "ESC") {
+            ingresoProductoBorrar = prompt("ingrese el producto a borrar (uno que se haya agregado antes)")     //EL USUARIO ELIGE EL PRODUCTO A BORRAR SEGUN ALGUNO QUE YA HAYA INGRESADO
+            if (ingresoProductoBorrar === "" || ingresoProductoBorrar === null ) {
+                alert("no ingreso el nombre del producto")
+            } else if (ingresoProductoBorrar === "ESC"){
+                alert("Saliendo de borrado de productos...");
+            } else {
+                const nuevoBorrar = productoAgregado.borrarListaEntrada(ingresoProductoBorrar)        
+                console.log(nuevoBorrar);       //PRUEBA DE CONTROL
+        
+                // MUESTRO POR PANTALLA EL RESULTADO DE BUSCAR UN PRODUCTO
+                alert(nuevoBorrar)
+        
+                let nuevoMensaje = "";
+                for (let i = 0; i < productoAgregado.listaEntrada.length; i++) {  
+                    nuevoMensaje = nuevoMensaje + " " + `${productoAgregado.listaEntrada[i].nombre} x ${productoAgregado.listaEntrada[i].cantidad} unidad/es con un valor de $${productoAgregado.listaEntrada[i].precio} \n`
+                };
+        
+                alert(`Agrego:
+                ${nuevoMensaje}
+                por un valor total de $${productoAgregado.totalAcumulado}
+                `)
+                console.log(productoEnTabla);       //PRUEBA DE CONTROL
+            };
+        };
+    };
 };
