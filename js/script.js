@@ -145,7 +145,7 @@ if (inicio) {
     por un valor total de $${productoAgregado.totalAcumulado}
     `)
     
-
+    // EJECUTO LA FUNCION PARA BUSCAR PRODUCTOS A LA LISTA
     const consultarBuscar = confirm("Si desea buscar un producto haga click en aceptar. Para continuar presione cancelar");
     if (consultarBuscar) {
         let ingresoProductoBuscar;
@@ -165,8 +165,8 @@ if (inicio) {
 
    
 
-
-    const consultarBorrar = confirm("Si desea borrar un producto haga click en aceptar");
+    // EJECUTO LA FUNCION PARA BORRAR PRODUCTOS A LA LISTA
+    const consultarBorrar = confirm("Si desea borrar un producto haga click en aceptar. Para salir del programa presione cancelar");
     if (consultarBorrar) {
         let ingresoProductoBorrar;
         while (ingresoProductoBorrar !== "ESC") {
@@ -194,5 +194,7 @@ if (inicio) {
                 console.log(productoEnTabla);       //PRUEBA DE CONTROL
             };
         };
-    };
+    } else {
+        alert("Gracias y hasta luego");
+    }
 };
