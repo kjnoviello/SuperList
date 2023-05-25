@@ -79,6 +79,7 @@ if (inicio) {
 
                         if (existeProducto) {
                             existeProducto.cantidad += cantidad;
+                            this.totalAcumulado += cantidad* existeProducto.precio
 
                         } else {
                         
@@ -178,9 +179,9 @@ if (inicio) {
         
         let contenedor = document.getElementById("tablas");
         let nuevo = document.createElement("tr");
-        let output = document.getElementById("output");
+        // let output = document.getElementById("output");
         const precioTotal = productoAgregado.listaEntrada[i].precio * productoAgregado.listaEntrada[i].cantidad;
-        // const sum = sum + precioTotal;
+        
     
         nuevo.innerHTML = `
         <td class ="td_especial">${productoAgregado.listaEntrada[i].nombre}</td>
@@ -192,11 +193,16 @@ if (inicio) {
         
         contenedor.append(nuevo);
 
-        output.innerHTML = `
-        <p><strong>TOTAL $ ${productoAgregado.totalAcumulado.toFixed(2)}</strong></p>
-        `;                          
+        // output.innerHTML = `
+        // <p><strong>TOTAL $ ${productoAgregado.totalAcumulado.toFixed(2)}</strong></p>
+        // `;                          
         
     };
+    let output = document.getElementById("output");
+    output.innerHTML = `
+    <p><strong>TOTAL $ ${productoAgregado.totalAcumulado.toFixed(2)}</strong></p>
+    `;                          
+    
 
 
 
