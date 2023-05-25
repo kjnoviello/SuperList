@@ -117,6 +117,7 @@ p {
 /* ACTUAL LIST */
 .section{
   padding: 20px 20px 30px;
+  background-color: white;
 }
 
 .section_table_header {
@@ -162,7 +163,11 @@ p {
 
 /* ABOUT US */
 .section_about_us{
-  max-width: 490px;
+  max-width: 850px;
+}
+
+.section_about_us_div{
+  max-width: 590px;
   margin-left: auto;
   margin-right: auto;
 }

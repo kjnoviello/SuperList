@@ -25,3 +25,5 @@ function darkMode() {
 }
 
 botondark.onclick = darkMode;
+
+

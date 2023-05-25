@@ -74,16 +74,14 @@ if (inicio) {
                                 precio = parseFloat(prompt("ingrese el precio del producto"));
                             };
                         
-                        //! EXISTE PRODUCTO
-
+                        // SI EXISTE EL PRODUCTO SOLO LE SUMO LA CANTIDAD
                         const existeProducto = this.listaEntrada.find(item => item.nombre === nombre)
 
                         if (existeProducto) {
                             existeProducto.cantidad += cantidad; 
                         } else {
-
-                        //! FIN DE EXISTE PRODUCTO
                         
+                            // SI NO EXISTE LO CREO
                             const nuevaEntrada = new Entrada(nombre, cantidad, precio);
                             this.listaEntrada.push(nuevaEntrada);
                             console.log(this.listaEntrada);       // PRUEBA DE CONTROL
@@ -98,6 +96,8 @@ if (inicio) {
                             <td>${nuevaEntrada.cantidad}</td>
                             <td>$ ${nuevaEntrada.precio.toFixed(2)}</td>
                             <td>$ ${this.totalAcumulado.toFixed(2)}</td>
+                            <td><button>EDIT</button></td>
+
                             `;
             
                             contenedor.append(nuevo);
@@ -110,8 +110,14 @@ if (inicio) {
             // DEFINO LA FUNCION PARA BUSCAR UN PRODUCTO SEGUN EL NOMBRE
             buscarListaEntrada(nombre){
                 const buscarProducto = this.listaEntrada.find(item => item.nombre === nombre);
-                return buscarProducto ? `El producto ${nombre} se encuentra en la lista` : `No existe el producto ${nombre} en la lista`;
-                console.log(`esto es el log de buscarproducto ${buscarProducto}`);
+                
+                if (buscarProducto) {
+                    console.log(`esto es el log de buscarproducto ${buscarProducto.nombre}, ${buscarProducto.cantidad}, ${buscarProducto.precio}`); //PRUEBA DE CONTROL
+                    alert(`El producto ${nombre} se encuentra en la lista`);
+                    return buscarProducto.nombre, buscarProducto.cantidad, buscarProducto.precio;
+                } else {
+                    return alert(`No existe el producto ${nombre} en la lista`);
+                };
             };
 
             // DEFINO LA FUNCION PARA BORRAR UN PRODUCTO SEGUN EL NOMBRE
@@ -139,20 +145,19 @@ if (inicio) {
                 };
             };
 
-             // DEFINO LA FUNCION PARA EDITAR UN PRODUCTO SEGUN EL NOMBRE
-             editarListaEntrada(nombre){
+            //TODO
+            // DEFINO LA FUNCION PARA EDITAR UN PRODUCTO SEGUN EL NOMBRE
+            editarListaEntrada(nombre){
                 
                 const nuevoBuscarListaEntrada = this.buscarListaEntrada(nombre)
+                console.log(`esto es nuevobuscarlistaentrada ${nuevoBuscarListaEntrada}`);
 
-                const nuevoNombre = this.nuevoBuscarListaEntrada.nombre;
-                const nuevaCantidad = this.nuevoBuscarListaEntrada.cantidad;
-                const nuevoPrecio = this.nuevoBuscarListaEntrada.precio;
+                // const nuevoNombre = this.nuevoBuscarListaEntrada.nombre;
+                // const nuevaCantidad = this.nuevoBuscarListaEntrada.cantidad;
+                // const nuevoPrecio = this.nuevoBuscarListaEntrada.precio;
 
-
-
-
-
-             }
+            };
+            //TODO FIN
 
 
     };
@@ -184,9 +189,7 @@ if (inicio) {
                 } else if (ingresoProductoBuscar === "ESC"){
                     alert("Saliendo de busqueda de productos...");
                 } else {
-                    const nuevoBuscar = productoAgregado.buscarListaEntrada(ingresoProductoBuscar)
-                    console.log(nuevoBuscar);   // PRUEBA DE CONTROL
-                    alert(nuevoBuscar);         // MUESTRO POR PANTALLA EL RESULTADO DE BUSCAR UN PRODUCTO
+                    productoAgregado.buscarListaEntrada(ingresoProductoBuscar);
                 };
         };
     }; 
@@ -226,8 +229,12 @@ if (inicio) {
         alert("Gracias y hasta luego");
     }
 
-       // EJECUTO LA FUNCION PARA EDITAR PRODUCTOS A LA LISTA
-
+        // TODO
+        // EJECUTO LA FUNCION PARA EDITAR PRODUCTOS A LA LISTA
+        let nombreAEditar = prompt("ingrese nombre a editar")
+        const editar = productoAgregado.editarListaEntrada(nombreAEditar)
+        console.log(`se llamo a la funcion editar y se guardo en una variable el res es ${editar}`);
+        // TODO FIN
 
 
 
