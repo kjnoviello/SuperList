@@ -85,22 +85,28 @@ if (inicio) {
                             const nuevaEntrada = new Entrada(nombre, cantidad, precio);
                             this.listaEntrada.push(nuevaEntrada);
                             console.log(this.listaEntrada);       // PRUEBA DE CONTROL
+                            const precioTotal = nuevaEntrada.precio * nuevaEntrada.cantidad;
                             this.totalAcumulado += cantidad*precio
                             
                             // AGREGO AL DOM
                             let contenedor = document.getElementById("tablas");
                             let nuevo = document.createElement("tr");
+                            let output = document.getElementById("output");
+
+                            output.innerHTML = `
+                            <p><strong>TOTAL $ ${this.totalAcumulado.toFixed(2)}</strong></p>
+                            `;                          
                             
                             nuevo.innerHTML = `
                             <td class ="td_especial">${nuevaEntrada.nombre}</td>
                             <td>${nuevaEntrada.cantidad}</td>
                             <td>$ ${nuevaEntrada.precio.toFixed(2)}</td>
-                            <td>$ ${this.totalAcumulado.toFixed(2)}</td>
+                            <td>$ ${precioTotal.toFixed(2)}</td>
                             <td><button>EDIT</button></td>
-
                             `;
             
                             contenedor.append(nuevo);
+                            
                         };            
                     };
                 };

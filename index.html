@@ -20,13 +20,31 @@
         <!-- Actual List -->
         <section class="section">
           <h2 class="section_header">Today List</h2>
+
+
+          <!--* INICIO DE FORMULARIO -->
+          <form action="">
+            <div class="form_div">
+              <input class="form_input" type="text" placeholder="Ingrese el producto">
+              <input class="form_input" type="text" placeholder="Ingrese la cantidad">
+              <input class="form_input" type="text" placeholder="Ingrese el precio" name="" id="">
+            </div>
+            <div class="form_div">
+              <input class="btn_add form_input" type="button" value="Agregar a la lista">
+              <div class="form_input" id="output">
+              </div>
+            </div>
+                
+          </form>
+          <!--* FIN DE FORMULARIO -->
+
           <table>
             <tr class="section_table_header">
               <th><strong><em>Product</em></strong></th>
               <th><strong><em>Unit</em></strong></th>
               <th><strong><em>Price</em></strong></th>
               <th><strong><em>Total</em></th>
-              <th style="visibility: hidden;"><button>EDIT</button></th>
+              <th><button style="visibility: hidden;">EDIT</button></th>
             </tr>
           </table>
           <div class="section_table">

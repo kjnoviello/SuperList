@@ -115,6 +115,35 @@ p {
 }
 
 /* ACTUAL LIST */
+form{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+
+.form_div{
+  display: inherit;
+  flex-direction: column;
+}
+
+.form_input{
+  border: 3px solid #333333;
+  border-radius: 5px;
+  min-width: 280px;
+  margin: 20px;
+  margin-inline: 30px;
+  height: 50px;
+  text-align: center;
+}
+
+.btn_add{
+  height: 60px;
+  margin: auto;
+  box-sizing:border-box;
+}
+
 .section{
   padding: 20px 20px 30px;
   background-color: white;
@@ -253,6 +282,13 @@ a {
     padding-right: 10px;
     flex-wrap: wrap;
     justify-content: center;
+  }
+  form{
+    flex-direction: column;
+  }
+  .form_input{
+    min-width: 280px;
+    /* align-items: center; */
   }
 }
 
