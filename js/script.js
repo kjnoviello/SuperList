@@ -89,25 +89,6 @@ if (inicio) {
                             const precioTotal = nuevaEntrada.precio * nuevaEntrada.cantidad;
                             this.totalAcumulado += cantidad*precio
                             
-                            // AGREGO AL DOM
-                            let contenedor = document.getElementById("tablas");
-                            let nuevo = document.createElement("tr");
-                            let output = document.getElementById("output");
-
-                            output.innerHTML = `
-                            <p><strong>TOTAL $ ${this.totalAcumulado.toFixed(2)}</strong></p>
-                            `;                          
-                            
-                            nuevo.innerHTML = `
-                            <td class ="td_especial">${nuevaEntrada.nombre}</td>
-                            <td id="id_cantidad">${nuevaEntrada.cantidad}</td>
-                            <td>$ ${nuevaEntrada.precio.toFixed(2)}</td>
-                            <td>$ ${precioTotal.toFixed(2)}</td>
-                            <td><button>EDIT</button></td>
-                            `;
-            
-                            contenedor.append(nuevo);
-                            
                         };            
                     };
                 };
@@ -188,6 +169,45 @@ if (inicio) {
 
 
     //EJECUTO LA FUNCION PARA AGREGAR AL DOM
+    // AGREGO AL DOM
+
+
+    let mensajeDOM = "";
+    for (let i = 0; i < productoAgregado.listaEntrada.length; i++) {  
+        mensaje = mensaje + " " + `${productoAgregado.listaEntrada[i].nombre} x ${productoAgregado.listaEntrada[i].cantidad} unidad/es con un valor de $${productoAgregado.listaEntrada[i].precio} \n`
+        
+        let contenedor = document.getElementById("tablas");
+        let nuevo = document.createElement("tr");
+        let output = document.getElementById("output");
+        const precioTotal = productoAgregado.listaEntrada[i].precio * productoAgregado.listaEntrada[i].cantidad;
+        // const sum = sum + precioTotal;
+    
+        nuevo.innerHTML = `
+        <td class ="td_especial">${productoAgregado.listaEntrada[i].nombre}</td>
+        <td>${productoAgregado.listaEntrada[i].cantidad}</td>
+        <td>$ ${productoAgregado.listaEntrada[i].precio.toFixed(2)}</td>
+        <td>$ ${precioTotal.toFixed(2)}</td>
+        <td><button>EDIT</button></td>
+        `;
+        
+        contenedor.append(nuevo);
+
+        output.innerHTML = `
+        <p><strong>TOTAL $ ${productoAgregado.totalAcumulado.toFixed(2)}</strong></p>
+        `;                          
+        
+    };
+
+
+
+    
+
+
+
+
+
+
+
 
 
     
