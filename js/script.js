@@ -78,7 +78,8 @@ if (inicio) {
                         const existeProducto = this.listaEntrada.find(item => item.nombre === nombre)
 
                         if (existeProducto) {
-                            existeProducto.cantidad += cantidad; 
+                            existeProducto.cantidad += cantidad;
+
                         } else {
                         
                             // SI NO EXISTE LO CREO
@@ -99,7 +100,7 @@ if (inicio) {
                             
                             nuevo.innerHTML = `
                             <td class ="td_especial">${nuevaEntrada.nombre}</td>
-                            <td>${nuevaEntrada.cantidad}</td>
+                            <td id="id_cantidad">${nuevaEntrada.cantidad}</td>
                             <td>$ ${nuevaEntrada.precio.toFixed(2)}</td>
                             <td>$ ${precioTotal.toFixed(2)}</td>
                             <td><button>EDIT</button></td>
@@ -179,10 +180,16 @@ if (inicio) {
         mensaje = mensaje + " " + `${productoAgregado.listaEntrada[i].nombre} x ${productoAgregado.listaEntrada[i].cantidad} unidad/es con un valor de $${productoAgregado.listaEntrada[i].precio} \n`
     };
 
+
     alert(`Agrego:
     ${mensaje}
     por un valor total de $${productoAgregado.totalAcumulado}
     `)
+
+
+    //EJECUTO LA FUNCION PARA AGREGAR AL DOM
+
+
     
     // EJECUTO LA FUNCION PARA BUSCAR PRODUCTOS A LA LISTA
     const consultarBuscar = confirm("Si desea buscar un producto haga click en aceptar. Para continuar presione cancelar");
