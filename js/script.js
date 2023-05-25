@@ -15,7 +15,6 @@ class Entrada {
     };
 };
 
-
 // DECLARO VARIABLES SIN INICIAR
 let nombre; 
 let cantidad; 
@@ -65,16 +64,26 @@ if (inicio) {
                             };
                             console.log(cantidad);      //PRUEBA DE CONTROL
     
-                            // SI ES UN ENTERO POSITIVO EJECUTO EL CODIGO
-                            precio = parseFloat(prompt("ingrese el precio del producto"));
-                            console.log(precio);        //PRUBA DE CONTROL
+                        // SI ES UN ENTERO POSITIVO EJECUTO EL CODIGO
+                        precio = parseFloat(prompt("ingrese el precio del producto"));
+                        console.log(precio);        //PRUBA DE CONTROL
     
                             // VALIDO QUE LA ENTRADA PRECIO SEA MAYOR A 0
                             while (precio <0 || isNaN(precio)) {
                                 alert("Debe ingresar un numero mayor a 0")
                                 precio = parseFloat(prompt("ingrese el precio del producto"));
                             };
-                            
+                        
+                        //! EXISTE PRODUCTO
+
+                        const existeProducto = this.listaEntrada.find(item => item.nombre === nombre)
+
+                        if (existeProducto) {
+                            existeProducto.cantidad += cantidad; 
+                        } else {
+
+                        //! FIN DE EXISTE PRODUCTO
+                        
                             const nuevaEntrada = new Entrada(nombre, cantidad, precio);
                             this.listaEntrada.push(nuevaEntrada);
                             console.log(this.listaEntrada);       // PRUEBA DE CONTROL
@@ -91,7 +100,8 @@ if (inicio) {
                             <td>$ ${this.totalAcumulado.toFixed(2)}</td>
                             `;
             
-                            contenedor.append(nuevo);            
+                            contenedor.append(nuevo);
+                        };            
                     };
                 };
                 return this.listaEntrada;
@@ -101,6 +111,7 @@ if (inicio) {
             buscarListaEntrada(nombre){
                 const buscarProducto = this.listaEntrada.find(item => item.nombre === nombre);
                 return buscarProducto ? `El producto ${nombre} se encuentra en la lista` : `No existe el producto ${nombre} en la lista`;
+                console.log(`esto es el log de buscarproducto ${buscarProducto}`);
             };
 
             // DEFINO LA FUNCION PARA BORRAR UN PRODUCTO SEGUN EL NOMBRE
@@ -127,6 +138,23 @@ if (inicio) {
                     return (`No existe el producto ${nombre} a eliminar`);
                 };
             };
+
+             // DEFINO LA FUNCION PARA EDITAR UN PRODUCTO SEGUN EL NOMBRE
+             editarListaEntrada(nombre){
+                
+                const nuevoBuscarListaEntrada = this.buscarListaEntrada(nombre)
+
+                const nuevoNombre = this.nuevoBuscarListaEntrada.nombre;
+                const nuevaCantidad = this.nuevoBuscarListaEntrada.cantidad;
+                const nuevoPrecio = this.nuevoBuscarListaEntrada.precio;
+
+
+
+
+
+             }
+
+
     };
     
     // EJECUTO LA FUNCION PARA AGREGAR PRODUCTOS A LA LISTA
@@ -197,4 +225,13 @@ if (inicio) {
     } else {
         alert("Gracias y hasta luego");
     }
+
+       // EJECUTO LA FUNCION PARA EDITAR PRODUCTOS A LA LISTA
+
+
+
+
+
+
 };
+
