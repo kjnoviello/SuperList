@@ -148,6 +148,11 @@ form{
   font-size: large;
 }
 
+.form_output p{
+  font-size: 1.2em;
+  line-height: 0.3;
+}
+
 .btn{
   height: 60px;
   margin: auto;

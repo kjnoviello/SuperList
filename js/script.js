@@ -57,7 +57,7 @@ class ListaEntradas {
             let nuevo = document.createElement("tr");
             
             nuevo.innerHTML = `
-            <td>${nombre}</td>
+            <td>${nombre.toUpperCase()}</td>
             <td>${cantidad}</td>
             <td>$ ${precio}</td>
             <td id="idPrecio">$ ${precioTotal.toFixed(2)}</td>
@@ -79,39 +79,40 @@ class ListaEntradas {
     };
 
     // DEFINO LA FUNCION PARA BUSCAR UN PRODUCTO SEGUN EL NOMBRE
-    // buscarListaEntrada(nombre){
-    //     const buscarProducto = this.listaEntrada.find(item => item.nombre === nombre);
+    buscarListaEntrada(name){
+        name.toLowerCase()
+        const tabla = document.getElementById("tablas");
+        const columnas = tabla.getElementsByTagName("tr");
+        let productoBuscar = [];
 
-        
-    //     if (buscarProducto) {
-    //         alert(`El producto ${nombre} se encuentra en la lista`);
-    //         return buscarProducto.nombre, buscarProducto.cantidad, buscarProducto.precio;
-    //     } else {
-    //         return alert(`No existe el producto ${nombre} en la lista`);
-    //     };
-    // };
+        for (let i = 0; i < columnas.length; i++) {
+            const celdas = columnas[i].getElementsByTagName("td");
+            let array = celdas[0].textContent;
+            productoBuscar.push(array)
+        };
+
+        const resultado = productoBuscar.includes(name) ? alert(`${name} esta en la lista!`) : alert(`No existe ${name} en la lista`)
+        console.log(resultado);
+
+        document.getElementById("search").addEventListener("click", () => {})
+    };
 };
+
+// INICIALIZO AL OBJETO
+const productoAgregado = new ListaEntradas;
 
 // EJECUTO LA FUNCION PARA AGREGAR PRODUCTOS A LA LISTA
-
 const funcionAgregar = () => {
-    const productoAgregado = new ListaEntradas;
-    const productoEnTabla = productoAgregado.agregarListaEntrada()
+    infoTabla = productoAgregado.agregarListaEntrada()
 };
 
-
-
-
-
-    // EJECUTO LA FUNCION PARA BUSCAR PRODUCTOS A LA LISTA
-    
-        // let ingresoProductoBuscar;
-        // while (ingresoProductoBuscar !== "ESC") {
-        //     ingresoProductoBuscar = ("ingrese el nombre del producto a buscar. Escriba ESC para salir")
-        //         productoAgregado.buscarListaEntrada(ingresoProductoBuscar);
-        //         };
-
-
+// EJECUTO LA FUNCION PARA BUSCAR PRODUCTOS A LA LISTA
+const funcionBuscar = () => {
+    let dataBtnSearch = document.getElementById("search").value;
+    console.log(dataBtnSearch);
+    productoAgregado.buscarListaEntrada(dataBtnSearch.toUpperCase());
+    document.getElementById("search").value = "";
+};
 
 // EJECUTO LA FUNCION PARA BORRAR PRODUCTOS A LA LISTA
 const eliminarFila = (boton) => {
@@ -138,11 +139,11 @@ const actTotal = () => {
 };
 
 // EVENTOS
-
 let btn_add = document.getElementById("btn_add");
 btn_add.addEventListener("click", funcionAgregar);
 
 let btn_del = document.getElementById("btn_del");
 
-
+let search = document.getElementById("btn_src");
+search.addEventListener("click", funcionBuscar);
     
