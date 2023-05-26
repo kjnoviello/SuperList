@@ -138,6 +138,7 @@ form{
   margin-inline: 30px;
   height: 50px;
   text-align: center;
+  font-size: large;
 }
 
 .btn_add{
@@ -145,6 +146,9 @@ form{
   margin: auto;
   box-sizing:border-box;
   cursor: pointer;
+  background-color: #3a4a58;
+  color: white;
+  font-size: large;
 }
 
 .section{
