@@ -16,14 +16,10 @@ class Entrada {
 };
 
 // DECLARO VARIABLES SIN INICIAR
-let nombre; 
+let nombre;
 let cantidad; 
 let precio; 
 let total;
-
-let inicio = confirm("Para iniciar el programa haga click en aceptar")
-
-if (inicio) {
     
     // DEFINO LA CLASE PARA ENTRADA DEL PRODUCTO CON EL PRECIO ACUMULATIVO A LA TABLA
     class ListaEntradas {
@@ -37,62 +33,82 @@ if (inicio) {
             
             // DEFINO LA FUNCION PARA AGREGAR LA ENTRADA A LA TABLA
             agregarListaEntrada(){
-    
-                // CON ESC SALGO DEL PROGRAMA
-                while (nombre !== "ESC") {
-                    nombre = prompt("ingrese el nombre del producto. En este campo ingresar ESC para salir");
+                nombre = document.getElementById("inputNombre").value;
+                console.log(nombre);
+                const cantidadIngresada = document.getElementById("inputCantidad").value;
+                cantidad = cantidadIngresada ? parseInt(cantidadIngresada) : 1;
+
+                precio = document.getElementById("inputPrecio").value;
+                
+                if ((nombre === "" || nombre === null) || (cantidad <1 || isNaN(cantidad)) || (precio <=0 || isNaN(precio))){
                     
-                    // SI LA ENTRADA ESTA VACIA O ES NULA DA UN AVISO
-                    if (nombre === "" || nombre === null) {
-    
-                        alert("Debe ingresar un producto");
-                       
-                    // CON ESC SALGO DEL PROGRAMA    
-                    } else if (nombre === "ESC"){
-                        alert("Saliendo de ingreso de productos.....")
-                       
-                    // SI NO ES NINGUNA DE LAS ANTERIORES Y MIENTRAS NO SEA ESC SE EJECUTA EL CODIGO    
+                    alert("Debe ingresar un producto o un numero entero positivo");
+                    
+                } else {
+
+                    // SI EXISTE EL PRODUCTO SOLO LE SUMO LA CANTIDAD
+                    const existeProducto = this.listaEntrada.find(item => item.nombre === nombre)
+
+                    if (existeProducto) {
+                        existeProducto.cantidad += cantidad;
+                        this.totalAcumulado += cantidad * existeProducto.precio
+
                     } else {
-                        const cantidadIngresada = prompt("Ingrese la cantidad del producto o enter para 1");
-                        cantidad = cantidadIngresada ? parseInt(cantidadIngresada) : 1;
-    
-                            // VALIDO QUE LA ENTRADA CANTIDAD SEA UN ENTERO POSITIVO
-                            while (cantidad <1 || isNaN(cantidad)) {
-                                alert("Debe ingresar un numero entero positivo")
-                                const cantidadIngresada = prompt("Ingrese la cantidad del producto");
-                                cantidad = cantidadIngresada ? parseInt(cantidadIngresada) : 1;
-                            };
-                            console.log(cantidad);      //PRUEBA DE CONTROL
-    
-                        // SI ES UN ENTERO POSITIVO EJECUTO EL CODIGO
-                        precio = parseFloat(prompt("ingrese el precio del producto"));
-    
-                            // VALIDO QUE LA ENTRADA PRECIO SEA MAYOR A 0
-                            while (precio <0 || isNaN(precio)) {
-                                alert("Debe ingresar un numero mayor a 0")
-                                precio = parseFloat(prompt("ingrese el precio del producto"));
-                            };
-                        
-                        // SI EXISTE EL PRODUCTO SOLO LE SUMO LA CANTIDAD
-                        const existeProducto = this.listaEntrada.find(item => item.nombre === nombre)
+                    
+                        // SI NO EXISTE LO CREO
+                        const nuevaEntrada = new Entrada(nombre, cantidad, precio);
+                        this.listaEntrada.push(nuevaEntrada);
+                        const precioTotal = nuevaEntrada.precio * nuevaEntrada.cantidad;
 
-                        if (existeProducto) {
-                            existeProducto.cantidad += cantidad;
-                            this.totalAcumulado += cantidad * existeProducto.precio
+                         // AGREGO AL DOM
 
-                        } else {
+                        let tableHeader = document.getElementById("table_header");
+
+                        tableHeader.innerHTML = `
+                        <tr class="section_table_header">
+                        <th><strong><em>Product</em></strong></th>
+                        <th><strong><em>Unit</em></strong></th>
+                        <th><strong><em>Price</em></strong></th>
+                        <th><strong><em>Total</em></th>
+                        <th><button style="visibility: hidden;">DEL</button></th>
+                        </tr>
+                        `;
+
+                        let contenedor = document.getElementById("tablas");
+                        let nuevo = document.createElement("tr");
                         
-                            // SI NO EXISTE LO CREO
-                            const nuevaEntrada = new Entrada(nombre, cantidad, precio);
-                            this.listaEntrada.push(nuevaEntrada);
-                            const precioTotal = nuevaEntrada.precio * nuevaEntrada.cantidad;
-                            this.totalAcumulado += cantidad*precio
+                        nuevo.innerHTML = `
+                        <td>${nombre}</td>
+                        <td>${cantidad}</td>
+                        <td>$ ${precio}</td>
+                        <td id="idPrecio">$ ${precioTotal.toFixed(2)}</td>
+                        <td><button>DEL</button></td>
+                        `;
                         
-                        };            
+                        contenedor.prepend(nuevo);
+
+                        let totalSuma = 0 ;
+                        const tabla = document.getElementById("tablas");
+                        const filas = tabla.getElementsByTagName("tr");
+                    
+                        // Comenzamos desde 1 para omitir la fila de encabezado
+                        for (let i = 0; i < filas.length; i++) {
+                            const celdas = filas[i].getElementsByTagName("td");
+                            const precioTotal = parseFloat(celdas[3].textContent.replace("$", ""));
+                            totalSuma += precioTotal;
+                        }
+
+                        // Actualizar el elemento en el DOM con la suma total
+                        document.getElementById("output").innerHTML = `
+                        <p><strong>TOTAL $ ${totalSuma.toFixed(2)}</strong></p>
+                        `;
                     };
                 };
                 return this.listaEntrada;
             };
+
+
+
     
             // DEFINO LA FUNCION PARA BUSCAR UN PRODUCTO SEGUN EL NOMBRE
             buscarListaEntrada(nombre){
@@ -131,7 +147,7 @@ if (inicio) {
                 };
             };
 
-            //TODO
+            /*
             // DEFINO LA FUNCION PARA EDITAR UN PRODUCTO SEGUN EL NOMBRE
             editarListaEntrada(nombre){
                 
@@ -143,55 +159,25 @@ if (inicio) {
                 // const nuevoPrecio = this.nuevoBuscarListaEntrada.precio;
 
             };
-            //TODO FIN
-
+            //TODO FIN */
 
     };
     
     // EJECUTO LA FUNCION PARA AGREGAR PRODUCTOS A LA LISTA
 
+    const funcionAgregar = () => {
 
         const productoAgregado = new ListaEntradas;
         const productoEnTabla = productoAgregado.agregarListaEntrada()
+
+        
         console.log(productoEnTabla);
+    }
 
-        // AGREGO AL DOM
+    let btn_add = document.getElementById("btn_add");
+    btn_add.addEventListener("click", funcionAgregar)
 
-        let tableHeader = document.getElementById("table_header");
-
-        tableHeader.innerHTML = `
-        <tr class="section_table_header">
-        <th><strong><em>Product</em></strong></th>
-        <th><strong><em>Unit</em></strong></th>
-        <th><strong><em>Price</em></strong></th>
-        <th><strong><em>Total</em></th>
-        <th><button style="visibility: hidden;">DEL</button></th>
-        </tr>
-        `;
-
-        for (let i = 0; i < productoAgregado.listaEntrada.length; i++) {
-            
-            let contenedor = document.getElementById("tablas");
-            let nuevo = document.createElement("tr");
-            const precioTotal = productoAgregado.listaEntrada[i].precio * productoAgregado.listaEntrada[i].cantidad;
-            
-            nuevo.innerHTML = `
-            <td>${productoAgregado.listaEntrada[i].nombre}</td>
-            <td>${productoAgregado.listaEntrada[i].cantidad}</td>
-            <td>$ ${productoAgregado.listaEntrada[i].precio.toFixed(2)}</td>
-            <td>$ ${precioTotal.toFixed(2)}</td>
-            <td><button>DEL</button></td>
-            `;
-            
-            contenedor.prepend(nuevo);                       
-            
-            let output = document.getElementById("output");
-            output.innerHTML = `
-            <p><strong>TOTAL $ ${productoAgregado.totalAcumulado.toFixed(2)}</strong></p>
-            `;                          
-        };
-
-
+/* 
     // EJECUTO LA FUNCION PARA BUSCAR PRODUCTOS A LA LISTA
     const consultarBuscar = confirm("Si desea buscar un producto haga click en aceptar. Para continuar presione cancelar");
     if (consultarBuscar) {
@@ -237,8 +223,6 @@ if (inicio) {
                 console.log(productoEnTabla);       //PRUEBA DE CONTROL
             };
         };
-    } else {
-        alert("Gracias y hasta luego");
     }
 
         // TODO
@@ -246,6 +230,4 @@ if (inicio) {
         let nombreAEditar = prompt("ingrese nombre a editar")
         const editar = productoAgregado.editarListaEntrada(nombreAEditar)
         console.log(`se llamo a la funcion editar y se guardo en una variable el res es ${editar}`);
-        // TODO FIN
-};
-
+        // TODO FIN */
