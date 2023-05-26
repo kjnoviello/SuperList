@@ -66,7 +66,6 @@ if (inicio) {
     
                         // SI ES UN ENTERO POSITIVO EJECUTO EL CODIGO
                         precio = parseFloat(prompt("ingrese el precio del producto"));
-                        console.log(precio);        //PRUBA DE CONTROL
     
                             // VALIDO QUE LA ENTRADA PRECIO SEA MAYOR A 0
                             while (precio <0 || isNaN(precio)) {
@@ -86,10 +85,9 @@ if (inicio) {
                             // SI NO EXISTE LO CREO
                             const nuevaEntrada = new Entrada(nombre, cantidad, precio);
                             this.listaEntrada.push(nuevaEntrada);
-                            console.log(this.listaEntrada);       // PRUEBA DE CONTROL
                             const precioTotal = nuevaEntrada.precio * nuevaEntrada.cantidad;
                             this.totalAcumulado += cantidad*precio
-                            
+                        
                         };            
                     };
                 };
@@ -101,7 +99,6 @@ if (inicio) {
                 const buscarProducto = this.listaEntrada.find(item => item.nombre === nombre);
                 
                 if (buscarProducto) {
-                    console.log(`esto es el log de buscarproducto ${buscarProducto.nombre}, ${buscarProducto.cantidad}, ${buscarProducto.precio}`); //PRUEBA DE CONTROL
                     alert(`El producto ${nombre} se encuentra en la lista`);
                     return buscarProducto.nombre, buscarProducto.cantidad, buscarProducto.precio;
                 } else {
@@ -122,7 +119,7 @@ if (inicio) {
                     let subtotal = this.listaEntrada[indexProducto].cantidad * this.listaEntrada[indexProducto].precio
                     console.log("subtotal", subtotal);  // PRUEBA DE CONTROL
 
-                    // ELIMINO EL PRODUCTO (probar con un while para hacer un ciclo hasta borrar todos los productos iguales)
+                    // ELIMINO EL PRODUCTO
                     const borrarProducto = this.listaEntrada.splice(indexProducto, 1);
                     console.log("esto es borrarProducto", borrarProducto);  // PRUEBA DE CONTROL
                     console.log("esto es totalAcumulado antes de restar el subtotal", this.totalAcumulado);     // PRUEBA DE CONTROL
@@ -152,79 +149,49 @@ if (inicio) {
     };
     
     // EJECUTO LA FUNCION PARA AGREGAR PRODUCTOS A LA LISTA
-    const productoAgregado = new ListaEntradas;
-    const productoEnTabla = productoAgregado.agregarListaEntrada()
-    console.log(productoEnTabla);
-
-    
-    //! MUESTRO LA LISTA POR PANTALLA
-    // let mensaje = "";
-    // for (let i = 0; i < productoAgregado.listaEntrada.length; i++) {  
-    //     mensaje = mensaje + " " + `${productoAgregado.listaEntrada[i].nombre} x ${productoAgregado.listaEntrada[i].cantidad} unidad/es con un valor de $${productoAgregado.listaEntrada[i].precio} \n`
-    // };
 
 
-    // alert(`Agrego:
-    // ${mensaje}
-    // por un valor total de $${productoAgregado.totalAcumulado}
-    // `)
-    //! FIN DE MUESTRO LA LISTA POR PANTALLA
+        const productoAgregado = new ListaEntradas;
+        const productoEnTabla = productoAgregado.agregarListaEntrada()
+        console.log(productoEnTabla);
 
+        // AGREGO AL DOM
 
-    //EJECUTO LA FUNCION PARA AGREGAR AL DOM
-    // AGREGO AL DOM
+        let tableHeader = document.getElementById("table_header");
 
-    let tableHeader = document.getElementById("table_header");
-
-    tableHeader.innerHTML = `
-    <tr class="section_table_header">
-    <th><strong><em>Product</em></strong></th>
-    <th><strong><em>Unit</em></strong></th>
-    <th><strong><em>Price</em></strong></th>
-    <th><strong><em>Total</em></th>
-    <th><button style="visibility: hidden;">DEL</button></th>
-    </tr>
-    `;
-
-    let mensaje = "";
-    for (let i = 0; i < productoAgregado.listaEntrada.length; i++) {  
-        // mensaje = mensaje + " " + `${productoAgregado.listaEntrada[i].nombre} x ${productoAgregado.listaEntrada[i].cantidad} unidad/es con un valor de $${productoAgregado.listaEntrada[i].precio} \n`
-        
-        let contenedor = document.getElementById("tablas");
-        let nuevo = document.createElement("tr");
-        const precioTotal = productoAgregado.listaEntrada[i].precio * productoAgregado.listaEntrada[i].cantidad;
-        
-    
-        nuevo.innerHTML = `
-        <td>${productoAgregado.listaEntrada[i].nombre}</td>
-        <td>${productoAgregado.listaEntrada[i].cantidad}</td>
-        <td>$ ${productoAgregado.listaEntrada[i].precio.toFixed(2)}</td>
-        <td>$ ${precioTotal.toFixed(2)}</td>
-        <td><button>DEL</button></td>
+        tableHeader.innerHTML = `
+        <tr class="section_table_header">
+        <th><strong><em>Product</em></strong></th>
+        <th><strong><em>Unit</em></strong></th>
+        <th><strong><em>Price</em></strong></th>
+        <th><strong><em>Total</em></th>
+        <th><button style="visibility: hidden;">DEL</button></th>
+        </tr>
         `;
-        
-        contenedor.prepend(nuevo);                       
-        
-        let output = document.getElementById("output");
-        output.innerHTML = `
-        <p><strong>TOTAL $ ${productoAgregado.totalAcumulado.toFixed(2)}</strong></p>
-        `;                          
-    };
-    
+
+        for (let i = 0; i < productoAgregado.listaEntrada.length; i++) {
+            
+            let contenedor = document.getElementById("tablas");
+            let nuevo = document.createElement("tr");
+            const precioTotal = productoAgregado.listaEntrada[i].precio * productoAgregado.listaEntrada[i].cantidad;
+            
+            nuevo.innerHTML = `
+            <td>${productoAgregado.listaEntrada[i].nombre}</td>
+            <td>${productoAgregado.listaEntrada[i].cantidad}</td>
+            <td>$ ${productoAgregado.listaEntrada[i].precio.toFixed(2)}</td>
+            <td>$ ${precioTotal.toFixed(2)}</td>
+            <td><button>DEL</button></td>
+            `;
+            
+            contenedor.prepend(nuevo);                       
+            
+            let output = document.getElementById("output");
+            output.innerHTML = `
+            <p><strong>TOTAL $ ${productoAgregado.totalAcumulado.toFixed(2)}</strong></p>
+            `;                          
+        };
 
 
-
-    
-
-
-
-
-
-
-
-
-
-    
     // EJECUTO LA FUNCION PARA BUSCAR PRODUCTOS A LA LISTA
     const consultarBuscar = confirm("Si desea buscar un producto haga click en aceptar. Para continuar presione cancelar");
     if (consultarBuscar) {
@@ -240,8 +207,6 @@ if (inicio) {
                 };
         };
     }; 
-
-   
 
     // EJECUTO LA FUNCION PARA BORRAR PRODUCTOS A LA LISTA
     const consultarBorrar = confirm("Si desea borrar un producto haga click en aceptar. Para salir del programa presione cancelar");
@@ -282,10 +247,5 @@ if (inicio) {
         const editar = productoAgregado.editarListaEntrada(nombreAEditar)
         console.log(`se llamo a la funcion editar y se guardo en una variable el res es ${editar}`);
         // TODO FIN
-
-
-
-
-
 };
 

@@ -144,6 +144,7 @@ form{
   height: 60px;
   margin: auto;
   box-sizing:border-box;
+  cursor: pointer;
 }
 
 .section{
