@@ -49,7 +49,7 @@ class ListaEntradas {
             <th><strong><em>Unit</em></strong></th>
             <th><strong><em>Price</em></strong></th>
             <th><strong><em>Total</em></th>
-            <th><button style="visibility: hidden;">DEL</button></th>
+            <th class="td_btn"><button style="visibility: hidden;">DEL</button></th>
             </tr>
             `;
 
@@ -61,7 +61,7 @@ class ListaEntradas {
             <td>${cantidad}</td>
             <td>$ ${precio}</td>
             <td id="idPrecio">$ ${precioTotal.toFixed(2)}</td>
-            <td><button onclick="eliminarFila(this)">DEL</button></td>
+            <td class="td_btn"><button onclick="eliminarFila(this)">DEL</button></td>
             `;
             
             contenedor.prepend(nuevo);
@@ -79,16 +79,17 @@ class ListaEntradas {
     };
 
     // DEFINO LA FUNCION PARA BUSCAR UN PRODUCTO SEGUN EL NOMBRE
-    buscarListaEntrada(nombre){
-        const buscarProducto = this.listaEntrada.find(item => item.nombre === nombre);
+    // buscarListaEntrada(nombre){
+    //     const buscarProducto = this.listaEntrada.find(item => item.nombre === nombre);
+
         
-        if (buscarProducto) {
-            alert(`El producto ${nombre} se encuentra en la lista`);
-            return buscarProducto.nombre, buscarProducto.cantidad, buscarProducto.precio;
-        } else {
-            return alert(`No existe el producto ${nombre} en la lista`);
-        };
-    };
+    //     if (buscarProducto) {
+    //         alert(`El producto ${nombre} se encuentra en la lista`);
+    //         return buscarProducto.nombre, buscarProducto.cantidad, buscarProducto.precio;
+    //     } else {
+    //         return alert(`No existe el producto ${nombre} en la lista`);
+    //     };
+    // };
 };
 
 // EJECUTO LA FUNCION PARA AGREGAR PRODUCTOS A LA LISTA
@@ -98,21 +99,19 @@ const funcionAgregar = () => {
     const productoEnTabla = productoAgregado.agregarListaEntrada()
 };
 
-/*     // EJECUTO LA FUNCION PARA BUSCAR PRODUCTOS A LA LISTA
-    const consultarBuscar = confirm("Si desea buscar un producto haga click en aceptar. Para continuar presione cancelar");
-    if (consultarBuscar) {
-        let ingresoProductoBuscar;
-        while (ingresoProductoBuscar !== "ESC") {
-            ingresoProductoBuscar = prompt("ingrese el nombre del producto a buscar. Escriba ESC para salir")
-                if (ingresoProductoBuscar === "" || ingresoProductoBuscar === null) {
-                    alert("no ingreso el nombre del producto")
-                } else if (ingresoProductoBuscar === "ESC"){
-                    alert("Saliendo de busqueda de productos...");
-                } else {
-                    productoAgregado.buscarListaEntrada(ingresoProductoBuscar);
-                };
-        };
-    }; */ 
+
+
+
+
+    // EJECUTO LA FUNCION PARA BUSCAR PRODUCTOS A LA LISTA
+    
+        // let ingresoProductoBuscar;
+        // while (ingresoProductoBuscar !== "ESC") {
+        //     ingresoProductoBuscar = ("ingrese el nombre del producto a buscar. Escriba ESC para salir")
+        //         productoAgregado.buscarListaEntrada(ingresoProductoBuscar);
+        //         };
+
+
 
 // EJECUTO LA FUNCION PARA BORRAR PRODUCTOS A LA LISTA
 const eliminarFila = (boton) => {
