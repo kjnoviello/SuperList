@@ -102,16 +102,18 @@ p {
   padding: 10px;
 }
 
-.container_img{
-  background-color: #ffffff;
-}
-
 .container_img_main{
   background-image: url(../img/main.jpg);
   background-position: center;
   background-size: cover;
   object-fit: fill;
   min-height: 300px;
+  /* border-top-left-radius: 30px;
+  border-top-right-radius: 30px; */
+  border-radius: 30px;
+  position: relative;
+  top: 30px;
+
 }
 
 /* ACTUAL LIST */
@@ -165,7 +167,7 @@ form{
   text-align: center;
   font-weight: 600;
   font-size: 1.5rem;
-  margin-top: 30px;
+  margin-top: 40px;
   margin-bottom: 30px;
 }
 

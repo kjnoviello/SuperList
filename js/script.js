@@ -79,7 +79,7 @@ if (inicio) {
 
                         if (existeProducto) {
                             existeProducto.cantidad += cantidad;
-                            this.totalAcumulado += cantidad* existeProducto.precio
+                            this.totalAcumulado += cantidad * existeProducto.precio
 
                         } else {
                         
@@ -156,24 +156,27 @@ if (inicio) {
     const productoEnTabla = productoAgregado.agregarListaEntrada()
     console.log(productoEnTabla);
 
-    // MUESTRO LA LISTA POR PANTALLA
-    let mensaje = "";
-    for (let i = 0; i < productoAgregado.listaEntrada.length; i++) {  
-        mensaje = mensaje + " " + `${productoAgregado.listaEntrada[i].nombre} x ${productoAgregado.listaEntrada[i].cantidad} unidad/es con un valor de $${productoAgregado.listaEntrada[i].precio} \n`
-    };
+    
+    //! MUESTRO LA LISTA POR PANTALLA
+    // let mensaje = "";
+    // for (let i = 0; i < productoAgregado.listaEntrada.length; i++) {  
+    //     mensaje = mensaje + " " + `${productoAgregado.listaEntrada[i].nombre} x ${productoAgregado.listaEntrada[i].cantidad} unidad/es con un valor de $${productoAgregado.listaEntrada[i].precio} \n`
+    // };
 
 
-    alert(`Agrego:
-    ${mensaje}
-    por un valor total de $${productoAgregado.totalAcumulado}
-    `)
+    // alert(`Agrego:
+    // ${mensaje}
+    // por un valor total de $${productoAgregado.totalAcumulado}
+    // `)
+    //! FIN DE MUESTRO LA LISTA POR PANTALLA
 
 
     //EJECUTO LA FUNCION PARA AGREGAR AL DOM
     // AGREGO AL DOM
 
+    
 
-    let mensajeDOM = "";
+    let mensaje = "";
     for (let i = 0; i < productoAgregado.listaEntrada.length; i++) {  
         mensaje = mensaje + " " + `${productoAgregado.listaEntrada[i].nombre} x ${productoAgregado.listaEntrada[i].cantidad} unidad/es con un valor de $${productoAgregado.listaEntrada[i].precio} \n`
         
@@ -184,24 +187,20 @@ if (inicio) {
         
     
         nuevo.innerHTML = `
-        <td class ="td_especial">${productoAgregado.listaEntrada[i].nombre}</td>
+        <td>${productoAgregado.listaEntrada[i].nombre}</td>
         <td>${productoAgregado.listaEntrada[i].cantidad}</td>
         <td>$ ${productoAgregado.listaEntrada[i].precio.toFixed(2)}</td>
         <td>$ ${precioTotal.toFixed(2)}</td>
-        <td><button>EDIT</button></td>
+        <td><button>DEL</button></td>
         `;
         
-        contenedor.append(nuevo);
-
-        // output.innerHTML = `
-        // <p><strong>TOTAL $ ${productoAgregado.totalAcumulado.toFixed(2)}</strong></p>
-        // `;                          
+        contenedor.prepend(nuevo);                       
         
+        let output = document.getElementById("output");
+        output.innerHTML = `
+        <p><strong>TOTAL $ ${productoAgregado.totalAcumulado.toFixed(2)}</strong></p>
+        `;                          
     };
-    let output = document.getElementById("output");
-    output.innerHTML = `
-    <p><strong>TOTAL $ ${productoAgregado.totalAcumulado.toFixed(2)}</strong></p>
-    `;                          
     
 
 
