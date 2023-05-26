@@ -5,9 +5,6 @@ class Entrada {
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.precio = precio;
-
-        // dejo por default 1 unidad
-        cantidad ? this.cantidad : 1;
     };
 };
 
@@ -28,7 +25,6 @@ class ListaEntradas {
     // DEFINO LA FUNCION PARA AGREGAR LA ENTRADA A LA TABLA
     agregarListaEntrada(){
         nombre = document.getElementById("inputNombre").value;
-        console.log(nombre);
         const cantidadIngresada = document.getElementById("inputCantidad").value;
         cantidad = cantidadIngresada ? parseInt(cantidadIngresada) : 1;
 
