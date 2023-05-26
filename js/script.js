@@ -82,33 +82,21 @@ let total;
                         <td>${cantidad}</td>
                         <td>$ ${precio}</td>
                         <td id="idPrecio">$ ${precioTotal.toFixed(2)}</td>
-                        <td><button>DEL</button></td>
+                        <td><button onclick="eliminarFila(this)">DEL</button></td>
                         `;
                         
                         contenedor.prepend(nuevo);
 
-                        let totalSuma = 0 ;
-                        const tabla = document.getElementById("tablas");
-                        const filas = tabla.getElementsByTagName("tr");
-                    
-                        // Comenzamos desde 1 para omitir la fila de encabezado
-                        for (let i = 0; i < filas.length; i++) {
-                            const celdas = filas[i].getElementsByTagName("td");
-                            const precioTotal = parseFloat(celdas[3].textContent.replace("$", ""));
-                            totalSuma += precioTotal;
-                        }
+                        actTotal();
 
-                        // Actualizar el elemento en el DOM con la suma total
-                        document.getElementById("output").innerHTML = `
-                        <p><strong>TOTAL $ ${totalSuma.toFixed(2)}</strong></p>
-                        `;
+                        document.getElementById("inputNombre").value = "";
+                        document.getElementById("inputCantidad").value = "";
+                        document.getElementById("inputPrecio").value = "";
+
                     };
                 };
                 return this.listaEntrada;
             };
-
-
-
     
             // DEFINO LA FUNCION PARA BUSCAR UN PRODUCTO SEGUN EL NOMBRE
             buscarListaEntrada(nombre){
@@ -141,44 +129,22 @@ let total;
                     console.log("esto es totalAcumulado antes de restar el subtotal", this.totalAcumulado);     // PRUEBA DE CONTROL
 
                     this.totalAcumulado -= subtotal
-                    return (`Producto ${nombre} eliminado de la lista`);
+                    return alert(`Producto ${nombre} eliminado de la lista`);
                  } else {
-                    return (`No existe el producto ${nombre} a eliminar`);
+                    return alert(`No existe el producto ${nombre} a eliminar`);
                 };
             };
-
-            /*
-            // DEFINO LA FUNCION PARA EDITAR UN PRODUCTO SEGUN EL NOMBRE
-            editarListaEntrada(nombre){
-                
-                const nuevoBuscarListaEntrada = this.buscarListaEntrada(nombre)
-                console.log(`esto es nuevobuscarlistaentrada ${nuevoBuscarListaEntrada}`);
-
-                // const nuevoNombre = this.nuevoBuscarListaEntrada.nombre;
-                // const nuevaCantidad = this.nuevoBuscarListaEntrada.cantidad;
-                // const nuevoPrecio = this.nuevoBuscarListaEntrada.precio;
-
-            };
-            //TODO FIN */
-
     };
     
     // EJECUTO LA FUNCION PARA AGREGAR PRODUCTOS A LA LISTA
 
     const funcionAgregar = () => {
-
         const productoAgregado = new ListaEntradas;
         const productoEnTabla = productoAgregado.agregarListaEntrada()
+    };
 
-        
-        console.log(productoEnTabla);
-    }
 
-    let btn_add = document.getElementById("btn_add");
-    btn_add.addEventListener("click", funcionAgregar)
-
-/* 
-    // EJECUTO LA FUNCION PARA BUSCAR PRODUCTOS A LA LISTA
+/*     // EJECUTO LA FUNCION PARA BUSCAR PRODUCTOS A LA LISTA
     const consultarBuscar = confirm("Si desea buscar un producto haga click en aceptar. Para continuar presione cancelar");
     if (consultarBuscar) {
         let ingresoProductoBuscar;
@@ -192,42 +158,39 @@ let total;
                     productoAgregado.buscarListaEntrada(ingresoProductoBuscar);
                 };
         };
-    }; 
+    }; */ 
 
     // EJECUTO LA FUNCION PARA BORRAR PRODUCTOS A LA LISTA
-    const consultarBorrar = confirm("Si desea borrar un producto haga click en aceptar. Para salir del programa presione cancelar");
-    if (consultarBorrar) {
-        let ingresoProductoBorrar;
-        while (ingresoProductoBorrar !== "ESC") {
-            ingresoProductoBorrar = prompt("ingrese el producto a borrar (uno que se haya agregado antes)")     //EL USUARIO ELIGE EL PRODUCTO A BORRAR SEGUN ALGUNO QUE YA HAYA INGRESADO
-            if (ingresoProductoBorrar === "" || ingresoProductoBorrar === null ) {
-                alert("no ingreso el nombre del producto")
-            } else if (ingresoProductoBorrar === "ESC"){
-                alert("Saliendo de borrado de productos...");
-            } else {
-                const nuevoBorrar = productoAgregado.borrarListaEntrada(ingresoProductoBorrar)        
-                console.log(nuevoBorrar);       //PRUEBA DE CONTROL
-        
-                // MUESTRO POR PANTALLA EL RESULTADO DE BUSCAR UN PRODUCTO
-                alert(nuevoBorrar)
-        
-                let nuevoMensaje = "";
-                for (let i = 0; i < productoAgregado.listaEntrada.length; i++) {  
-                    nuevoMensaje = nuevoMensaje + " " + `${productoAgregado.listaEntrada[i].nombre} x ${productoAgregado.listaEntrada[i].cantidad} unidad/es con un valor de $${productoAgregado.listaEntrada[i].precio} \n`
-                };
-        
-                alert(`Agrego:
-                ${nuevoMensaje}
-                por un valor total de $${productoAgregado.totalAcumulado}
-                `)
-                console.log(productoEnTabla);       //PRUEBA DE CONTROL
-            };
-        };
-    }
+    function eliminarFila(boton) {
+        let fila = boton.parentNode.parentNode;
+        fila.remove();
+        actTotal()
+    };
 
-        // TODO
-        // EJECUTO LA FUNCION PARA EDITAR PRODUCTOS A LA LISTA
-        let nombreAEditar = prompt("ingrese nombre a editar")
-        const editar = productoAgregado.editarListaEntrada(nombreAEditar)
-        console.log(`se llamo a la funcion editar y se guardo en una variable el res es ${editar}`);
-        // TODO FIN */
+    function actTotal() {
+        let totalSuma = 0 ;
+        const tabla = document.getElementById("tablas");
+        const filas = tabla.getElementsByTagName("tr");
+    
+        for (let i = 0; i < filas.length; i++) {
+            const celdas = filas[i].getElementsByTagName("td");
+            const precioTotal = parseFloat(celdas[3].textContent.replace("$", ""));
+            totalSuma += precioTotal;
+        };
+
+        document.getElementById("output").innerHTML = `
+        <p><strong>TOTAL $ ${totalSuma.toFixed(2)}</strong></p>
+        `;
+    };
+   
+
+    // EVENTOS
+    
+    let btn_add = document.getElementById("btn_add");
+    btn_add.addEventListener("click", funcionAgregar)
+    
+    let btn_del = document.getElementById("btn_del");
+    btn_del.addEventListener("click", )
+    
+
+        
