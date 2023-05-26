@@ -174,15 +174,24 @@ if (inicio) {
     //EJECUTO LA FUNCION PARA AGREGAR AL DOM
     // AGREGO AL DOM
 
-    
+    let tableHeader = document.getElementById("table_header");
+
+    tableHeader.innerHTML = `
+    <tr class="section_table_header">
+    <th><strong><em>Product</em></strong></th>
+    <th><strong><em>Unit</em></strong></th>
+    <th><strong><em>Price</em></strong></th>
+    <th><strong><em>Total</em></th>
+    <th><button style="visibility: hidden;">DEL</button></th>
+    </tr>
+    `;
 
     let mensaje = "";
     for (let i = 0; i < productoAgregado.listaEntrada.length; i++) {  
-        mensaje = mensaje + " " + `${productoAgregado.listaEntrada[i].nombre} x ${productoAgregado.listaEntrada[i].cantidad} unidad/es con un valor de $${productoAgregado.listaEntrada[i].precio} \n`
+        // mensaje = mensaje + " " + `${productoAgregado.listaEntrada[i].nombre} x ${productoAgregado.listaEntrada[i].cantidad} unidad/es con un valor de $${productoAgregado.listaEntrada[i].precio} \n`
         
         let contenedor = document.getElementById("tablas");
         let nuevo = document.createElement("tr");
-        // let output = document.getElementById("output");
         const precioTotal = productoAgregado.listaEntrada[i].precio * productoAgregado.listaEntrada[i].cantidad;
         
     
