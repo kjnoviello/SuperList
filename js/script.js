@@ -139,11 +139,36 @@ const actTotal = () => {
 };
 
 // EVENTOS
-let btn_add = document.getElementById("btn_add");
-btn_add.addEventListener("click", funcionAgregar);
-
 let btn_del = document.getElementById("btn_del");
+let btn_add = document.getElementById("btn_add").addEventListener("click", funcionAgregar);
+let search = document.getElementById("btn_src").addEventListener("click", funcionBuscar);
 
-let search = document.getElementById("btn_src");
-search.addEventListener("click", funcionBuscar);
+
+// INICIO DE LOGIN
+let userLogin;
+const funcionLogin = () =>{
+    let sectionLogin = document.getElementById("sectionLogin");
+    let divLogin = document.createElement("div");
     
+    divLogin.innerHTML= `
+    <section class="section" id="sectionUser"><input class="form_input" id="inputLogin" type="text" placeholder="Your user name"><input class="btn form_input btn_user" id="btn_user" type="button" value="Add User"></section>
+    `;
+
+    sectionLogin.append(divLogin)
+
+    document.getElementById("btn_user").addEventListener("click", funcionAddUser);
+};
+
+const funcionAddUser  = () => {
+    userLogin = document.getElementById("inputLogin").value;
+    sessionStorage.setItem("usuario", userLogin.toUpperCase());
+    let sectionLogin = document.getElementById("sectionLogin");
+    sectionLogin.innerHTML = " ";
+    document.getElementById("todayList").innerText = `Today's ${sessionStorage.getItem("usuario")} List`;
+};
+
+let login = document.getElementById("login").addEventListener("click", funcionLogin);
+
+
+
+

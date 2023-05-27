@@ -7,6 +7,8 @@
   Table Alternate color:  #e5e8ed 
 */
 
+
+
 body{
   background-color: #3a4a58;
   color: #666565;
@@ -25,6 +27,7 @@ hr {
 img { 
   max-width: 100%;
   width: 250px;
+  border-radius: 10px;
 }
 img:hover{
   scale: 110%;
@@ -70,6 +73,12 @@ p {
   text-align: center;
 }
 
+#sectionUser{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+}
 
 /* CONTAINER */
 .container{
@@ -80,23 +89,34 @@ p {
 
 .container_text{
   color: white;
-  text-align: center;
+  text-align:end;
   justify-content: center;
   display: flex;
 }
 
 .container_text_icon{
-  display: inline-block;
+  display: inherit;
   vertical-align: baseline;
   padding: 15px;
   width: auto;
+  align-self: center;
+}
+.div_icon{
+  position: relative;
+  left: 150px;
+  align-self:flex-end;
+}
+
+.icon{
+  font-size: xx-large;
+  margin-inline: 10px;
+  align-self: center;
+  cursor: pointer;
 }
 
 .container_text_h1{
   display: inline-block;
   vertical-align: baseline;
-  margin-top: 20px;
-  margin-bottom: 35px;
   font-size: 2.1rem;
   font-weight: 600;
   padding: 10px;
@@ -319,6 +339,15 @@ a {
     padding: 10px 8px;
     font-size: 0.8rem;
   }
+  .div_icon{
+    flex-direction: column;
+    position: relative;
+    left: 120px;
+  }
+  .icon{
+    font-size: x-large;
+    margin-block: 5px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -344,5 +373,8 @@ a {
   }
   .btn{
     min-width: 150px;
+  }
+  .div_icon{
+    left: 12px;
   }
 }
