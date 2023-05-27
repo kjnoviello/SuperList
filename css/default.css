@@ -7,7 +7,9 @@
   Table Alternate color:  #e5e8ed 
 */
 
-
+html{
+  scroll-behavior:smooth
+}
 
 body{
   background-color: #3a4a58;
@@ -78,6 +80,7 @@ p {
   flex-direction: column;
   justify-content: center;
   align-self: center;
+  margin-top: 20px;
 }
 
 /* CONTAINER */
@@ -102,8 +105,7 @@ p {
   align-self: center;
 }
 .div_icon{
-  position: relative;
-  left: 150px;
+  display: inherit;
   align-self:flex-end;
 }
 
@@ -117,9 +119,8 @@ p {
 .container_text_h1{
   display: inline-block;
   vertical-align: baseline;
-  font-size: 2.1rem;
+  font-size: 2.8rem;
   font-weight: 600;
-  padding: 10px;
 }
 
 .container_img_main{
@@ -155,10 +156,11 @@ form{
   flex-direction: row;
   margin: 20px;
   margin-inline: 17px;
+  
 }
 
 .form_input{
-  border: 3px solid #333333;
+  /* border: 3px solid #333333; */
   border-radius: 5px;
   min-width: 280px;
   margin: 20px;
@@ -166,6 +168,8 @@ form{
   height: 50px;
   text-align: center;
   font-size: large;
+  box-shadow: 0 0px 200px rgba(0, 0, 0, 0.8);
+  border:#333333
 }
 
 .form_output p{
@@ -182,6 +186,7 @@ form{
   color: white;
   font-size: large;
   min-width: 100px;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.8);
 }
 
 .td_btn{
@@ -193,7 +198,49 @@ form{
 .section{
   padding: 20px 20px 30px;
   background-color: white;
+  transition: all 0.3s ease;
 }
+
+
+
+
+
+
+@-webkit-keyframes fade {
+  0% {
+    -webkit-transform: translateY(-50px);
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes fade {
+  0% {
+    -webkit-transform: translateY(-50px);
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.fade {
+  -webkit-animation: fade 0.5s cubic-bezier(0.185, 0.535, 0.15, 0.86) 0.2s both;
+  animation: fade 0.5s cubic-bezier(0.185, 0.535, 0.15, 0.86) 0.2s both;
+}
+
+
+
+
+
+
 
 .section_table_header {
   background-color: #c4cdd6;

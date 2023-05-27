@@ -150,7 +150,7 @@ const funcionLogin = () =>{
     let sectionLogin = document.getElementById("sectionLogin");
     
     sectionLogin.innerHTML= `
-    <section class="section" id="sectionUser"><input class="form_input" id="inputLogin" type="text" placeholder="Your user name"><input class="btn form_input btn_user" id="btn_user" type="button" value="Add User"></section>
+    <section class="section fade" id="sectionUser"><input class="form_input" id="inputLogin" type="text" placeholder="Your user name"><input class="btn form_input btn_user" id="btn_user" type="button" value="Add User"></section>
     `;
 
     document.getElementById("btn_user").addEventListener("click", funcionAddUser);
