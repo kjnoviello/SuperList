@@ -148,13 +148,10 @@ let search = document.getElementById("btn_src").addEventListener("click", funcio
 let userLogin;
 const funcionLogin = () =>{
     let sectionLogin = document.getElementById("sectionLogin");
-    let divLogin = document.createElement("div");
     
-    divLogin.innerHTML= `
+    sectionLogin.innerHTML= `
     <section class="section" id="sectionUser"><input class="form_input" id="inputLogin" type="text" placeholder="Your user name"><input class="btn form_input btn_user" id="btn_user" type="button" value="Add User"></section>
     `;
-
-    sectionLogin.append(divLogin)
 
     document.getElementById("btn_user").addEventListener("click", funcionAddUser);
 };
