@@ -138,6 +138,10 @@ p {
   cursor: pointer;
 }
 
+.media{
+color:#3a4a58
+}
+
 .container_text_h1{
   display: inline-block;
   vertical-align: baseline;

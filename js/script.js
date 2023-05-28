@@ -219,7 +219,6 @@ document.getElementById("login").addEventListener("click", funcionLogin);
 
 
 // DARK-MODE
-
 const darkMode = () => {
     document.querySelectorAll("section").forEach(element => {
         element.classList.toggle("section");
@@ -232,7 +231,13 @@ const darkMode = () => {
     
     let dark_mode = document.getElementById("dark_mode")
     dark_mode.classList.toggle("ri-moon-fill");
-    dark_mode.classList.toggle("ri-sun-fill");   
+    dark_mode.classList.toggle("ri-sun-fill");
+
+    const social = document.getElementById("social").getElementsByTagName("i")
+    for (let i = 0; i < social.length; i++) {
+        social[i].classList.remove("media");
+    };
+
 };
 document.getElementById("dark_mode").addEventListener("click", darkMode)
 
