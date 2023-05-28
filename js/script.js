@@ -44,7 +44,7 @@ class ListaEntradas {
             let tableHeader = document.getElementById("table_header");
 
             tableHeader.innerHTML = `
-            <tr class="section_table_header">
+            <tr class="section_table_header" id="tr_header">
             <th><strong><em>Product</em></strong></th>
             <th><strong><em>Unit</em></strong></th>
             <th><strong><em>Price</em></strong></th>
@@ -138,34 +138,101 @@ const actTotal = () => {
     `;
 };
 
-// EVENTOS
-let btn_del = document.getElementById("btn_del");
-let btn_add = document.getElementById("btn_add").addEventListener("click", funcionAgregar);
-let search = document.getElementById("btn_src").addEventListener("click", funcionBuscar);
+// CAMBIAR COLOR AL BOTON CUANDO SE HACE CLICK
+const funcionColorDownBtnAdd = () => {
+    document.getElementById("btn_add").classList.add("btn_color")
+};
+const funcionColorDownBtnSrc = () => {
+    document.getElementById("btn_src").classList.add("btn_color")
+};
 
+const funcionColorUpBtnAdd = () => {
+    document.getElementById("btn_add").classList.remove("btn_color")
+}
+const funcionColorUpBtnSrc = () => {
+    document.getElementById("btn_src").classList.remove("btn_color")
+}
+
+// EVENTOS
+// document.getElementById("btn_del");
+document.getElementById("btn_add").addEventListener("click", funcionAgregar);
+document.getElementById("btn_add").addEventListener("mousedown", funcionColorDownBtnAdd);
+document.getElementById("btn_add").addEventListener("mouseup", funcionColorUpBtnAdd);
+
+
+document.getElementById("btn_src").addEventListener("click", funcionBuscar);
+document.getElementById("btn_src").addEventListener("mousedown", funcionColorDownBtnSrc);
+document.getElementById("btn_src").addEventListener("mouseup", funcionColorUpBtnSrc);
 
 // INICIO DE LOGIN
 let userLogin;
-const funcionLogin = () =>{
-    let sectionLogin = document.getElementById("sectionLogin");
-    
-    sectionLogin.innerHTML= `
-    <section class="section fade" id="sectionUser"><input class="form_input" id="inputLogin" type="text" placeholder="Your user name"><input class="btn form_input btn_user" id="btn_user" type="button" value="Add User"></section>
-    `;
 
+const funcionLogin = () => {
+    const sectionLogin = document.getElementById("sectionLogin");
+    sectionLogin.innerHTML = `
+        <section class="section fade" id="sectionUser">
+        <input class="form_input" id="inputLogin" type="text" placeholder="Your user name">
+        <input class="btn form_input btn_user" id="btn_user" type="button" value="Add User">
+        </section>
+    `;
     document.getElementById("btn_user").addEventListener("click", funcionAddUser);
 };
 
-const funcionAddUser  = () => {
+const funcionAddUser = () => {
     userLogin = document.getElementById("inputLogin").value;
-    sessionStorage.setItem("usuario", userLogin.toUpperCase());
-    let sectionLogin = document.getElementById("sectionLogin");
-    sectionLogin.innerHTML = " ";
-    document.getElementById("todayList").innerText = `Today's ${sessionStorage.getItem("usuario")} List`;
+    
+    if ((userLogin === "" || userLogin === null)) {
+        alert("Debe ingresar un nombre de usuario")
+    } else {
+    
+        sessionStorage.setItem("usuario", userLogin.toUpperCase());
+    
+        const sectionLogin = document.getElementById("sectionLogin");
+        sectionLogin.innerHTML = "";
+        
+        document.getElementById("todayList").innerText = `Today's ${sessionStorage.getItem("usuario")} List`;
+        
+        const login = document.getElementById("login");
+        login.classList.replace('ri-login-box-line', 'ri-logout-box-line');
+        login.setAttribute('id', 'logout');
+    
+        document.getElementById("logout").addEventListener("click", funcionDelUser);
+    };
 };
 
-let login = document.getElementById("login").addEventListener("click", funcionLogin);
+const funcionDelUser = () => {
+    location.reload()
+
+    //! NO ELIMINAR!!! OPCION DE FUNCION
+    // sessionStorage.clear()
+    // document.getElementById("todayList").innerText = `Today's List`;
+    // userLogin = "";
+    // const logout = document.getElementById("logout");
+    // logout.setAttribute("id", "login");
+    // logout.classList.replace('ri-logout-box-line', 'ri-login-box-line');
+    // const sectionLogin = document.getElementById("sectionLogin");
+    // sectionLogin.innerHTML = "";
+    // document.getElementById("login").addEventListener("click", funcionLogin);
+    //! NO ELIMINAR!!! OPCION DE FUNCION
+};
+document.getElementById("login").addEventListener("click", funcionLogin);
 
 
+// DARK-MODE
 
+const darkMode = () => {
+    document.querySelectorAll("section").forEach(element => {
+        element.classList.toggle("section");
+        element.classList.toggle("section_dark_mode");
+    });
+    
+    let body = document.querySelector("body");
+    body.classList.toggle("body");
+    body.classList.toggle("body_dark_mode");
+    
+    let dark_mode = document.getElementById("dark_mode")
+    dark_mode.classList.toggle("ri-moon-fill");
+    dark_mode.classList.toggle("ri-sun-fill");   
+};
+document.getElementById("dark_mode").addEventListener("click", darkMode)
 
