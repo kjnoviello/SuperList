@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Super List App</title>
+    <link rel="shortcut icon" href="./img/favicon.svg" type="image/x-icon">
     <link href="css/default.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
   </head>
@@ -15,9 +16,15 @@
         <h1 class="container_text_h1" id="titulo">Super List</h1>
       </div>
       <div class="container_text div_icon" id="icons">
-        <i class="ri-login-box-line icon" id="login"></i>
-        <i class="ri-moon-fill icon" id="dark_mode"></i>
-        <i class="ri-translate icon" id="translate"></i>
+        <div class="div_icon_i">
+          <i class="ri-login-box-line icon" id="login"></i>
+        </div>
+        <div class="div_icon_i">
+          <i class="ri-moon-fill icon" id="dark_mode"></i>
+        </div>
+        <div class="div_icon_i">
+          <i class="ri-translate icon" id="translate"></i>
+        </div>
       </div>
       
       <div id="sectionLogin">
@@ -39,8 +46,8 @@
             </div>
             <div class="form_div">
               <div class="form_div_btn">
-                <input class="btn form_input" id="btn_add" type="button" value="Add to the list">
                 <input class="btn form_input" id="btn_src" type="button" value="Search product">
+                <input class="btn form_input" id="btn_add" type="button" value="Add to the list">
               </div>
               <input class="form_input" id="search" type="text" placeholder="Search product name">
               <div class="form_input form_output" id="output">

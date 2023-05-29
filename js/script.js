@@ -61,10 +61,12 @@ class ListaEntradas {
             <td>${cantidad}</td>
             <td>$ ${precio}</td>
             <td id="idPrecio">$ ${precioTotal.toFixed(2)}</td>
-            <td class="td_btn"><button onclick="eliminarFila(this)">DEL</button></td>
+            <td class="td_btn"><i onclick="eliminarFila(this)" class="ri-delete-bin-fill icon_delete"></i></td>
             `;
             
             contenedor.prepend(nuevo);
+
+            
 
             //EJECUTO LA FUNCION PARA ACTUALIZAR EL TOTAL DE PRECIOS
             actTotal();
@@ -215,7 +217,26 @@ const funcionDelUser = () => {
     // document.getElementById("login").addEventListener("click", funcionLogin);
     //! NO ELIMINAR!!! OPCION DE FUNCION
 };
-document.getElementById("login").addEventListener("click", funcionLogin);
+
+
+const funcionLoginDel = () => {
+    const sectionLogin = document.getElementById("sectionLogin");
+    sectionLogin.innerHTML = ``
+}
+
+let toggleState = true; // Variable to track the toggle state
+
+document.getElementById("login").addEventListener("click", function(){
+    if (toggleState) {
+        funcionLogin(); // Call the function if the toggle state is true
+    } else {
+        funcionLoginDel();
+    }
+    
+    toggleState = !toggleState; // Toggle the state variable
+});
+
+// document.getElementById("login").addEventListener("click", funcionLogin);
 
 
 // DARK-MODE
@@ -235,7 +256,7 @@ const darkMode = () => {
 
     const social = document.getElementById("social").getElementsByTagName("i")
     for (let i = 0; i < social.length; i++) {
-        social[i].classList.remove("media");
+        social[i].classList.toggle("media");
     };
 
 };
