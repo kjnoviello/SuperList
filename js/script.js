@@ -192,17 +192,34 @@ const funcionAddUser = () => {
         const login = document.getElementById("login");
         login.classList.replace('ri-login-box-line', 'ri-logout-box-line');
         login.setAttribute('id', 'logout');
-    
+
+
+        // if (translationEnabled) {
+        //     if (sessionStorage.getItem("usuario") === null) {
+        //         document.getElementById("todayList").innerHTML = `La lista para hoy`;
+        //     } else {
+        //         document.getElementById("todayList").innerHTML = `La lista de ${sessionStorage.getItem("usuario")} para hoy`;
+        //     };
+        // } else {
+        //     if (sessionStorage.getItem("usuario") === null) {
+        //         document.getElementById("todayList").innerHTML = `Today's List`;
+        //     } else {
+        //         document.getElementById("todayList").innerHTML = `Today's ${sessionStorage.getItem("usuario")} List`;
+        //     };
+        // }
+
+
+
         document.getElementById("logout").addEventListener("click", funcionDelUser);
     };
 };
 
 // FUNCION ELIMINAR USUSARIO
 const funcionDelUser = () => {
+    sessionStorage.clear()
     location.reload()
 
     //! NO ELIMINAR!!! OPCION DE FUNCION
-    // sessionStorage.clear()
     // document.getElementById("todayList").innerText = `Today's List`;
     // userLogin = "";
     // const logout = document.getElementById("logout");
@@ -219,14 +236,14 @@ const funcionLoginDel = () => {
     const sectionLogin = document.getElementById("sectionLogin");
     sectionLogin.innerHTML = ``
 };
-let toggleState = true;
+let toggleLoginState = true;
 document.getElementById("login").addEventListener("click", function(){
-    if (toggleState) {
+    if (toggleLoginState) {
         funcionLogin();
     } else {
         funcionLoginDel();
     };
-    toggleState = !toggleState;
+    toggleLoginState = !toggleLoginState;
 });
 
 // DARK-MODE
@@ -250,3 +267,81 @@ const darkMode = () => {
     };
 };
 document.getElementById("dark_mode").addEventListener("click", darkMode)
+
+
+//!++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //* TRANSLATE FEATURE
+
+//todo 1- traer los tags (html) al js (asignarles una variable)- h1, h2, span, p, input
+
+//todo 2- hacer la funcion para cambiar el text
+
+//todo 3- traer el boton a js y asignarle un evento
+
+let translationEnabled = true;
+const translate = () =>{
+
+    if (sessionStorage.getItem("usuario") === null) {
+        document.getElementById("todayList").innerHTML = `La lista para hoy`;
+    } else {
+        document.getElementById("todayList").innerHTML = `La lista de ${sessionStorage.getItem("usuario")} para hoy`;
+    };
+
+
+    const mySavedListEng = "My saved List"
+    const mySavedListEsp =  "Mis listas guardadas"
+    const savedList = document.getElementById("savedList");
+
+    const aboutOurAppEng = "About our App"
+    const aboutOurAppEsp = "Sobre nuestra App"
+    const aboutOurApp = document.getElementById("aboutOurApp");
+
+    const talkToUsEng = "talkToUs"
+    const talkToUsEsp = "Comunícate con nosotros"
+    const talkToUs = document.getElementById("talkToUs");
+
+    const aboutOurAppP1Eng = "Welcome to our supermarket list! This is your ultimate guide to shopping for groceries at our store. We've put together a comprehensive list of all the items you need to stock up your pantry and fridge. Our list includes everything from fresh produce to pantry staples, so you can easily find everything you need in one place.";
+    const aboutOurAppP1Esp = "¡Bienvenido a nuestra lista de supermercado! Esta es tu guía definitiva para hacer compras de alimentos en nuestra tienda. Hemos creado una lista completa de todos los artículos que necesitas para abastecer tu despensa y refrigerador. Nuestra lista incluye desde productos frescos hasta ingredientes básicos de despensa, para que puedas encontrar fácilmente todo lo que necesitas en un solo lugar.";
+    const aboutOurAppP1 = document.getElementById("aboutOurAppP1");
+
+    const aboutOurAppP2Eng = "So, grab your shopping cart and get ready to fill it up with all the items on your list. With our comprehensive selection, competitive prices, and helpful staff, you'll be able to get everything you need in one convenient shopping trip.";
+    const aboutOurAppP2Esp = "Así que, agarra tu carrito de compras y prepárate para llenarlo con todos los artículos de tu lista. Con nuestra amplia selección, precios competitivos y personal amable, podrás obtener todo lo que necesitas en un solo viaje de compras conveniente.";
+    const aboutOurAppP2 = document.getElementById("aboutOurAppP2");
+
+    const talkToUsPEng = "Follow us on our social media platforms for more information. Thank you!" 
+    const talkToUsPEsp = "Síguenos en nuestras redes sociales para obtener más información. ¡Gracias!"
+    const talkToUsP = document.getElementById("talkToUsP");
+
+
+
+    if (translationEnabled) {
+        savedList.innerHTML = mySavedListEsp;
+        aboutOurApp.innerHTML = aboutOurAppEsp;
+        talkToUs.innerHTML = talkToUsEsp;
+        aboutOurAppP1.innerHTML = aboutOurAppP1Esp;
+        aboutOurAppP2.innerHTML = aboutOurAppP2Esp;
+        talkToUsP.innerHTML = talkToUsPEsp;
+        if (sessionStorage.getItem("usuario") === null) {
+            document.getElementById("todayList").innerHTML = `La lista para hoy`;
+        } else {
+            document.getElementById("todayList").innerHTML = `La lista de ${sessionStorage.getItem("usuario")} para hoy`;
+        };
+
+
+    } else {
+        savedList.innerHTML = mySavedListEng;
+        aboutOurApp.innerHTML = aboutOurAppEng;
+        talkToUs.innerHTML = talkToUsEng
+        aboutOurAppP1.innerHTML = aboutOurAppP1Eng;
+        aboutOurAppP2.innerHTML = aboutOurAppP2Eng;
+        talkToUsP.innerHTML = talkToUsPEng;
+        if (sessionStorage.getItem("usuario") === null) {
+            document.getElementById("todayList").innerHTML = `Today's List`;
+        } else {
+            document.getElementById("todayList").innerHTML = `Today's ${sessionStorage.getItem("usuario")} List`;
+        };
+    };
+    translationEnabled = !translationEnabled
+}; 
+document.getElementById("translate").addEventListener("click", translate)
+
