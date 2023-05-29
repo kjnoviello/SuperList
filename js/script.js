@@ -147,7 +147,6 @@ const funcionColorDownBtnAdd = () => {
 const funcionColorDownBtnSrc = () => {
     document.getElementById("btn_src").classList.add("btn_color")
 };
-
 const funcionColorUpBtnAdd = () => {
     document.getElementById("btn_add").classList.remove("btn_color")
 }
@@ -160,8 +159,6 @@ const funcionColorUpBtnSrc = () => {
 document.getElementById("btn_add").addEventListener("click", funcionAgregar);
 document.getElementById("btn_add").addEventListener("mousedown", funcionColorDownBtnAdd);
 document.getElementById("btn_add").addEventListener("mouseup", funcionColorUpBtnAdd);
-
-
 document.getElementById("btn_src").addEventListener("click", funcionBuscar);
 document.getElementById("btn_src").addEventListener("mousedown", funcionColorDownBtnSrc);
 document.getElementById("btn_src").addEventListener("mouseup", funcionColorUpBtnSrc);
@@ -218,26 +215,20 @@ const funcionDelUser = () => {
     //! NO ELIMINAR!!! OPCION DE FUNCION
 };
 
-
 const funcionLoginDel = () => {
     const sectionLogin = document.getElementById("sectionLogin");
     sectionLogin.innerHTML = ``
-}
+};
 
-let toggleState = true; // Variable to track the toggle state
-
+let toggleState = true;
 document.getElementById("login").addEventListener("click", function(){
     if (toggleState) {
-        funcionLogin(); // Call the function if the toggle state is true
+        funcionLogin();
     } else {
         funcionLoginDel();
-    }
-    
-    toggleState = !toggleState; // Toggle the state variable
+    };
+    toggleState = !toggleState;
 });
-
-// document.getElementById("login").addEventListener("click", funcionLogin);
-
 
 // DARK-MODE
 const darkMode = () => {
@@ -261,4 +252,3 @@ const darkMode = () => {
 
 };
 document.getElementById("dark_mode").addEventListener("click", darkMode)
-
