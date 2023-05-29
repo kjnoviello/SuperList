@@ -66,12 +66,10 @@ class ListaEntradas {
             
             contenedor.prepend(nuevo);
 
-            
-
-            //EJECUTO LA FUNCION PARA ACTUALIZAR EL TOTAL DE PRECIOS
+            // EJECUTO LA FUNCION PARA ACTUALIZAR EL TOTAL DE PRECIOS
             actTotal();
 
-            //RESTAURO LOS CAMPOS DE FORMULARIO AL ESTADO INICIAL
+            // RESTAURO LOS CAMPOS DE FORMULARIO AL ESTADO INICIAL
             document.getElementById("inputNombre").value = "";
             document.getElementById("inputCantidad").value = "";
             document.getElementById("inputPrecio").value = "";
@@ -103,12 +101,12 @@ class ListaEntradas {
 // INICIALIZO AL OBJETO
 const productoAgregado = new ListaEntradas;
 
-// EJECUTO LA FUNCION PARA AGREGAR PRODUCTOS A LA LISTA
+// FUNCION PARA AGREGAR PRODUCTOS A LA LISTA
 const funcionAgregar = () => {
     infoTabla = productoAgregado.agregarListaEntrada()
 };
 
-// EJECUTO LA FUNCION PARA BUSCAR PRODUCTOS A LA LISTA
+// FUNCION PARA BUSCAR PRODUCTOS A LA LISTA
 const funcionBuscar = () => {
     let dataBtnSearch = document.getElementById("search").value;
     console.log(dataBtnSearch);
@@ -116,7 +114,7 @@ const funcionBuscar = () => {
     document.getElementById("search").value = "";
 };
 
-// EJECUTO LA FUNCION PARA BORRAR PRODUCTOS A LA LISTA
+// FUNCION PARA BORRAR PRODUCTOS A LA LISTA
 const eliminarFila = (boton) => {
     let fila = boton.parentNode.parentNode;
     fila.remove();
@@ -149,10 +147,10 @@ const funcionColorDownBtnSrc = () => {
 };
 const funcionColorUpBtnAdd = () => {
     document.getElementById("btn_add").classList.remove("btn_color")
-}
+};
 const funcionColorUpBtnSrc = () => {
     document.getElementById("btn_src").classList.remove("btn_color")
-}
+};
 
 // EVENTOS
 // document.getElementById("btn_del");
@@ -165,7 +163,6 @@ document.getElementById("btn_src").addEventListener("mouseup", funcionColorUpBtn
 
 // INICIO DE LOGIN
 let userLogin;
-
 const funcionLogin = () => {
     const sectionLogin = document.getElementById("sectionLogin");
     sectionLogin.innerHTML = `
@@ -177,6 +174,7 @@ const funcionLogin = () => {
     document.getElementById("btn_user").addEventListener("click", funcionAddUser);
 };
 
+// FUNCION AGREGAR USUARIO
 const funcionAddUser = () => {
     userLogin = document.getElementById("inputLogin").value;
     
@@ -199,6 +197,7 @@ const funcionAddUser = () => {
     };
 };
 
+// FUNCION ELIMINAR USUSARIO
 const funcionDelUser = () => {
     location.reload()
 
@@ -215,11 +214,11 @@ const funcionDelUser = () => {
     //! NO ELIMINAR!!! OPCION DE FUNCION
 };
 
+// FUNCION ESCONDER LOGIN USUARIO
 const funcionLoginDel = () => {
     const sectionLogin = document.getElementById("sectionLogin");
     sectionLogin.innerHTML = ``
 };
-
 let toggleState = true;
 document.getElementById("login").addEventListener("click", function(){
     if (toggleState) {
@@ -249,6 +248,5 @@ const darkMode = () => {
     for (let i = 0; i < social.length; i++) {
         social[i].classList.toggle("media");
     };
-
 };
 document.getElementById("dark_mode").addEventListener("click", darkMode)
