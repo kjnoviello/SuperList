@@ -13,6 +13,7 @@ let nombre;
 let cantidad; 
 let precio; 
 let total;
+let searchOutput;
     
 // DEFINO LA CLASE PARA ENTRADA DEL PRODUCTO CON EL PRECIO ACUMULATIVO A LA TABLA
 class ListaEntradas {
@@ -31,8 +32,9 @@ class ListaEntradas {
         precio = document.getElementById("inputPrecio").value;
         
         if ((nombre === "" || nombre === null) || (cantidad <1 || isNaN(cantidad)) || (precio <=0 || isNaN(precio))){
-            
-            alert("Debe ingresar un producto o un numero entero positivo");
+
+            // FUNCION SWEETALERT
+            sweetAlert(`Debe ingresar un producto o un numero entero positivo`,'warning', 'Got it!' )
             
         } else {
         
@@ -80,6 +82,7 @@ class ListaEntradas {
 
     // DEFINO LA FUNCION PARA BUSCAR UN PRODUCTO SEGUN EL NOMBRE
     buscarListaEntrada(name){
+
         name.toLowerCase()
         const tabla = document.getElementById("tablas");
         const columnas = tabla.getElementsByTagName("tr");
@@ -91,8 +94,15 @@ class ListaEntradas {
             productoBuscar.push(array)
         };
 
-        const resultado = productoBuscar.includes(name) ? alert(`${name} esta en la lista!`) : alert(`No existe ${name} en la lista`)
-        console.log(resultado);
+        const resultado = productoBuscar.includes(name) 
+
+        if (resultado) {
+            // FUNCION SWEETALERT
+            sweetAlert(`Ya agregaste ${name} en la lista!`,'success', 'Ok' );
+        } else {
+            // FUNCION SWEETALERT
+            sweetAlert(`Todavía no agregaste ${name}`,'error', 'Ok' );
+        };
 
         document.getElementById("search").addEventListener("click", () => {})
     };
@@ -116,9 +126,20 @@ const funcionBuscar = () => {
 
 // FUNCION PARA BORRAR PRODUCTOS A LA LISTA
 const eliminarFila = (boton) => {
-    let fila = boton.parentNode.parentNode;
-    fila.remove();
-    actTotal();
+    
+    Swal.fire({
+        text: `Deseas borrar el producto??`,
+        icon: 'question',
+        confirmButtonText: 'Are you sure?'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let fila = boton.parentNode.parentNode;
+                fila.remove();
+                actTotal();
+                   // FUNCION SWEETALERT
+                   sweetAlert('Borrado','success', 'Done' );
+            };
+        });
 };
 
 //FUNCION PARA ACTUALIZAR EL TOTAL ACUMULADO DE LOS PRECIOS
@@ -246,6 +267,15 @@ document.getElementById("login").addEventListener("click", function(){
     toggleLoginState = !toggleLoginState;
 });
 
+// FUNCION SWEETALERT
+function sweetAlert(text, icon, button ) {
+    Swal.fire({
+        text: text,
+        icon: icon,
+        confirmButtonText: button
+        });
+};
+
 // DARK-MODE
 const darkMode = () => {
     document.querySelectorAll("section").forEach(element => {
@@ -296,7 +326,7 @@ const translate = () =>{
     const aboutOurAppEsp = "Sobre nuestra App"
     const aboutOurApp = document.getElementById("aboutOurApp");
 
-    const talkToUsEng = "talkToUs"
+    const talkToUsEng = "Talk to Us"
     const talkToUsEsp = "Comunícate con nosotros"
     const talkToUs = document.getElementById("talkToUs");
 
