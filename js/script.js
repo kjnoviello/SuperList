@@ -193,6 +193,7 @@ const funcionLogin = () => {
         </section>
     `;
     document.getElementById("btn_user").addEventListener("click", funcionAddUser);
+    return sectionUser
 };
 
 // FUNCION AGREGAR USUARIO
@@ -272,7 +273,9 @@ function sweetAlert(text, icon, button ) {
     Swal.fire({
         text: text,
         icon: icon,
-        confirmButtonText: button
+        confirmButtonText: button,
+        timer: 1500,
+        background: "red"
         });
 };
 
@@ -282,7 +285,7 @@ const darkMode = () => {
         element.classList.toggle("section");
         element.classList.toggle("section_dark_mode");
     });
-    
+
     let body = document.querySelector("body");
     body.classList.toggle("body");
     body.classList.toggle("body_dark_mode");
@@ -295,6 +298,7 @@ const darkMode = () => {
     for (let i = 0; i < social.length; i++) {
         social[i].classList.toggle("media");
     };
+
 };
 document.getElementById("dark_mode").addEventListener("click", darkMode)
 
@@ -342,8 +346,6 @@ const translate = () =>{
     const talkToUsPEsp = "Síguenos en nuestras redes sociales para obtener más información. ¡Gracias!"
     const talkToUsP = document.getElementById("talkToUsP");
 
-
-
     if (translationEnabled) {
         savedList.innerHTML = mySavedListEsp;
         aboutOurApp.innerHTML = aboutOurAppEsp;
@@ -356,7 +358,6 @@ const translate = () =>{
         } else {
             document.getElementById("todayList").innerHTML = `La lista de ${sessionStorage.getItem("usuario")} para hoy`;
         };
-
 
     } else {
         savedList.innerHTML = mySavedListEng;
@@ -375,3 +376,9 @@ const translate = () =>{
 }; 
 document.getElementById("translate").addEventListener("click", translate)
 
+// LIBRERIA SCROLL REVEAL
+ScrollReveal('.smooth', { easing: 'ease-in' });
+ScrollReveal({ distance: '60px' });
+
+ScrollReveal().reveal('section', { duration: 1500, origin: 'bottom'});
+ScrollReveal().reveal('hr', { duration: 1500, origin: 'bottom'});
