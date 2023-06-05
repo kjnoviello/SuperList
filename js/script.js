@@ -1,7 +1,7 @@
 // DEFINO LA CLASE ENTRADA DEL PRODUCTO
 class Entrada {
 
-    constructor(nombre, cantidad, precio,) {
+    constructor(nombre, cantidad, precio) {
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.precio = precio;
@@ -34,7 +34,7 @@ class ListaEntradas {
         if ((nombre === "" || nombre === null) || (cantidad <1 || isNaN(cantidad)) || (precio <=0 || isNaN(precio))){
 
             // FUNCION SWEETALERT
-            sweetAlert(`Debe ingresar un producto o un numero entero positivo`,'warning', 'Got it!' )
+            sweetAlert(`Sorry, you must enter a product or a positive integer`,'warning', 'Got it!', false)
             
         } else {
         
@@ -69,7 +69,7 @@ class ListaEntradas {
             contenedor.prepend(nuevo);
 
             // FUNCION TOAST
-            toast("success", "Agregado!" );
+            toast("success", "Done!" );
 
             // EJECUTO LA FUNCION PARA ACTUALIZAR EL TOTAL DE PRECIOS
             actTotal();
@@ -101,10 +101,10 @@ class ListaEntradas {
 
         if (resultado) {
             // FUNCION SWEETALERT
-            sweetAlert(`Ya agregaste ${name} en la lista!`,'success', 'Ok' );
+            sweetAlert(`You already add ${name} to this list!`,'success', 'Ok', false );
         } else {
             // FUNCION SWEETALERT
-            sweetAlert(`Todavía no agregaste ${name}`,'error', 'Ok' );
+            sweetAlert(`There's no ${name} yet`,'error', 'Ok', false );
         };
 
         document.getElementById("search").addEventListener("click", () => {})
@@ -129,21 +129,21 @@ const funcionBuscar = () => {
 
 // FUNCION PARA BORRAR PRODUCTOS A LA LISTA
 const eliminarFila = (boton) => {
+    let fila = boton.parentNode.parentNode;
+    fila.remove();
+    actTotal();
+    // FUNCION SWEETALERT
+    sweetAlert('Deleted','success', 'Done', false );
     
-    Swal.fire({
-        text: `Deseas borrar el producto??`,
-        icon: 'question',
-        confirmButtonText: 'Are you sure?',
-        confirmButtonColor: "#3a4a58"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                let fila = boton.parentNode.parentNode;
-                fila.remove();
-                actTotal();
-                   // FUNCION SWEETALERT
-                   sweetAlert('Borrado','success', 'Done' );
-            };
-        });
+//     Swal.fire({
+//         text: `Do you want to delete this??`,
+//         icon: 'question',
+//         confirmButtonText: 'Yes, i do',
+//         confirmButtonColor: "#3a4a58"
+//         }).then((result) => {
+//             if (result.isConfirmed) {
+//             };
+//         });
 };
 
 //FUNCION PARA ACTUALIZAR EL TOTAL ACUMULADO DE LOS PRECIOS
@@ -163,7 +163,7 @@ const actTotal = () => {
     `;
 };
 
-// CAMBIAR COLOR AL BOTON CUANDO SE HACE CLICK
+// CAMBIAR COLOR AL BOTON AGREGAR Y BUSCAR CUANDO SE HACE CLICK
 const funcionColorDownBtnAdd = () => {
     document.getElementById("btn_add").classList.add("btn_color")
 };
@@ -190,14 +190,16 @@ document.getElementById("btn_src").addEventListener("mouseup", funcionColorUpBtn
 let userLogin;
 const funcionLogin = () => {
     const sectionLogin = document.getElementById("sectionLogin");
+
     sectionLogin.innerHTML = `
-        <section class="section fade" id="sectionUser">
+        <section class="section fade ${darkModeEnabled ? '' : 'section_dark_mode'}" id="sectionUser">
         <input class="form_input" id="inputLogin" type="text" placeholder="Your user name">
         <input class="btn form_input btn_user" id="btn_user" type="button" value="Add User">
         </section>
     `;
+
     document.getElementById("btn_user").addEventListener("click", funcionAddUser);
-    return sectionUser
+    return sectionUser;
 };
 
 // FUNCION AGREGAR USUARIO
@@ -205,7 +207,7 @@ const funcionAddUser = () => {
     userLogin = document.getElementById("inputLogin").value;
     
     if ((userLogin === "" || userLogin === null)) {
-        alert("Debe ingresar un nombre de usuario")
+        sweetAlert("Debe ingresar un nombre de usuario", "warning", "ok", false)
     } else {
     
         sessionStorage.setItem("usuario", userLogin.toUpperCase());
@@ -220,6 +222,7 @@ const funcionAddUser = () => {
         login.setAttribute('id', 'logout');
 
 
+        //! BUSCANDO EL ERROR AL TRADUCIR CON UN USUARIO LOGEADO
         // if (translationEnabled) {
         //     if (sessionStorage.getItem("usuario") === null) {
         //         document.getElementById("todayList").innerHTML = `La lista para hoy`;
@@ -233,23 +236,37 @@ const funcionAddUser = () => {
         //         document.getElementById("todayList").innerHTML = `Today's ${sessionStorage.getItem("usuario")} List`;
         //     };
         // }
+        //! FIN DE BUSCANDO EL ERROR AL TRADUCIR CON UN USUARIO LOGEADO
+
 
 
         document.getElementById("logout").addEventListener("click", funcionDelUser);
 
         // FUNCION SWEETALERT
-        sweetAlert(`Bienvenido ${sessionStorage.getItem("usuario", userLogin.toUpperCase())}`, 'info', 'Done');
+        sweetAlert(`Bienvenido ${sessionStorage.getItem("usuario", userLogin.toUpperCase())}`, 'info', 'Done', false);
     };
 };
 
 // FUNCION ELIMINAR USUSARIO
 const funcionDelUser = () => {
-    sessionStorage.clear()
-    location.reload()
+    sweetAlert("See you soon", "warning", "ok", true )
+
+    Swal.fire({
+        text: 'Wait!, do you really want to leave?',
+        icon: 'question',
+        confirmButtonText: 'Yes, i do',
+        confirmButtonColor: "#3a4a58"
+    }).then((result) => {
+        if(result.isConfirmed) {
+            sessionStorage.removeItem("usuario")
+            location.reload()
+        };
+    });
+
 
     //! NO ELIMINAR!!! OPCION DE FUNCION
+    // sessionStorage.removeItem("usuario");
     // document.getElementById("todayList").innerText = `Today's List`;
-    // userLogin = "";
     // const logout = document.getElementById("logout");
     // logout.setAttribute("id", "login");
     // logout.classList.replace('ri-logout-box-line', 'ri-login-box-line');
@@ -275,29 +292,30 @@ document.getElementById("login").addEventListener("click", function(){
 });
 
 // FUNCION SWEETALERT
-function sweetAlert(text, icon, button ) {
+function sweetAlert(text, icon, buttonText, showButton ) {
     Swal.fire({
         text: text,
         icon: icon,
-        confirmButtonText: button,
+        confirmButtonText: buttonText,
         timer: 1500,
         background: "white",
         color: "#666565",
-        confirmButtonColor: "#3a4a58"
+        confirmButtonColor: "#3a4a58",
+        showConfirmButton : showButton
         });
 };
 
 // FUNCION TOAST
 const Toast = Swal.mixin({
-  toast: true,
-  position: 'top',
-  showConfirmButton: false,
-  timer: 2000,
-  timerProgressBar: false,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
+    toast: true,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: false,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
 });
 
 function toast (icon, text) {  
@@ -309,52 +327,27 @@ function toast (icon, text) {
 };
 
 // DARK-MODE
-let darkModeEnable = true;
-
+let darkModeEnabled = true;
 const darkMode = () => {
-
-    let dark_mode = document.getElementById("dark_mode")
-    let body = document.querySelector("body");
+    const body = document.querySelector("body");
+    const darkModeToggle = document.getElementById("dark_mode");
+  
+    body.classList.toggle("body_dark_mode");
+    darkModeToggle.classList.toggle("ri-sun-fill");
     
-    const social = document.getElementById("social").getElementsByTagName("i")
-    for (let i = 0; i < social.length; i++) {
-        social[i].classList.toggle("media");
-    };
-
-    if (darkModeEnable) {
-        body.classList.toggle("body_dark_mode");
-        dark_mode.classList.toggle("ri-sun-fill");
-        document.querySelectorAll("section").forEach(element => {
-            element.classList.toggle("section_dark_mode");
-        });
-        const social = document.getElementById("social").getElementsByTagName("i")
-        for (let i = 0; i < social.length; i++) {
-        social[i].classList.toggle("media");
-        };
-
-    } else {
-
-        body.classList.toggle("body");
-        dark_mode.classList.toggle("ri-moon-fill");
-        document.querySelectorAll("section").forEach(element => {
-            element.classList.toggle("section");
-        });
-    };
+    const sections = document.querySelectorAll("section");
+    sections.forEach((section) => {
+      section.classList.toggle("section_dark_mode");
+    });
     
-    darkModeEnable = !darkModeEnable
-
-
-    //* INICIO DE PRUEBA
-    // const sectionUser = document.getElementById("sectionUser");
-    // if (sectionUser) {
-    //     sectionUser.classList.add('section_dark_mode')
-        
-    // };
-    //* FIN DE PRUEBA
-}
+    const socialIcons = document.getElementById("social").getElementsByTagName("i");
+    for (let i = 0; i < socialIcons.length; i++) {
+      socialIcons[i].classList.toggle("media");
+    }
+    
+    darkModeEnabled = !darkModeEnabled;
+  };
 document.getElementById("dark_mode").addEventListener("click", darkMode)
-
-
 
 
 //!++++++++++++++++++++++++++++++++++++++++++++++++++++++
