@@ -68,6 +68,9 @@ class ListaEntradas {
             
             contenedor.prepend(nuevo);
 
+            // FUNCION TOAST
+            toast("success", "Agregado!" );
+
             // EJECUTO LA FUNCION PARA ACTUALIZAR EL TOTAL DE PRECIOS
             actTotal();
 
@@ -130,7 +133,8 @@ const eliminarFila = (boton) => {
     Swal.fire({
         text: `Deseas borrar el producto??`,
         icon: 'question',
-        confirmButtonText: 'Are you sure?'
+        confirmButtonText: 'Are you sure?',
+        confirmButtonColor: "#3a4a58"
         }).then((result) => {
             if (result.isConfirmed) {
                 let fila = boton.parentNode.parentNode;
@@ -231,8 +235,10 @@ const funcionAddUser = () => {
         // }
 
 
-
         document.getElementById("logout").addEventListener("click", funcionDelUser);
+
+        // FUNCION SWEETALERT
+        sweetAlert(`Bienvenido ${sessionStorage.getItem("usuario", userLogin.toUpperCase())}`, 'info', 'Done');
     };
 };
 
@@ -275,36 +281,84 @@ function sweetAlert(text, icon, button ) {
         icon: icon,
         confirmButtonText: button,
         timer: 1500,
-        background: "red"
+        background: "white",
+        color: "#666565",
+        confirmButtonColor: "#3a4a58"
         });
 };
 
-// DARK-MODE
-const darkMode = () => {
-    document.querySelectorAll("section").forEach(element => {
-        element.classList.toggle("section");
-        element.classList.toggle("section_dark_mode");
+// FUNCION TOAST
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top',
+  showConfirmButton: false,
+  timer: 2000,
+  timerProgressBar: false,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+});
+
+function toast (icon, text) {  
+    Toast.fire({
+        icon: icon,
+        title: text,
+        color: "#666565"
     });
+};
 
-    let body = document.querySelector("body");
-    body.classList.toggle("body");
-    body.classList.toggle("body_dark_mode");
-    
+// DARK-MODE
+let darkModeEnable = true;
+
+const darkMode = () => {
+
     let dark_mode = document.getElementById("dark_mode")
-    dark_mode.classList.toggle("ri-moon-fill");
-    dark_mode.classList.toggle("ri-sun-fill");
-
+    let body = document.querySelector("body");
+    
     const social = document.getElementById("social").getElementsByTagName("i")
     for (let i = 0; i < social.length; i++) {
         social[i].classList.toggle("media");
     };
 
-};
+    if (darkModeEnable) {
+        body.classList.toggle("body_dark_mode");
+        dark_mode.classList.toggle("ri-sun-fill");
+        document.querySelectorAll("section").forEach(element => {
+            element.classList.toggle("section_dark_mode");
+        });
+        const social = document.getElementById("social").getElementsByTagName("i")
+        for (let i = 0; i < social.length; i++) {
+        social[i].classList.toggle("media");
+        };
+
+    } else {
+
+        body.classList.toggle("body");
+        dark_mode.classList.toggle("ri-moon-fill");
+        document.querySelectorAll("section").forEach(element => {
+            element.classList.toggle("section");
+        });
+    };
+    
+    darkModeEnable = !darkModeEnable
+
+
+    //* INICIO DE PRUEBA
+    // const sectionUser = document.getElementById("sectionUser");
+    // if (sectionUser) {
+    //     sectionUser.classList.add('section_dark_mode')
+        
+    // };
+    //* FIN DE PRUEBA
+}
 document.getElementById("dark_mode").addEventListener("click", darkMode)
 
 
+
+
 //!++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        //* TRANSLATE FEATURE
+        //* TRANSLATE FEATURE (EN PROGRESO, NO ESTA TERMIANDO)
 
 //todo 1- traer los tags (html) al js (asignarles una variable)- h1, h2, span, p, input
 
@@ -375,6 +429,7 @@ const translate = () =>{
     translationEnabled = !translationEnabled
 }; 
 document.getElementById("translate").addEventListener("click", translate)
+
 
 // LIBRERIA SCROLL REVEAL
 ScrollReveal('.smooth', { easing: 'ease-in' });
