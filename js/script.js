@@ -128,22 +128,21 @@ const funcionBuscar = () => {
 };
 
 // FUNCION PARA BORRAR PRODUCTOS A LA LISTA
-const eliminarFila = (boton) => {
-    let fila = boton.parentNode.parentNode;
-    fila.remove();
-    actTotal();
-    // FUNCION SWEETALERT
-    sweetAlert('Deleted','success', 'Done', false );
-    
-//     Swal.fire({
-//         text: `Do you want to delete this??`,
-//         icon: 'question',
-//         confirmButtonText: 'Yes, i do',
-//         confirmButtonColor: "#3a4a58"
-//         }).then((result) => {
-//             if (result.isConfirmed) {
-//             };
-//         });
+const eliminarFila = (boton) => {  
+    Swal.fire({
+        text: `Do you want to delete this??`,
+        icon: 'question',
+        confirmButtonText: 'Yes, i do',
+        confirmButtonColor: "#3a4a58"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let fila = boton.parentNode.parentNode;
+            fila.remove();
+            actTotal();
+            // FUNCION SWEETALERT
+            sweetAlert('Deleted','success', 'Done', false );
+            };
+        });
 };
 
 //FUNCION PARA ACTUALIZAR EL TOTAL ACUMULADO DE LOS PRECIOS
@@ -196,6 +195,7 @@ const funcionLogin = () => {
         <input class="form_input" id="inputLogin" type="text" placeholder="Your user name">
         <input class="btn form_input btn_user" id="btn_user" type="button" value="Add User">
         </section>
+        <hr class="fade">
     `;
 
     document.getElementById("btn_user").addEventListener("click", funcionAddUser);
@@ -368,6 +368,11 @@ const translate = () =>{
         document.getElementById("todayList").innerHTML = `La lista de ${sessionStorage.getItem("usuario")} para hoy`;
     };
 
+    const translationToggle = document.getElementById("translate");
+    translationToggle.classList.toggle("ri-translate-2");
+    translationToggle.classList.toggle("ri-translate");
+
+
 
     const mySavedListEng = "My saved List"
     const mySavedListEsp =  "Mis listas guardadas"
@@ -400,6 +405,7 @@ const translate = () =>{
         aboutOurAppP1.innerHTML = aboutOurAppP1Esp;
         aboutOurAppP2.innerHTML = aboutOurAppP2Esp;
         talkToUsP.innerHTML = talkToUsPEsp;
+
         if (sessionStorage.getItem("usuario") === null) {
             document.getElementById("todayList").innerHTML = `La lista para hoy`;
         } else {
