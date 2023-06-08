@@ -42,9 +42,10 @@ img {
   border-radius: 10px;
 }
 
-img:hover{
+.imgModal:hover{
   scale: 110%;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 figure { margin: 0; }
@@ -112,6 +113,7 @@ p {
   text-align:end;
   justify-content: center;
   display: flex;
+  text-shadow: 1px 1px 50px white;
 }
 
 .container_text_icon{
@@ -138,6 +140,10 @@ p {
   margin-inline: 10px;
   align-self: center;
   cursor: pointer;
+}
+
+.icon_main{
+  font-size: 50px;
 }
 
 .media{

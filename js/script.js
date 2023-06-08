@@ -297,7 +297,7 @@ function sweetAlert(text, icon, buttonText, showButton ) {
         text: text,
         icon: icon,
         confirmButtonText: buttonText,
-        timer: 1500,
+        timer: 2000,
         background: "white",
         color: "#666565",
         confirmButtonColor: "#3a4a58",
@@ -436,3 +436,41 @@ ScrollReveal({ distance: '60px' });
 
 ScrollReveal().reveal('section', { duration: 1500, origin: 'bottom'});
 ScrollReveal().reveal('hr', { duration: 1500, origin: 'bottom'});
+
+
+
+
+
+
+
+//! TESTING ++++++++++++++++++++++++++++++
+
+let recipeImg;
+
+function open() {
+    fetch('https://www.themealdb.com/api/json/v1/1/random.php')
+        .then(response => response.json())
+        .then(data => {
+            const recipe = data.meals[0];
+            const recipeName = recipe.strMeal;
+            const recipeCategory = recipe.strCategory;
+            const recipeInstructions = recipe.strInstructions;
+            recipeImg = recipe.strMealThumb
+
+        Swal.fire({
+            title: recipeName,
+            html: `
+                <p><strong>Category:</strong> ${recipeCategory}</p>
+                <p><strong>Instructions:</strong> ${recipeInstructions}</p>
+                <img src="${recipeImg}"/>
+            `
+            });
+        })
+        .catch(error => {
+            console.log('Error al obtener la receta:', error);
+        });
+  }
+
+  const openModalButton = document.getElementById('img1');
+  openModalButton.addEventListener('click', open);
+
