@@ -349,6 +349,225 @@ const darkMode = () => {
   };
 document.getElementById("dark_mode").addEventListener("click", darkMode)
 
+// API - MODAL PARA RECETA
+let recipeImg;
+const getRecipe = async () => {
+    await fetch('https://www.themealdb.com/api/json/v1/1/random.php')
+        .then(response => response.json())
+        .then(data => {
+            const recipe = data.meals[0];
+            const recipeName = recipe.strMeal;
+            const recipeCategory = recipe.strCategory;
+            const recipeInstructions = recipe.strInstructions;
+            recipeImg = recipe.strMealThumb
+
+        Swal.fire({
+            title: recipeName,
+            html: `
+                <p><strong>Category:</strong> ${recipeCategory}</p>
+                <p class="pIndex"><strong>Instructions:</strong> ${recipeInstructions}</p>
+                <img src="${recipeImg}"/>
+            `,
+            confirmButtonColor: "#3a4a58"
+            });
+        })
+        .catch(err => {
+            Swal.fire({
+                title: "Ops, please try later",
+                text: err,
+                icon: "error",
+                confirmButtonText: "OK",
+                confirmButtonColor: "#3a4a58"
+            });
+        })
+        .finally(
+            console.log("End of process")
+        );
+  };
+  const openModalRecipe = document.getElementById('imgRecipe');
+  openModalRecipe.addEventListener('click', getRecipe);
+
+
+// CHECKLIST
+const getChecklist = () => {
+    const { value: accept } = Swal.fire({
+        title: 'Grocery list',
+    html: `
+    <h4>Market</h4>
+    <div class="modalCheckContainer">
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Olive</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Rice</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Soup</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Flour</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Grated bread</p>
+    </div>
+    </div>
+    <hr>
+
+    <h4>Breakfast & Snack</h4>
+    <div class="modalCheckContainer">
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Sugar</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Coffe</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Milk</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Tea</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Cereal</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Cookies</p>
+    </div>
+    </div>
+    <hr>
+
+    <h4>Dip & Condiments</h4>
+    <div class="modalCheckContainer">
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Olive oil</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Pepper</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Salt</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Ketchup</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Mayonnaise</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Mustard</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Tomato sauce</p>
+    </div>
+    </div>
+    <hr>
+
+    <h4>Vegetables</h4>
+    <div class="modalCheckContainer">
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Potato</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Eggplant</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Broccoli</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Pumpkin</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Onion</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Mustard</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Cauliflower</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Spinach</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Lettuce</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Carrot</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Tomato</p>
+    </div>
+    </div>
+    <hr>
+
+    <h4>Fruits</h4>
+    <div class="modalCheckContainer">
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>PineApple</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Banana</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Lemmon</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Strawberry</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Apple</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Orange</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Pear</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Melon</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Grapefruit</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Grape</p>
+    </div>
+    <div class="modalCheckDiv">
+    <input type="checkbox"><p>Watermelon</p>
+    </div>
+    </div>
+    <hr>
+
+    
+    
+    `,
+    confirmButtonColor: "#3a4a58",
+    
+    inputValidator: (result) => {
+        return !result && 'You need to agree with T&C'
+    }
+    })
+
+    if (accept) {
+        Swal.fire('You agreed with T&C :)')
+    }
+}
+
+const openModalChecklist = document.getElementById("imgCheck");
+openModalChecklist.addEventListener("click", getChecklist);
+
+
+
+// LIBRERIA SCROLL REVEAL
+ScrollReveal('.smooth', { easing: 'ease-in' });
+ScrollReveal({ distance: '60px' });
+
+ScrollReveal().reveal('section', { duration: 1500, origin: 'bottom'});
+ScrollReveal().reveal('hr', { duration: 1500, origin: 'bottom'});
+
+
+
+
 
 //!++++++++++++++++++++++++++++++++++++++++++++++++++++++
         //* TRANSLATE FEATURE (EN PROGRESO, NO ESTA TERMIANDO)
@@ -430,12 +649,7 @@ const translate = () =>{
 document.getElementById("translate").addEventListener("click", translate)
 
 
-// LIBRERIA SCROLL REVEAL
-ScrollReveal('.smooth', { easing: 'ease-in' });
-ScrollReveal({ distance: '60px' });
 
-ScrollReveal().reveal('section', { duration: 1500, origin: 'bottom'});
-ScrollReveal().reveal('hr', { duration: 1500, origin: 'bottom'});
 
 
 
@@ -444,33 +658,4 @@ ScrollReveal().reveal('hr', { duration: 1500, origin: 'bottom'});
 
 
 //! TESTING ++++++++++++++++++++++++++++++
-
-let recipeImg;
-
-function open() {
-    fetch('https://www.themealdb.com/api/json/v1/1/random.php')
-        .then(response => response.json())
-        .then(data => {
-            const recipe = data.meals[0];
-            const recipeName = recipe.strMeal;
-            const recipeCategory = recipe.strCategory;
-            const recipeInstructions = recipe.strInstructions;
-            recipeImg = recipe.strMealThumb
-
-        Swal.fire({
-            title: recipeName,
-            html: `
-                <p><strong>Category:</strong> ${recipeCategory}</p>
-                <p><strong>Instructions:</strong> ${recipeInstructions}</p>
-                <img src="${recipeImg}"/>
-            `
-            });
-        })
-        .catch(error => {
-            console.log('Error al obtener la receta:', error);
-        });
-  }
-
-  const openModalButton = document.getElementById('img1');
-  openModalButton.addEventListener('click', open);
 

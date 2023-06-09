@@ -89,8 +89,12 @@ th {
 
 p {
   font-size: 1rem;
-  line-height: 1.7;
   text-align: center;
+}
+
+.pIndex{
+  line-height: 1.7;
+
 }
 
 #sectionUser{
@@ -321,6 +325,19 @@ form{
 .section_img_list_name{
   margin-top: 20px;
   margin-bottom: 10px;
+}
+
+.modalCheckContainer{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.modalCheckDiv{
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  margin-inline: 10px;
 }
 
 
