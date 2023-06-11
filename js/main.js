@@ -1,6 +1,5 @@
 // DEFINO LA CLASE ENTRADA DEL PRODUCTO
 class Entrada {
-
     constructor(nombre, cantidad, precio) {
         this.nombre = nombre;
         this.cantidad = cantidad;
@@ -17,7 +16,6 @@ let searchOutput;
     
 // DEFINO LA CLASE PARA ENTRADA DEL PRODUCTO CON EL PRECIO ACUMULATIVO A LA TABLA
 class ListaEntradas {
-
     constructor() {
         this.listaEntrada = [];
         this.totalAcumulado = 0;
@@ -28,7 +26,6 @@ class ListaEntradas {
         nombre = document.getElementById("inputNombre").value;
         const cantidadIngresada = document.getElementById("inputCantidad").value;
         cantidad = cantidadIngresada ? parseInt(cantidadIngresada) : 1;
-
         precio = document.getElementById("inputPrecio").value;
         
         if ((nombre === "" || nombre === null) || (cantidad <1 || isNaN(cantidad)) || (precio <=0 || isNaN(precio))){
