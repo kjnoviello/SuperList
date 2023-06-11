@@ -199,7 +199,7 @@ const funcionLogin = () => {
     `;
 
     document.getElementById("btn_user").addEventListener("click", funcionAddUser);
-    return sectionUser;
+    // return sectionUser;
 };
 
 // FUNCION AGREGAR USUARIO
@@ -249,13 +249,12 @@ const funcionAddUser = () => {
 
 // FUNCION ELIMINAR USUSARIO
 const funcionDelUser = () => {
-    sweetAlert("See you soon", "warning", "ok", true )
-
+    toggleLoginState = false
     Swal.fire({
         text: 'Wait!, do you really want to leave?',
         icon: 'question',
         confirmButtonText: 'Yes, i do',
-        confirmButtonColor: "#3a4a58"
+        confirmButtonColor: "#3a4a58",        
     }).then((result) => {
         if(result.isConfirmed) {
             sessionStorage.removeItem("usuario")
@@ -387,181 +386,197 @@ const getRecipe = async () => {
   const openModalRecipe = document.getElementById('imgRecipe');
   openModalRecipe.addEventListener('click', getRecipe);
 
-
+let olive;
 // CHECKLIST
 const getChecklist = () => {
     const { value: accept } = Swal.fire({
         title: 'Grocery list',
-    html: `
-    <h4>Market</h4>
-    <div class="modalCheckContainer">
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Olive</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Rice</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Soup</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Flour</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Grated bread</p>
-    </div>
-    </div>
-    <hr>
+        confirmButtonColor: "#3a4a58",
+        html: `
+        <h4>Market</h4>
+        <div class="modalCheckContainer">
+        <div class="modalCheckDiv">
+        <input type="checkbox" id="olive"><p>Olive</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Rice</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Soup</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Flour</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Grated bread</p>
+        </div>
+        </div>
+        <hr>
 
-    <h4>Breakfast & Snack</h4>
-    <div class="modalCheckContainer">
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Sugar</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Coffe</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Milk</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Tea</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Cereal</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Cookies</p>
-    </div>
-    </div>
-    <hr>
+        <h4>Breakfast & Snack</h4>
+        <div class="modalCheckContainer">
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Sugar</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Coffe</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Milk</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Tea</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Cereal</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Cookies</p>
+        </div>
+        </div>
+        <hr>
 
-    <h4>Dip & Condiments</h4>
-    <div class="modalCheckContainer">
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Olive oil</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Pepper</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Salt</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Ketchup</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Mayonnaise</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Mustard</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Tomato sauce</p>
-    </div>
-    </div>
-    <hr>
+        <h4>Dip & Condiments</h4>
+        <div class="modalCheckContainer">
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Olive oil</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Pepper</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Salt</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Ketchup</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Mayonnaise</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Mustard</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Tomato sauce</p>
+        </div>
+        </div>
+        <hr>
 
-    <h4>Vegetables</h4>
-    <div class="modalCheckContainer">
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Potato</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Eggplant</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Broccoli</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Pumpkin</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Onion</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Mustard</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Cauliflower</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Spinach</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Lettuce</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Carrot</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Tomato</p>
-    </div>
-    </div>
-    <hr>
+        <h4>Vegetables</h4>
+        <div class="modalCheckContainer">
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Potato</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Eggplant</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Broccoli</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Pumpkin</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Onion</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Mustard</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Cauliflower</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Spinach</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Lettuce</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Carrot</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Tomato</p>
+        </div>
+        </div>
+        <hr>
 
-    <h4>Fruits</h4>
-    <div class="modalCheckContainer">
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>PineApple</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Banana</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Lemmon</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Strawberry</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Apple</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Orange</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Pear</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Melon</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Grapefruit</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Grape</p>
-    </div>
-    <div class="modalCheckDiv">
-    <input type="checkbox"><p>Watermelon</p>
-    </div>
-    </div>
-    <hr>
+        <h4>Fruits</h4>
+        <div class="modalCheckContainer">
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>PineApple</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Banana</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Lemmon</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Strawberry</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Apple</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Orange</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Pear</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Melon</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Grapefruit</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Grape</p>
+        </div>
+        <div class="modalCheckDiv">
+        <input type="checkbox"><p>Watermelon</p>
+        </div>
+        </div>
+        <hr>
+        `,
+    });
 
-    
-    
-    `,
-    confirmButtonColor: "#3a4a58",
-    
-    inputValidator: (result) => {
-        return !result && 'You need to agree with T&C'
-    }
-    })
+    //! GUARDAR CHECKLIST
+    // Obtener todos los checkboxes
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const checkboxesOlive = document.getElementById('olive');
+    checkboxesOlive.addEventListener("change", () => {
+        // Obtener el estado del checkbox
+        const checkboxesOliveState = checkboxesOlive.checked
 
-    if (accept) {
-        Swal.fire('You agreed with T&C :)')
-    }
-}
+        console.log(checkboxesOliveState);
+        // Guardar el estado del checkbox en el almacenamiento local
+        localStorage.setItem("checkbox.id", checkboxesOliveState);
+        const check = localStorage.getItem("checkbox.id", checkboxesOliveState);
+        console.log(check);
+        });
+    console.log(checkboxes);
 
+    // Escuchar el evento de cambio en los checkboxes
+    checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+        // Obtener el estado del checkbox
+        const checkboxState = checkbox.checked;
+        console.log(checkboxState);
+        // Guardar el estado del checkbox en el almacenamiento local
+        localStorage.setItem("checkbox.id", checkboxState);
+        const check = localStorage.getItem("checkbox.id", checkboxState);
+        console.log(check);
+        });
+    });
+    //! FIN DE GUARDAR CHECKLIST
+
+};
 const openModalChecklist = document.getElementById("imgCheck");
 openModalChecklist.addEventListener("click", getChecklist);
-
-
 
 // LIBRERIA SCROLL REVEAL
 ScrollReveal('.smooth', { easing: 'ease-in' });
 ScrollReveal({ distance: '60px' });
-
 ScrollReveal().reveal('section', { duration: 1500, origin: 'bottom'});
 ScrollReveal().reveal('hr', { duration: 1500, origin: 'bottom'});
 
@@ -658,4 +673,5 @@ document.getElementById("translate").addEventListener("click", translate)
 
 
 //! TESTING ++++++++++++++++++++++++++++++
+
 
