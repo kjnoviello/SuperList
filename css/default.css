@@ -132,6 +132,7 @@ p {
   align-self:flex-end;
   flex-direction: row;
   justify-content: end;
+  margin-bottom: 10px;
 }
 
 .div_icon_i:hover{
@@ -167,9 +168,8 @@ color:#3a4a58
   background-size: cover;
   object-fit: fill;
   min-height: 300px;
-  border-radius: 30px;
-  position: relative;
-  top: 30px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
 }
 
 /* ACTUAL LIST */
@@ -307,7 +307,6 @@ form{
 }
 
 /* SAVED LIST */
-
 .section_div_img{
   display: flex;
   flex-wrap: wrap;
@@ -342,7 +341,6 @@ form{
 .modalCheckDiv input{
   cursor: pointer;
 }
-
 
 /* ABOUT US */
 .section_about_us{
@@ -379,7 +377,6 @@ form{
   margin-top: 30px;
 }
 
-
 .section_social_container{
   display: inline-block;
 }
@@ -395,7 +392,6 @@ a {
 }
 
 /* FOOTER */
-
 .footer_text_link{
   color: #fff;
   text-decoration: none;

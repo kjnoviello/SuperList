@@ -86,7 +86,7 @@ class ListaEntradas {
     // DEFINO LA FUNCION PARA BUSCAR UN PRODUCTO SEGUN EL NOMBRE
     buscarListaEntrada(name){
 
-        name.toLowerCase()
+        name.toLowerCase();
         const tabla = document.getElementById("tablas");
         const columnas = tabla.getElementsByTagName("tr");
         let productoBuscar = [];
@@ -94,10 +94,10 @@ class ListaEntradas {
         for (let i = 0; i < columnas.length; i++) {
             const celdas = columnas[i].getElementsByTagName("td");
             let array = celdas[0].textContent;
-            productoBuscar.push(array)
+            productoBuscar.push(array);
         };
 
-        const resultado = productoBuscar.includes(name) 
+        const resultado = productoBuscar.includes(name); 
 
         if (resultado) {
             // FUNCION SWEETALERT
@@ -107,7 +107,7 @@ class ListaEntradas {
             sweetAlert(`There's no ${name} yet`,'error', 'Ok', false );
         };
 
-        document.getElementById("search").addEventListener("click", () => {})
+        document.getElementById("search").addEventListener("click", () => {});
     };
 };
 
@@ -177,7 +177,6 @@ const funcionColorUpBtnSrc = () => {
 };
 
 // EVENTOS
-// document.getElementById("btn_del");
 document.getElementById("btn_add").addEventListener("click", funcionAgregar);
 document.getElementById("btn_add").addEventListener("mousedown", funcionColorDownBtnAdd);
 document.getElementById("btn_add").addEventListener("mouseup", funcionColorUpBtnAdd);
@@ -199,7 +198,6 @@ const funcionLogin = () => {
     `;
 
     document.getElementById("btn_user").addEventListener("click", funcionAddUser);
-    // return sectionUser;
 };
 
 // FUNCION AGREGAR USUARIO
@@ -249,7 +247,7 @@ const funcionAddUser = () => {
 
 // FUNCION ELIMINAR USUSARIO
 const funcionDelUser = () => {
-    toggleLoginState = false
+    toggleLoginState = false;
     Swal.fire({
         text: 'Wait!, do you really want to leave?',
         icon: 'question',
@@ -258,7 +256,7 @@ const funcionDelUser = () => {
     }).then((result) => {
         if(result.isConfirmed) {
             sessionStorage.removeItem("usuario")
-            location.reload()
+            location.reload();
         };
     });
 
@@ -278,7 +276,7 @@ const funcionDelUser = () => {
 // FUNCION ESCONDER LOGIN USUARIO
 const funcionLoginDel = () => {
     const sectionLogin = document.getElementById("sectionLogin");
-    sectionLogin.innerHTML = ``
+    sectionLogin.innerHTML = ``;
 };
 let toggleLoginState = true;
 document.getElementById("login").addEventListener("click", function(){
@@ -312,8 +310,8 @@ const Toast = Swal.mixin({
     timer: 2000,
     timerProgressBar: false,
     didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
     }
 });
 
@@ -342,11 +340,11 @@ const darkMode = () => {
     const socialIcons = document.getElementById("social").getElementsByTagName("i");
     for (let i = 0; i < socialIcons.length; i++) {
       socialIcons[i].classList.toggle("media");
-    }
+    };
     
     darkModeEnabled = !darkModeEnabled;
   };
-document.getElementById("dark_mode").addEventListener("click", darkMode)
+document.getElementById("dark_mode").addEventListener("click", darkMode);
 
 // API - MODAL PARA RECETA
 let recipeImg;
@@ -546,7 +544,7 @@ const getChecklist = () => {
     const checkboxesOlive = document.getElementById('olive');
     checkboxesOlive.addEventListener("change", () => {
         // Obtener el estado del checkbox
-        const checkboxesOliveState = checkboxesOlive.checked
+        const checkboxesOliveState = checkboxesOlive.checked;
 
         console.log(checkboxesOliveState);
         // Guardar el estado del checkbox en el almacenamiento local
@@ -585,13 +583,7 @@ ScrollReveal().reveal('hr', { duration: 1500, origin: 'bottom'});
 
 
 //!++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        //* TRANSLATE FEATURE (EN PROGRESO, NO ESTA TERMIANDO)
-
-//todo 1- traer los tags (html) al js (asignarles una variable)- h1, h2, span, p, input
-
-//todo 2- hacer la funcion para cambiar el text
-
-//todo 3- traer el boton a js y asignarle un evento
+ //* TRANSLATE FEATURE (EN PROGRESO, NO ESTA TERMIANDO)
 
 let translationEnabled = true;
 const translate = () =>{
@@ -608,16 +600,16 @@ const translate = () =>{
 
 
 
-    const mySavedListEng = "My saved List"
-    const mySavedListEsp =  "Mis listas guardadas"
+    const mySavedListEng = "My saved List";
+    const mySavedListEsp =  "Mis listas guardadas";
     const savedList = document.getElementById("savedList");
 
-    const aboutOurAppEng = "About our App"
-    const aboutOurAppEsp = "Sobre nuestra App"
+    const aboutOurAppEng = "About our App";
+    const aboutOurAppEsp = "Sobre nuestra App";
     const aboutOurApp = document.getElementById("aboutOurApp");
 
-    const talkToUsEng = "Talk to Us"
-    const talkToUsEsp = "Comunícate con nosotros"
+    const talkToUsEng = "Talk to Us";
+    const talkToUsEsp = "Comunícate con nosotros";
     const talkToUs = document.getElementById("talkToUs");
 
     const aboutOurAppP1Eng = "Welcome to our supermarket list! This is your ultimate guide to shopping for groceries at our store. We've put together a comprehensive list of all the items you need to stock up your pantry and fridge. Our list includes everything from fresh produce to pantry staples, so you can easily find everything you need in one place.";
@@ -628,8 +620,8 @@ const translate = () =>{
     const aboutOurAppP2Esp = "Así que, agarra tu carrito de compras y prepárate para llenarlo con todos los artículos de tu lista. Con nuestra amplia selección, precios competitivos y personal amable, podrás obtener todo lo que necesitas en un solo viaje de compras conveniente.";
     const aboutOurAppP2 = document.getElementById("aboutOurAppP2");
 
-    const talkToUsPEng = "Follow us on our social media platforms for more information. Thank you!" 
-    const talkToUsPEsp = "Síguenos en nuestras redes sociales para obtener más información. ¡Gracias!"
+    const talkToUsPEng = "Follow us on our social media platforms for more information. Thank you!" ;
+    const talkToUsPEsp = "Síguenos en nuestras redes sociales para obtener más información. ¡Gracias!";
     const talkToUsP = document.getElementById("talkToUsP");
 
     if (translationEnabled) {
@@ -649,7 +641,7 @@ const translate = () =>{
     } else {
         savedList.innerHTML = mySavedListEng;
         aboutOurApp.innerHTML = aboutOurAppEng;
-        talkToUs.innerHTML = talkToUsEng
+        talkToUs.innerHTML = talkToUsEng;
         aboutOurAppP1.innerHTML = aboutOurAppP1Eng;
         aboutOurAppP2.innerHTML = aboutOurAppP2Eng;
         talkToUsP.innerHTML = talkToUsPEng;
@@ -659,19 +651,6 @@ const translate = () =>{
             document.getElementById("todayList").innerHTML = `Today's ${sessionStorage.getItem("usuario")} List`;
         };
     };
-    translationEnabled = !translationEnabled
+    translationEnabled = !translationEnabled;
 }; 
-document.getElementById("translate").addEventListener("click", translate)
-
-
-
-
-
-
-
-
-
-
-//! TESTING ++++++++++++++++++++++++++++++
-
-
+document.getElementById("translate").addEventListener("click", translate);
