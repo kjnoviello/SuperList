@@ -11,6 +11,10 @@ html{
   scroll-behavior:smooth
 }
 
+h4{
+  text-align: center;
+}
+
 .body{
   background-color: #3a4a58;
   color: #666565;

@@ -196,6 +196,7 @@ const funcionLogin = () => {
 };
 
 // FUNCION AGREGAR USUARIO
+
 const funcionAddUser = () => {
     userLogin = document.getElementById("inputLogin").value;
     
@@ -203,40 +204,24 @@ const funcionAddUser = () => {
         sweetAlert("Debe ingresar un nombre de usuario", "warning", "ok", false)
     } else {
     
-        sessionStorage.setItem("usuario", userLogin.toUpperCase());
-    
+        localStorage.setItem("usuario", userLogin.toUpperCase());
+
         const sectionLogin = document.getElementById("sectionLogin");
         sectionLogin.innerHTML = "";
         
-        document.getElementById("todayList").innerText = `Today's ${sessionStorage.getItem("usuario")} List`;
+        document.getElementById("todayList").innerText = `Today's ${localStorage.getItem("usuario")} List`;
         
         const login = document.getElementById("login");
         login.classList.replace('ri-login-box-line', 'ri-logout-box-line');
         login.setAttribute('id', 'logout');
 
-
-        //! BUSCANDO EL ERROR AL TRADUCIR CON UN USUARIO LOGEADO
-        // if (translationEnabled) {
-        //     if (sessionStorage.getItem("usuario") === null) {
-        //         document.getElementById("todayList").innerHTML = `La lista para hoy`;
-        //     } else {
-        //         document.getElementById("todayList").innerHTML = `La lista de ${sessionStorage.getItem("usuario")} para hoy`;
-        //     };
-        // } else {
-        //     if (sessionStorage.getItem("usuario") === null) {
-        //         document.getElementById("todayList").innerHTML = `Today's List`;
-        //     } else {
-        //         document.getElementById("todayList").innerHTML = `Today's ${sessionStorage.getItem("usuario")} List`;
-        //     };
-        // }
-        //! FIN DE BUSCANDO EL ERROR AL TRADUCIR CON UN USUARIO LOGEADO
-
-
-
         document.getElementById("logout").addEventListener("click", funcionDelUser);
 
         // FUNCION SWEETALERT
-        sweetAlert(`Bienvenido ${sessionStorage.getItem("usuario", userLogin.toUpperCase())}`, 'info', 'Done', false);
+        sweetAlert(`Bienvenido ${localStorage.getItem("usuario", userLogin.toUpperCase())}`, 'info', 'Done', false);
+
+
+
     };
 };
 
@@ -250,22 +235,10 @@ const funcionDelUser = () => {
         confirmButtonColor: "#3a4a58",        
     }).then((result) => {
         if(result.isConfirmed) {
-            sessionStorage.removeItem("usuario")
+            localStorage.removeItem("usuario")
             location.reload();
         };
     });
-
-
-    //! NO ELIMINAR!!! OPCION DE FUNCION
-    // sessionStorage.removeItem("usuario");
-    // document.getElementById("todayList").innerText = `Today's List`;
-    // const logout = document.getElementById("logout");
-    // logout.setAttribute("id", "login");
-    // logout.classList.replace('ri-logout-box-line', 'ri-login-box-line');
-    // const sectionLogin = document.getElementById("sectionLogin");
-    // sectionLogin.innerHTML = "";
-    // document.getElementById("login").addEventListener("click", funcionLogin);
-    //! NO ELIMINAR!!! OPCION DE FUNCION
 };
 
 // FUNCION ESCONDER LOGIN USUARIO
@@ -380,191 +353,126 @@ const getRecipe = async () => {
   openModalRecipe.addEventListener('click', getRecipe);
 
 // CHECKLIST
-const getChecklist = () => {
-    const { value: accept } = Swal.fire({
-        title: 'Grocery list',
-        confirmButtonColor: "#3a4a58",
-        html: `
-        <h4>Market</h4>
-        <div class="modalCheckContainer">
-        <div class="modalCheckDiv"><input type="checkbox" id="olive"><p>Olive</p></div>
-        <div class="modalCheckDiv"><input type="checkbox" id="rice"><p>Rice</p></div>
-        <div class="modalCheckDiv"><input type="checkbox" id="soup"><p>Soup</p></div>
-        <div class="modalCheckDiv"><input type="checkbox" id="flour"><p>Flour</p></div>
-        <div class="modalCheckDiv"><input type="checkbox" id="gratedBread"><p>Grated bread</p></div>
-        </div>
-        <hr>
+// const getChecklist = () => {
+//     const { value: accept } = Swal.fire({
+//         title: 'Grocery list',
+//         confirmButtonColor: "#3a4a58",
+//         html: `
+//         <h4>Market</h4>
+//         <div class="modalCheckContainer">
+//         <div class="modalCheckDiv"><input type="checkbox" id="olive"><p>Olive</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox" id="rice"><p>Rice</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox" id="soup"><p>Soup</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox" id="flour"><p>Flour</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox" id="gratedBread"><p>Grated bread</p></div>
+//         </div>
+//         <hr>
 
-        <h4>Breakfast & Snack</h4>
-        <div class="modalCheckContainer">
-        <div class="modalCheckDiv"><input type="checkbox"><p>Sugar</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Coffe</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Milk</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Tea</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Cereal</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Cookies</p></div>
-        </div>
-        <hr>
+//         <h4>Breakfast & Snack</h4>
+//         <div class="modalCheckContainer">
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Sugar</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Coffe</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Milk</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Tea</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Cereal</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Cookies</p></div>
+//         </div>
+//         <hr>
 
-        <h4>Dip & Condiments</h4>
-        <div class="modalCheckContainer">
-        <div class="modalCheckDiv"><input type="checkbox"><p>Olive oil</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Pepper</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Salt</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Ketchup</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Mayonnaise</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Mustard</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Tomato sauce</p></div>
-        </div>
-        <hr>
+//         <h4>Dip & Condiments</h4>
+//         <div class="modalCheckContainer">
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Olive oil</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Pepper</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Salt</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Ketchup</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Mayonnaise</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Mustard</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Tomato sauce</p></div>
+//         </div>
+//         <hr>
 
-        <h4>Vegetables</h4>
-        <div class="modalCheckContainer">
-        <div class="modalCheckDiv"><input type="checkbox"><p>Potato</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Eggplant</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Broccoli</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Pumpkin</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Onion</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Mustard</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Cauliflower</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Spinach</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Lettuce</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Carrot</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Tomato</p></div>
-        </div>
-        <hr>
+//         <h4>Vegetables</h4>
+//         <div class="modalCheckContainer">
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Potato</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Eggplant</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Broccoli</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Pumpkin</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Onion</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Mustard</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Cauliflower</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Spinach</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Lettuce</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Carrot</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Tomato</p></div>
+//         </div>
+//         <hr>
 
-        <h4>Fruits</h4>
-        <div class="modalCheckContainer">
-        <div class="modalCheckDiv"><input type="checkbox"><p>PineApple</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Banana</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Lemmon</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Strawberry</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Apple</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Orange</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Pear</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Melon</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Grapefruit</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Grape</p></div>
-        <div class="modalCheckDiv"><input type="checkbox"><p>Watermelon</p></div>
-        </div>
-        <hr>
-        `,
+//         <h4>Fruits</h4>
+//         <div class="modalCheckContainer">
+//         <div class="modalCheckDiv"><input type="checkbox"><p>PineApple</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Banana</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Lemmon</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Strawberry</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Apple</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Orange</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Pear</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Melon</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Grapefruit</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Grape</p></div>
+//         <div class="modalCheckDiv"><input type="checkbox"><p>Watermelon</p></div>
+//         </div>
+//         <hr>
+//         `,
+//     });
+// };
+
+// const openModalChecklist = document.getElementById("imgCheck");
+// openModalChecklist.addEventListener("click", getChecklist);
+
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', () => {
+        const usuario = localStorage.getItem("usuario");
+        const checkboxId = checkbox.id;
+        const isChecked = checkbox.checked;
+        const usuarioData = JSON.parse(localStorage.getItem(usuario)) || {};
+
+        // Actualizar valor en el objeto usuarioData
+        usuarioData[checkboxId] = isChecked;
+
+        // Guardar el objeto usuarioData en el Local Storage
+        localStorage.setItem(usuario, JSON.stringify(usuarioData));
     });
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach((checkbox) => {
-        checkbox.addEventListener('change', () => {
-            const usuario = sessionStorage.getItem("usuario");
-            const checkboxId = checkbox.id;
-            const isChecked = checkbox.checked;
-            const usuarioData = JSON.parse(localStorage.getItem(usuario)) || {};
-        
-            // Actualizar valor en el objeto usuarioData
-            usuarioData[checkboxId] = isChecked;
-        
-            // Guardar el objeto usuarioData en el Local Storage
-            localStorage.setItem(usuario, JSON.stringify(usuarioData));
-        });
-    });
-};
-const openModalChecklist = document.getElementById("imgCheck");
-openModalChecklist.addEventListener("click", getChecklist);
+});
 
-window.addEventListener('DOMContentLoaded', () => {
-    const storedChecklist = localStorage.getItem('checklist');
-  
+
+const restoreUserChecklist = () => {
+    const user =  localStorage.getItem("usuario")
+    const storedChecklist = localStorage.getItem(user);
+    
     if (storedChecklist) {
         const checklist = JSON.parse(storedChecklist);
-  
+
         for (const id in checklist) {
-            const checkbox = document.getElementById(id);
-        
+        const checkbox = document.getElementById(id);
+
             if (checkbox) {
                 checkbox.checked = checklist[id];
-            };
-        };
-    };
-});
+            }
+        }
+    }  
+}
+
+document.addEventListener('DOMContentLoaded', restoreUserChecklist);
+// document.getElementById("btn_add").addEventListener('DOMContentLoaded', addCheck);
+
+
+
+
+
 
 // LIBRERIA SCROLL REVEAL
 ScrollReveal('.smooth', { easing: 'ease-in' });
 ScrollReveal({ distance: '60px' });
 ScrollReveal().reveal('section', { duration: 1500, origin: 'bottom'});
 ScrollReveal().reveal('hr', { duration: 1500, origin: 'bottom'});
-
-
-
-
-
-//!++++++++++++++++++++++++++++++++++++++++++++++++++++++
- //* TRANSLATE FEATURE (EN PROGRESO, NO ESTA TERMIANDO)
-
-let translationEnabled = true;
-const translate = () =>{
-
-    if (sessionStorage.getItem("usuario") === null) {
-        document.getElementById("todayList").innerHTML = `La lista para hoy`;
-    } else {
-        document.getElementById("todayList").innerHTML = `La lista de ${sessionStorage.getItem("usuario")} para hoy`;
-    };
-
-    const translationToggle = document.getElementById("translate");
-    translationToggle.classList.toggle("ri-translate-2");
-    translationToggle.classList.toggle("ri-translate");
-
-
-
-    const mySavedListEng = "My saved List";
-    const mySavedListEsp =  "Mis listas guardadas";
-    const savedList = document.getElementById("savedList");
-
-    const aboutOurAppEng = "About our App";
-    const aboutOurAppEsp = "Sobre nuestra App";
-    const aboutOurApp = document.getElementById("aboutOurApp");
-
-    const talkToUsEng = "Talk to Us";
-    const talkToUsEsp = "Comunícate con nosotros";
-    const talkToUs = document.getElementById("talkToUs");
-
-    const aboutOurAppP1Eng = "Welcome to our supermarket list! This is your ultimate guide to shopping for groceries at our store. We've put together a comprehensive list of all the items you need to stock up your pantry and fridge. Our list includes everything from fresh produce to pantry staples, so you can easily find everything you need in one place.";
-    const aboutOurAppP1Esp = "¡Bienvenido a nuestra lista de supermercado! Esta es tu guía definitiva para hacer compras de alimentos en nuestra tienda. Hemos creado una lista completa de todos los artículos que necesitas para abastecer tu despensa y refrigerador. Nuestra lista incluye desde productos frescos hasta ingredientes básicos de despensa, para que puedas encontrar fácilmente todo lo que necesitas en un solo lugar.";
-    const aboutOurAppP1 = document.getElementById("aboutOurAppP1");
-
-    const aboutOurAppP2Eng = "So, grab your shopping cart and get ready to fill it up with all the items on your list. With our comprehensive selection, competitive prices, and helpful staff, you'll be able to get everything you need in one convenient shopping trip.";
-    const aboutOurAppP2Esp = "Así que, agarra tu carrito de compras y prepárate para llenarlo con todos los artículos de tu lista. Con nuestra amplia selección, precios competitivos y personal amable, podrás obtener todo lo que necesitas en un solo viaje de compras conveniente.";
-    const aboutOurAppP2 = document.getElementById("aboutOurAppP2");
-
-    const talkToUsPEng = "Follow us on our social media platforms for more information. Thank you!" ;
-    const talkToUsPEsp = "Síguenos en nuestras redes sociales para obtener más información. ¡Gracias!";
-    const talkToUsP = document.getElementById("talkToUsP");
-
-    if (translationEnabled) {
-        savedList.innerHTML = mySavedListEsp;
-        aboutOurApp.innerHTML = aboutOurAppEsp;
-        talkToUs.innerHTML = talkToUsEsp;
-        aboutOurAppP1.innerHTML = aboutOurAppP1Esp;
-        aboutOurAppP2.innerHTML = aboutOurAppP2Esp;
-        talkToUsP.innerHTML = talkToUsPEsp;
-
-        if (sessionStorage.getItem("usuario") === null) {
-            document.getElementById("todayList").innerHTML = `La lista para hoy`;
-        } else {
-            document.getElementById("todayList").innerHTML = `La lista de ${sessionStorage.getItem("usuario")} para hoy`;
-        };
-
-    } else {
-        savedList.innerHTML = mySavedListEng;
-        aboutOurApp.innerHTML = aboutOurAppEng;
-        talkToUs.innerHTML = talkToUsEng;
-        aboutOurAppP1.innerHTML = aboutOurAppP1Eng;
-        aboutOurAppP2.innerHTML = aboutOurAppP2Eng;
-        talkToUsP.innerHTML = talkToUsPEng;
-        if (sessionStorage.getItem("usuario") === null) {
-            document.getElementById("todayList").innerHTML = `Today's List`;
-        } else {
-            document.getElementById("todayList").innerHTML = `Today's ${sessionStorage.getItem("usuario")} List`;
-        };
-    };
-    translationEnabled = !translationEnabled;
-}; 
-document.getElementById("translate").addEventListener("click", translate);
