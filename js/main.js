@@ -82,7 +82,6 @@ class ListaEntradas {
 
     // DEFINO LA FUNCION PARA BUSCAR UN PRODUCTO SEGUN EL NOMBRE
     buscarListaEntrada(name){
-
         name.toLowerCase();
         const tabla = document.getElementById("tablas");
         const columnas = tabla.getElementsByTagName("tr");
@@ -119,7 +118,6 @@ const funcionAgregar = () => {
 // FUNCION PARA BUSCAR PRODUCTOS A LA LISTA
 const funcionBuscar = () => {
     let dataBtnSearch = document.getElementById("search").value;
-    console.log(dataBtnSearch);
     productoAgregado.buscarListaEntrada(dataBtnSearch.toUpperCase());
     document.getElementById("search").value = "";
 };
@@ -381,7 +379,6 @@ const getRecipe = async () => {
   const openModalRecipe = document.getElementById('imgRecipe');
   openModalRecipe.addEventListener('click', getRecipe);
 
-let olive;
 // CHECKLIST
 const getChecklist = () => {
     const { value: accept } = Swal.fire({
@@ -390,184 +387,104 @@ const getChecklist = () => {
         html: `
         <h4>Market</h4>
         <div class="modalCheckContainer">
-        <div class="modalCheckDiv">
-        <input type="checkbox" id="olive"><p>Olive</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Rice</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Soup</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Flour</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Grated bread</p>
-        </div>
+        <div class="modalCheckDiv"><input type="checkbox" id="olive"><p>Olive</p></div>
+        <div class="modalCheckDiv"><input type="checkbox" id="rice"><p>Rice</p></div>
+        <div class="modalCheckDiv"><input type="checkbox" id="soup"><p>Soup</p></div>
+        <div class="modalCheckDiv"><input type="checkbox" id="flour"><p>Flour</p></div>
+        <div class="modalCheckDiv"><input type="checkbox" id="gratedBread"><p>Grated bread</p></div>
         </div>
         <hr>
 
         <h4>Breakfast & Snack</h4>
         <div class="modalCheckContainer">
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Sugar</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Coffe</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Milk</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Tea</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Cereal</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Cookies</p>
-        </div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Sugar</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Coffe</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Milk</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Tea</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Cereal</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Cookies</p></div>
         </div>
         <hr>
 
         <h4>Dip & Condiments</h4>
         <div class="modalCheckContainer">
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Olive oil</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Pepper</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Salt</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Ketchup</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Mayonnaise</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Mustard</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Tomato sauce</p>
-        </div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Olive oil</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Pepper</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Salt</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Ketchup</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Mayonnaise</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Mustard</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Tomato sauce</p></div>
         </div>
         <hr>
 
         <h4>Vegetables</h4>
         <div class="modalCheckContainer">
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Potato</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Eggplant</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Broccoli</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Pumpkin</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Onion</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Mustard</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Cauliflower</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Spinach</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Lettuce</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Carrot</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Tomato</p>
-        </div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Potato</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Eggplant</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Broccoli</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Pumpkin</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Onion</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Mustard</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Cauliflower</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Spinach</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Lettuce</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Carrot</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Tomato</p></div>
         </div>
         <hr>
 
         <h4>Fruits</h4>
         <div class="modalCheckContainer">
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>PineApple</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Banana</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Lemmon</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Strawberry</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Apple</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Orange</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Pear</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Melon</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Grapefruit</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Grape</p>
-        </div>
-        <div class="modalCheckDiv">
-        <input type="checkbox"><p>Watermelon</p>
-        </div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>PineApple</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Banana</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Lemmon</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Strawberry</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Apple</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Orange</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Pear</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Melon</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Grapefruit</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Grape</p></div>
+        <div class="modalCheckDiv"><input type="checkbox"><p>Watermelon</p></div>
         </div>
         <hr>
         `,
     });
-
-    //! GUARDAR CHECKLIST
-    // Obtener todos los checkboxes
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    const checkboxesOlive = document.getElementById('olive');
-    checkboxesOlive.addEventListener("change", () => {
-        // Obtener el estado del checkbox
-        const checkboxesOliveState = checkboxesOlive.checked;
-
-        console.log(checkboxesOliveState);
-        // Guardar el estado del checkbox en el almacenamiento local
-        localStorage.setItem("checkbox.id", checkboxesOliveState);
-        const check = localStorage.getItem("checkbox.id", checkboxesOliveState);
-        console.log(check);
-        });
-    console.log(checkboxes);
-
-    // Escuchar el evento de cambio en los checkboxes
-    checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
-        // Obtener el estado del checkbox
-        const checkboxState = checkbox.checked;
-        console.log(checkboxState);
-        // Guardar el estado del checkbox en el almacenamiento local
-        localStorage.setItem("checkbox.id", checkboxState);
-        const check = localStorage.getItem("checkbox.id", checkboxState);
-        console.log(check);
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', () => {
+            const usuario = sessionStorage.getItem("usuario");
+            const checkboxId = checkbox.id;
+            const isChecked = checkbox.checked;
+            const usuarioData = JSON.parse(localStorage.getItem(usuario)) || {};
+        
+            // Actualizar valor en el objeto usuarioData
+            usuarioData[checkboxId] = isChecked;
+        
+            // Guardar el objeto usuarioData en el Local Storage
+            localStorage.setItem(usuario, JSON.stringify(usuarioData));
         });
     });
-    //! FIN DE GUARDAR CHECKLIST
-
 };
 const openModalChecklist = document.getElementById("imgCheck");
 openModalChecklist.addEventListener("click", getChecklist);
+
+window.addEventListener('DOMContentLoaded', () => {
+    const storedChecklist = localStorage.getItem('checklist');
+  
+    if (storedChecklist) {
+        const checklist = JSON.parse(storedChecklist);
+  
+        for (const id in checklist) {
+            const checkbox = document.getElementById(id);
+        
+            if (checkbox) {
+                checkbox.checked = checklist[id];
+            };
+        };
+    };
+});
 
 // LIBRERIA SCROLL REVEAL
 ScrollReveal('.smooth', { easing: 'ease-in' });
