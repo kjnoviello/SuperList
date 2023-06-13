@@ -220,7 +220,7 @@ const funcionAddUser = () => {
         // FUNCION SWEETALERT
         sweetAlert(`Bienvenido ${localStorage.getItem("usuario", userLogin.toUpperCase())}`, 'info', 'Done', false);
 
-
+        restoreUserChecklist();
 
     };
 };
@@ -448,13 +448,17 @@ checkboxes.forEach((checkbox) => {
 
 const restoreUserChecklist = () => {
     const user =  localStorage.getItem("usuario")
+    console.log(`log de user ${user}`);
     const storedChecklist = localStorage.getItem(user);
-    
+    console.log("log de storedChecklist", storedChecklist);
+
     if (storedChecklist) {
         const checklist = JSON.parse(storedChecklist);
+        console.log("log de checklist", checklist);
 
         for (const id in checklist) {
         const checkbox = document.getElementById(id);
+        console.log("log de checkbox", checkbox);
 
             if (checkbox) {
                 checkbox.checked = checklist[id];
