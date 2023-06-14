@@ -115,14 +115,14 @@ const funcionAgregar = () => {
     infoTabla = productoAgregado.agregarListaEntrada()
 };
 
-// FUNCION PARA BUSCAR PRODUCTOS A LA LISTA
+// FUNCION PARA BUSCAR PRODUCTOS EN LA LISTA
 const funcionBuscar = () => {
     let dataBtnSearch = document.getElementById("search").value;
     productoAgregado.buscarListaEntrada(dataBtnSearch.toUpperCase());
     document.getElementById("search").value = "";
 };
 
-// FUNCION PARA BORRAR PRODUCTOS A LA LISTA
+// FUNCION PARA BORRAR PRODUCTOS DE LA LISTA
 const eliminarFila = (boton) => {  
     Swal.fire({
         text: `Do you want to delete this??`,
@@ -157,33 +157,10 @@ const actTotal = () => {
     `;
 };
 
-// CAMBIAR COLOR AL BOTON AGREGAR Y BUSCAR CUANDO SE HACE CLICK
-const funcionColorDownBtnAdd = () => {
-    document.getElementById("btn_add").classList.add("btn_color")
-};
-const funcionColorDownBtnSrc = () => {
-    document.getElementById("btn_src").classList.add("btn_color")
-};
-const funcionColorUpBtnAdd = () => {
-    document.getElementById("btn_add").classList.remove("btn_color")
-};
-const funcionColorUpBtnSrc = () => {
-    document.getElementById("btn_src").classList.remove("btn_color")
-};
-
-// EVENTOS
-document.getElementById("btn_add").addEventListener("click", funcionAgregar);
-document.getElementById("btn_add").addEventListener("mousedown", funcionColorDownBtnAdd);
-document.getElementById("btn_add").addEventListener("mouseup", funcionColorUpBtnAdd);
-document.getElementById("btn_src").addEventListener("click", funcionBuscar);
-document.getElementById("btn_src").addEventListener("mousedown", funcionColorDownBtnSrc);
-document.getElementById("btn_src").addEventListener("mouseup", funcionColorUpBtnSrc);
-
-// INICIO DE LOGIN
+// FUNCION PARA LOGIN
 let userLogin;
 const funcionLogin = () => {
     const sectionLogin = document.getElementById("sectionLogin");
-
     sectionLogin.innerHTML = `
         <section class="section fade ${darkModeEnabled ? '' : 'section_dark_mode'}" id="sectionUser">
         <input class="form_input" id="inputLogin" type="text" placeholder="Your user name">
@@ -195,7 +172,7 @@ const funcionLogin = () => {
     document.getElementById("btn_user").addEventListener("click", funcionAddUser);
 };
 
-// FUNCION AGREGAR USUARIO
+// FUNCION PARA AGREGAR USUARIO EN EL LOGIN
 
 const funcionAddUser = () => {
     userLogin = document.getElementById("inputLogin").value;
@@ -204,12 +181,12 @@ const funcionAddUser = () => {
         sweetAlert("Please type in your User name", "warning", "ok", false)
     } else {
     
-        localStorage.setItem("usuario", userLogin.toUpperCase());
+        sessionStorage.setItem("usuario", userLogin.toUpperCase());
 
         const sectionLogin = document.getElementById("sectionLogin");
         sectionLogin.innerHTML = "";
         
-        document.getElementById("todayList").innerText = `Today's ${localStorage.getItem("usuario")} List`;
+        document.getElementById("todayList").innerText = `Today's ${sessionStorage.getItem("usuario")} List`;
         
         const login = document.getElementById("login");
         login.classList.replace('ri-login-box-line', 'ri-logout-box-line');
@@ -218,8 +195,9 @@ const funcionAddUser = () => {
         document.getElementById("logout").addEventListener("click", funcionDelUser);
 
         // FUNCION SWEETALERT
-        sweetAlert(`Welcome ${localStorage.getItem("usuario", userLogin.toUpperCase())}`, 'info', 'Done', false);
+        sweetAlert(`Welcome ${sessionStorage.getItem("usuario", userLogin.toUpperCase())}`, 'info', 'Done', false);
 
+        // REVISA SI EL USUARIO YA TIENE UN CHECKLIST GUARDADA
         restoreUserChecklist();
 
     };
@@ -235,7 +213,7 @@ const funcionDelUser = () => {
         confirmButtonColor: "#3a4a58",        
     }).then((result) => {
         if(result.isConfirmed) {
-            localStorage.removeItem("usuario")
+            sessionStorage.removeItem("usuario")
             location.reload();
         };
     });
@@ -321,22 +299,22 @@ openModalRecipe.addEventListener('click', getRecipe);
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 checkboxes.forEach((checkbox) => {
     checkbox.addEventListener('change', () => {
-        const usuario = localStorage.getItem("usuario");
+        const usuario = sessionStorage.getItem("usuario");
         const checkboxId = checkbox.id;
         const isChecked = checkbox.checked;
         const usuarioData = JSON.parse(localStorage.getItem(usuario)) || {};
 
-        // Actualizar valor en el objeto usuarioData
+        // ACTUALIZA EL VALOR EN EL USUARIODATA
         usuarioData[checkboxId] = isChecked;
 
-        // Guardar el objeto usuarioData en el Local Storage
+        // GUARDA USUARIODATA EN EL LOCALSTORAGE
         localStorage.setItem(usuario, JSON.stringify(usuarioData));
     });
 });
 
 // FUNCION PARA RESTAURAR CHECKLIST DEL USUARIO
 const restoreUserChecklist = () => {
-    const user =  localStorage.getItem("usuario")
+    const user =  sessionStorage.getItem("usuario")
     console.log(`log de user ${user}`);
     const storedChecklist = localStorage.getItem(user);
     console.log("log de storedChecklist", storedChecklist);
@@ -356,7 +334,6 @@ const restoreUserChecklist = () => {
     };  
 };
 document.addEventListener('DOMContentLoaded', restoreUserChecklist);
-
 
 // FUNCION SWEETALERT
 function sweetAlert(text, icon, buttonText, showButton ) {
@@ -384,7 +361,6 @@ const Toast = Swal.mixin({
         toast.addEventListener('mouseleave', Swal.resumeTimer);
     }
 });
-
 function toast (icon, text) {  
     Toast.fire({
         icon: icon,
@@ -392,6 +368,28 @@ function toast (icon, text) {
         color: "#666565"
     });
 };
+
+// CAMBIAR COLOR AL BOTON AGREGAR Y BUSCAR CUANDO SE HACE CLICK
+const funcionColorDownBtnAdd = () => {
+    document.getElementById("btn_add").classList.add("btn_color")
+};
+const funcionColorDownBtnSrc = () => {
+    document.getElementById("btn_src").classList.add("btn_color")
+};
+const funcionColorUpBtnAdd = () => {
+    document.getElementById("btn_add").classList.remove("btn_color")
+};
+const funcionColorUpBtnSrc = () => {
+    document.getElementById("btn_src").classList.remove("btn_color")
+};
+
+// EVENTOS
+document.getElementById("btn_add").addEventListener("click", funcionAgregar);
+document.getElementById("btn_add").addEventListener("mousedown", funcionColorDownBtnAdd);
+document.getElementById("btn_add").addEventListener("mouseup", funcionColorUpBtnAdd);
+document.getElementById("btn_src").addEventListener("click", funcionBuscar);
+document.getElementById("btn_src").addEventListener("mousedown", funcionColorDownBtnSrc);
+document.getElementById("btn_src").addEventListener("mouseup", funcionColorUpBtnSrc);
 
 // LIBRERIA SCROLL REVEAL
 ScrollReveal('.smooth', { easing: 'ease-in' });
