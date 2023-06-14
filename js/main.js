@@ -201,7 +201,7 @@ const funcionAddUser = () => {
     userLogin = document.getElementById("inputLogin").value;
     
     if ((userLogin === "" || userLogin === null)) {
-        sweetAlert("Debe ingresar un nombre de usuario", "warning", "ok", false)
+        sweetAlert("Please type in your User name", "warning", "ok", false)
     } else {
     
         localStorage.setItem("usuario", userLogin.toUpperCase());
@@ -218,7 +218,7 @@ const funcionAddUser = () => {
         document.getElementById("logout").addEventListener("click", funcionDelUser);
 
         // FUNCION SWEETALERT
-        sweetAlert(`Bienvenido ${localStorage.getItem("usuario", userLogin.toUpperCase())}`, 'info', 'Done', false);
+        sweetAlert(`Welcome ${localStorage.getItem("usuario", userLogin.toUpperCase())}`, 'info', 'Done', false);
 
         restoreUserChecklist();
 
@@ -255,41 +255,6 @@ document.getElementById("login").addEventListener("click", function(){
     };
     toggleLoginState = !toggleLoginState;
 });
-
-// FUNCION SWEETALERT
-function sweetAlert(text, icon, buttonText, showButton ) {
-    Swal.fire({
-        text: text,
-        icon: icon,
-        confirmButtonText: buttonText,
-        timer: 2000,
-        background: "white",
-        color: "#666565",
-        confirmButtonColor: "#3a4a58",
-        showConfirmButton : showButton
-        });
-};
-
-// FUNCION TOAST
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top',
-    showConfirmButton: false,
-    timer: 2000,
-    timerProgressBar: false,
-    didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer);
-        toast.addEventListener('mouseleave', Swal.resumeTimer);
-    }
-});
-
-function toast (icon, text) {  
-    Toast.fire({
-        icon: icon,
-        title: text,
-        color: "#666565"
-    });
-};
 
 // DARK-MODE
 let darkModeEnabled = true;
@@ -348,87 +313,11 @@ const getRecipe = async () => {
         .finally(
             console.log("End of process")
         );
-  };
-  const openModalRecipe = document.getElementById('imgRecipe');
-  openModalRecipe.addEventListener('click', getRecipe);
+};
+const openModalRecipe = document.getElementById('imgRecipe');
+openModalRecipe.addEventListener('click', getRecipe);
 
-// CHECKLIST
-// const getChecklist = () => {
-//     const { value: accept } = Swal.fire({
-//         title: 'Grocery list',
-//         confirmButtonColor: "#3a4a58",
-//         html: `
-//         <h4>Market</h4>
-//         <div class="modalCheckContainer">
-//         <div class="modalCheckDiv"><input type="checkbox" id="olive"><p>Olive</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox" id="rice"><p>Rice</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox" id="soup"><p>Soup</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox" id="flour"><p>Flour</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox" id="gratedBread"><p>Grated bread</p></div>
-//         </div>
-//         <hr>
-
-//         <h4>Breakfast & Snack</h4>
-//         <div class="modalCheckContainer">
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Sugar</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Coffe</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Milk</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Tea</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Cereal</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Cookies</p></div>
-//         </div>
-//         <hr>
-
-//         <h4>Dip & Condiments</h4>
-//         <div class="modalCheckContainer">
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Olive oil</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Pepper</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Salt</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Ketchup</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Mayonnaise</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Mustard</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Tomato sauce</p></div>
-//         </div>
-//         <hr>
-
-//         <h4>Vegetables</h4>
-//         <div class="modalCheckContainer">
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Potato</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Eggplant</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Broccoli</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Pumpkin</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Onion</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Mustard</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Cauliflower</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Spinach</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Lettuce</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Carrot</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Tomato</p></div>
-//         </div>
-//         <hr>
-
-//         <h4>Fruits</h4>
-//         <div class="modalCheckContainer">
-//         <div class="modalCheckDiv"><input type="checkbox"><p>PineApple</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Banana</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Lemmon</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Strawberry</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Apple</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Orange</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Pear</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Melon</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Grapefruit</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Grape</p></div>
-//         <div class="modalCheckDiv"><input type="checkbox"><p>Watermelon</p></div>
-//         </div>
-//         <hr>
-//         `,
-//     });
-// };
-
-// const openModalChecklist = document.getElementById("imgCheck");
-// openModalChecklist.addEventListener("click", getChecklist);
-
+// GUARDAR CHECKLIST DEL USUARIO
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 checkboxes.forEach((checkbox) => {
     checkbox.addEventListener('change', () => {
@@ -445,7 +334,7 @@ checkboxes.forEach((checkbox) => {
     });
 });
 
-
+// FUNCION PARA RESTAURAR CHECKLIST DEL USUARIO
 const restoreUserChecklist = () => {
     const user =  localStorage.getItem("usuario")
     console.log(`log de user ${user}`);
@@ -462,18 +351,47 @@ const restoreUserChecklist = () => {
 
             if (checkbox) {
                 checkbox.checked = checklist[id];
-            }
-        }
-    }  
-}
-
+            };
+        };
+    };  
+};
 document.addEventListener('DOMContentLoaded', restoreUserChecklist);
-// document.getElementById("btn_add").addEventListener('DOMContentLoaded', addCheck);
 
 
+// FUNCION SWEETALERT
+function sweetAlert(text, icon, buttonText, showButton ) {
+    Swal.fire({
+        text: text,
+        icon: icon,
+        confirmButtonText: buttonText,
+        timer: 2000,
+        background: "white",
+        color: "#666565",
+        confirmButtonColor: "#3a4a58",
+        showConfirmButton : showButton
+        });
+};
 
+// FUNCION TOAST
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: false,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+    }
+});
 
-
+function toast (icon, text) {  
+    Toast.fire({
+        icon: icon,
+        title: text,
+        color: "#666565"
+    });
+};
 
 // LIBRERIA SCROLL REVEAL
 ScrollReveal('.smooth', { easing: 'ease-in' });

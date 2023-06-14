@@ -11,7 +11,7 @@ html{
   scroll-behavior:smooth
 }
 
-h4{
+h3{
   text-align: center;
 }
 
@@ -316,6 +316,7 @@ form{
   justify-content: center;
   margin-left: -15px;
   margin-right: -15px;
+  margin-bottom: 50px;
 }
 
 .section_img{
