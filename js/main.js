@@ -27,21 +27,17 @@ class ListaEntradas {
         const cantidadIngresada = document.getElementById("inputCantidad").value;
         cantidad = cantidadIngresada ? parseInt(cantidadIngresada) : 1;
         precio = document.getElementById("inputPrecio").value;
-        
         if ((nombre === "" || nombre === null) || (cantidad <1 || isNaN(cantidad)) || (precio <=0 || isNaN(precio))){
 
             // FUNCION SWEETALERT
             sweetAlert(`Sorry, you must enter a product or a positive integer`,'warning', 'Got it!', false)
-            
         } else {
-        
             const nuevaEntrada = new Entrada(nombre, cantidad, precio);
             this.listaEntrada.push(nuevaEntrada);
             const precioTotal = nuevaEntrada.precio * nuevaEntrada.cantidad;
 
             // AGREGO AL DOM
             let tableHeader = document.getElementById("table_header");
-
             tableHeader.innerHTML = `
             <tr class="section_table_header" id="tr_header">
             <th><strong><em>Product</em></strong></th>
@@ -51,10 +47,8 @@ class ListaEntradas {
             <th class="td_btn"><button style="visibility: hidden;">DEL</button></th>
             </tr>
             `;
-
             let contenedor = document.getElementById("tablas");
             let nuevo = document.createElement("tr");
-            
             nuevo.innerHTML = `
             <td>${nombre.toUpperCase()}</td>
             <td>${cantidad}</td>
@@ -62,7 +56,6 @@ class ListaEntradas {
             <td id="idPrecio">$ ${precioTotal.toFixed(2)}</td>
             <td class="td_btn"><i onclick="eliminarFila(this)" class="ri-delete-bin-fill icon_delete"></i></td>
             `;
-            
             contenedor.prepend(nuevo);
 
             // FUNCION TOAST
@@ -75,7 +68,6 @@ class ListaEntradas {
             document.getElementById("inputNombre").value = "";
             document.getElementById("inputCantidad").value = "";
             document.getElementById("inputPrecio").value = "";
-
             };
         return this.listaEntrada;
     };
@@ -86,13 +78,11 @@ class ListaEntradas {
         const tabla = document.getElementById("tablas");
         const columnas = tabla.getElementsByTagName("tr");
         let productoBuscar = [];
-
         for (let i = 0; i < columnas.length; i++) {
             const celdas = columnas[i].getElementsByTagName("td");
             let array = celdas[0].textContent;
             productoBuscar.push(array);
         };
-
         const resultado = productoBuscar.includes(name); 
 
         if (resultado) {
@@ -102,7 +92,6 @@ class ListaEntradas {
             // FUNCION SWEETALERT
             sweetAlert(`There's no ${name} yet`,'error', 'Ok', false );
         };
-
         document.getElementById("search").addEventListener("click", () => {});
     };
 };
@@ -173,25 +162,22 @@ const funcionLogin = () => {
 };
 
 // FUNCION PARA AGREGAR USUARIO EN EL LOGIN
-
 const funcionAddUser = () => {
     userLogin = document.getElementById("inputLogin").value;
     
     if ((userLogin === "" || userLogin === null)) {
         sweetAlert("Please type in your User name", "warning", "ok", false)
     } else {
-    
         sessionStorage.setItem("usuario", userLogin.toUpperCase());
-
         const sectionLogin = document.getElementById("sectionLogin");
         sectionLogin.innerHTML = "";
         
+        document.getElementById("logP").innerText = `LOG OUT`;
         document.getElementById("todayList").innerText = `Today's ${sessionStorage.getItem("usuario")} List`;
         
         const login = document.getElementById("login");
         login.classList.replace('ri-login-box-line', 'ri-logout-box-line');
         login.setAttribute('id', 'logout');
-
         document.getElementById("logout").addEventListener("click", funcionDelUser);
 
         // FUNCION SWEETALERT
@@ -199,7 +185,6 @@ const funcionAddUser = () => {
 
         // REVISA SI EL USUARIO YA TIENE UN CHECKLIST GUARDADA
         restoreUserChecklist();
-
     };
 };
 
@@ -252,7 +237,6 @@ const darkMode = () => {
     for (let i = 0; i < socialIcons.length; i++) {
       socialIcons[i].classList.toggle("media");
     };
-    
     darkModeEnabled = !darkModeEnabled;
   };
 document.getElementById("dark_mode").addEventListener("click", darkMode);

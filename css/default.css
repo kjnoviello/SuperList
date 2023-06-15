@@ -137,6 +137,8 @@ p {
   flex-direction: row;
   justify-content: end;
   margin-bottom: 10px;
+  margin-inline: 20px;
+
 }
 
 .div_icon_i:hover{
@@ -447,6 +449,9 @@ a {
   .icon{
     font-size: x-large;
     margin-block: 5px;
+  }
+  .div_icon{
+    justify-content: space-around;
   }
 }
 
