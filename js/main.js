@@ -157,7 +157,6 @@ const funcionLogin = () => {
         </section>
         <hr class="fade">
     `;
-
     document.getElementById("btn_user").addEventListener("click", funcionAddUser);
 };
 
@@ -169,6 +168,7 @@ const funcionAddUser = () => {
         sweetAlert("Please type in your User name", "warning", "ok", false)
     } else {
         sessionStorage.setItem("usuario", userLogin.toUpperCase());
+
         const sectionLogin = document.getElementById("sectionLogin");
         sectionLogin.innerHTML = "";
         
@@ -252,7 +252,6 @@ const getRecipe = async () => {
             const recipeCategory = recipe.strCategory;
             const recipeInstructions = recipe.strInstructions;
             recipeImg = recipe.strMealThumb
-
         Swal.fire({
             title: recipeName,
             html: `
