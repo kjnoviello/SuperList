@@ -213,11 +213,7 @@ const funcionLoginDel = () => {
 };
 let toggleLoginState = true;
 document.getElementById("login").addEventListener("click", function(){
-    if (toggleLoginState) {
-        funcionLogin();
-    } else {
-        funcionLoginDel();
-    };
+    toggleLoginState ? funcionLogin() : funcionLoginDel();
     toggleLoginState = !toggleLoginState;
 });
 
