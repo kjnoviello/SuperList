@@ -243,6 +243,13 @@ form{
   transition: all 0.3s ease;
 }
 
+.section_login{
+  padding-top: 20px;
+  padding-bottom: 30px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
 .section_dark_mode{
   padding: 20px 20px 30px;
   background-color: rgb(39, 39, 39);
