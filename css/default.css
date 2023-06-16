@@ -22,7 +22,7 @@ h3{
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-size: 17px;
   font-weight: 400;
-  padding: 15px;
+  padding: 12px;
   margin: 0;
 }
 
@@ -184,6 +184,10 @@ form{
   flex-direction: column;
 }
 
+.form_div_login{
+  align-items: center
+}
+
 .form_div_btn{
   display: inherit;
   flex-direction: row;
@@ -239,13 +243,6 @@ form{
 
 .section{
   padding: 20px 20px 30px;
-  background-color: white;
-  transition: all 0.3s ease;
-}
-
-.section_login{
-  padding-top: 20px;
-  padding-bottom: 30px;
   background-color: white;
   transition: all 0.3s ease;
 }
@@ -475,11 +472,6 @@ a {
   .form_input{
     min-width: 320px;
     height: 60px;
-  }
-  .form_input_login{
-    min-width: 280px;
-    margin-inline: 0px;
-
   }
   .btn{
     min-width: 150px;
