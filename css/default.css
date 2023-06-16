@@ -476,6 +476,9 @@ a {
     min-width: 320px;
     height: 60px;
   }
+  .form_input_login{
+    min-width: 280px;
+  }
   .btn{
     min-width: 150px;
   }

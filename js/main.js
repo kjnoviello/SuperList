@@ -152,7 +152,7 @@ const funcionLogin = () => {
     const sectionLogin = document.getElementById("sectionLogin");
     sectionLogin.innerHTML = `
         <section class="section_login fade ${darkModeEnabled ? '' : 'section_dark_mode'}" id="sectionUser">
-        <input class="form_input" id="inputLogin" type="text" placeholder="Your user name">
+        <input class="form_input form_input_login" id="inputLogin" type="text" placeholder="Your user name">
         <input class="btn form_input btn_user" id="btn_user" type="button" value="Add User">
         </section>
         <hr class="fade">
