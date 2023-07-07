@@ -44,7 +44,7 @@ class ListaEntradas {
             <th><strong><em>Unit</em></strong></th>
             <th><strong><em>Price</em></strong></th>
             <th><strong><em>Total</em></th>
-            <th class="td_btn"><button style="visibility: hidden;">DEL</button></th>
+            <th class="td_btn"><i onclick="eliminarTabla()" class="ri-close-circle-line"></i>
             </tr>
             `;
             let contenedor = document.getElementById("tablas");
@@ -101,7 +101,14 @@ const productoAgregado = new ListaEntradas;
 
 // FUNCION PARA AGREGAR PRODUCTOS A LA LISTA
 const funcionAgregar = () => {
-    infoTabla = productoAgregado.agregarListaEntrada()
+    const prodAgregadoEnLista = productoAgregado.agregarListaEntrada();
+    localStorage.setItem(userLogin.toLowerCase(), JSON.stringify(prodAgregadoEnLista));
+    console.log(prodAgregadoEnLista);
+
+    //! ESTOY HACIENDO QUE SE GUARDE EN EL LOCAL STORAGE LA LISTA CON EL USUARIO EN MINUSCULA. 
+    //TODO HACER QUE AL BORRAR UN PRODUCTO DE LA LISTA LO BORRE DEL STORAGE DEL USUARIO.
+    //TODO HACER UN BOTON PARA TRAER EL HISTORIAL DE LA LISTA DEL USUARIO AL FRONT
+
 };
 
 // FUNCION PARA BUSCAR PRODUCTOS EN LA LISTA
@@ -124,9 +131,28 @@ const eliminarFila = (boton) => {
             fila.remove();
             actTotal();
             // FUNCION SWEETALERT
-            sweetAlert('Deleted','success', 'Done', false );
+            sweetAlert('Deleted','success', 'Done', false);
             };
         });
+};
+
+//FUNCION PARA BORRAR LA TABLA DEL USUARIO LOGEADO
+const eliminarTabla = () => {
+    Swal.fire({
+        text: `This will delete all the table, are you sure? There´s no way back from this`,
+        icon: 'question',
+        confirmButtonText: 'Yes, empty the table!!',
+        confirmButtonColor: "#3a4a58"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let tabla = document.getElementById("tablas");
+            while (tabla.rows.length > 0) {
+            tabla.deleteRow(0);
+            }
+            actTotal();
+            localStorage.removeItem(userLogin.toLowerCase());
+        };
+    });
 };
 
 //FUNCION PARA ACTUALIZAR EL TOTAL ACUMULADO DE LOS PRECIOS
@@ -296,18 +322,13 @@ checkboxes.forEach((checkbox) => {
 // FUNCION PARA RESTAURAR CHECKLIST DEL USUARIO
 const restoreUserChecklist = () => {
     const user =  sessionStorage.getItem("usuario")
-    console.log(`log de user ${user}`);
     const storedChecklist = localStorage.getItem(user);
-    console.log("log de storedChecklist", storedChecklist);
 
     if (storedChecklist) {
         const checklist = JSON.parse(storedChecklist);
-        console.log("log de checklist", checklist);
 
         for (const id in checklist) {
         const checkbox = document.getElementById(id);
-        console.log("log de checkbox", checkbox);
-
             if (checkbox) {
                 checkbox.checked = checklist[id];
             };
