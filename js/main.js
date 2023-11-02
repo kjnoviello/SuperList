@@ -44,7 +44,7 @@ class ListaEntradas {
             <th><strong><em>Unit</em></strong></th>
             <th><strong><em>Price</em></strong></th>
             <th><strong><em>Total</em></th>
-            <th class="td_btn"><i onclick="eliminarTabla()" class="ri-close-circle-line"></i>
+            <th class="td_btn"><i onclick="eliminarTabla()" class="ri-close-circle-line icon_delete"></i>
             </tr>
             `;
             let contenedor = document.getElementById("tablas");
@@ -106,7 +106,8 @@ const funcionAgregar = () => {
     console.log(prodAgregadoEnLista);
 
     //! ESTOY HACIENDO QUE SE GUARDE EN EL LOCAL STORAGE LA LISTA CON EL USUARIO EN MINUSCULA. 
-    //TODO HACER QUE AL BORRAR UN PRODUCTO DE LA LISTA LO BORRE DEL STORAGE DEL USUARIO.
+    //TODO HACER QUE AL BORRAR UN PRODUCTO DE LA LISTA LO BORRE DEL STORAGE DEL USUARIO. 
+            //TODO LA FUNCION ELIMINARFILA NO ESTA RELACIONADA CON EL ARRAY. SOLO BORRA LA FILA SELECCIONADA
     //TODO HACER UN BOTON PARA TRAER EL HISTORIAL DE LA LISTA DEL USUARIO AL FRONT
 
 };
@@ -118,6 +119,8 @@ const funcionBuscar = () => {
     document.getElementById("search").value = "";
 };
 
+
+//TODO OPTIMIZAR LOS CODIGOS DE LAS FUNCIONES QUE ELIMINAN
 // FUNCION PARA BORRAR PRODUCTOS DE LA LISTA
 const eliminarFila = (boton) => {  
     Swal.fire({
@@ -130,6 +133,19 @@ const eliminarFila = (boton) => {
             let fila = boton.parentNode.parentNode;
             fila.remove();
             actTotal();
+            
+
+            //! INICIO DE DELETE DE FILA DE USUARIO
+
+            if (userLogin) {
+                let fila = boton.parentNode.parentNode;
+                fila.remove();
+                actTotal();
+            };
+            
+            //! FIN DE DELETE DE FILA DE USUARIO
+
+
             // FUNCION SWEETALERT
             sweetAlert('Deleted','success', 'Done', false);
             };
@@ -151,6 +167,8 @@ const eliminarTabla = () => {
             }
             actTotal();
             localStorage.removeItem(userLogin.toLowerCase());
+            // FUNCION SWEETALERT
+            sweetAlert('Deleted','success', 'Done', false);
         };
     });
 };
