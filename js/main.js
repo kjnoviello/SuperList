@@ -19,6 +19,7 @@ class ListaEntradas {
     constructor() {
         this.listaEntrada = [];
         this.totalAcumulado = 0;
+        this.cargarDatosDesdeLocalStorage();
     };
     
     // DEFINO LA FUNCION PARA AGREGAR LA ENTRADA A LA TABLA
@@ -27,6 +28,7 @@ class ListaEntradas {
         const cantidadIngresada = document.getElementById("inputCantidad").value;
         cantidad = cantidadIngresada ? parseInt(cantidadIngresada) : 1;
         precio = document.getElementById("inputPrecio").value;
+
         if ((nombre === "" || nombre === null) || (cantidad <1 || isNaN(cantidad)) || (precio <=0 || isNaN(precio))){
 
             // FUNCION SWEETALERT
@@ -34,6 +36,7 @@ class ListaEntradas {
         } else {
             const nuevaEntrada = new Entrada(nombre, cantidad, precio);
             this.listaEntrada.push(nuevaEntrada);
+            localStorage.setItem("listaEntrada", JSON.stringify(this.listaEntrada));
             const precioTotal = nuevaEntrada.precio * nuevaEntrada.cantidad;
 
             // AGREGO AL DOM
@@ -71,7 +74,7 @@ class ListaEntradas {
             };
         return this.listaEntrada;
     };
-
+    
     // DEFINO LA FUNCION PARA BUSCAR UN PRODUCTO SEGUN EL NOMBRE
     buscarListaEntrada(name){
         name.toLowerCase();
@@ -94,6 +97,48 @@ class ListaEntradas {
         };
         document.getElementById("search").addEventListener("click", () => {});
     };
+
+    // CARGAR DATOS AL INICIO
+    cargarDatosDesdeLocalStorage() {
+        const datosGuardados = localStorage.getItem("listaEntrada");
+        if (datosGuardados) {
+            // Si hay datos en el localStorage, cargarlos en this.listaEntrada
+            this.listaEntrada = JSON.parse(datosGuardados);
+            const tabla = document.getElementById("tablas");
+            
+            
+            // Agregar las entradas al DOM
+            this.listaEntrada.forEach((entrada) => {
+                
+                let tableHeader = document.getElementById("table_header");
+                tableHeader.innerHTML = `
+                <tr class="section_table_header" id="tr_header">
+                <th><strong><em>Product</em></strong></th>
+                <th><strong><em>Unit</em></strong></th>
+                <th><strong><em>Price</em></strong></th>
+                <th><strong><em>Total</em></th>
+                <th class="td_btn"><i onclick="eliminarTabla()" class="ri-close-circle-line icon_delete"></i>
+                </tr>
+                `;
+                let entradaPrecioTotal = entrada.precio * entrada.cantidad
+                const nuevaFila = document.createElement("tr");
+                nuevaFila.innerHTML = `
+                <td>${entrada.nombre.toUpperCase()}</td>
+                <td>${entrada.cantidad}</td>
+                <td>$ ${entrada.precio}</td>
+                <td id="idPrecio">$ ${(entradaPrecioTotal).toFixed(2)}</td>
+                <td class="td_btn"><i onclick="eliminarFila(this)" class="ri-delete-bin-fill icon_delete"></i></td>
+                `;
+                tabla.appendChild(nuevaFila);
+            })
+    
+            
+    
+            // Actualizar la visualización de la lista en el DOM si es necesario
+            // (código para agregar elementos al DOM según this.listaEntrada)
+        }
+    }
+
 };
 
 // INICIALIZO AL OBJETO
@@ -102,8 +147,6 @@ const productoAgregado = new ListaEntradas;
 // FUNCION PARA AGREGAR PRODUCTOS A LA LISTA
 const funcionAgregar = () => {
     const prodAgregadoEnLista = productoAgregado.agregarListaEntrada();
-    localStorage.setItem(userLogin.toLowerCase(), JSON.stringify(prodAgregadoEnLista));
-    console.log(prodAgregadoEnLista);
 
     //! ESTOY HACIENDO QUE SE GUARDE EN EL LOCAL STORAGE LA LISTA CON EL USUARIO EN MINUSCULA. 
     //TODO HACER QUE AL BORRAR UN PRODUCTO DE LA LISTA LO BORRE DEL STORAGE DEL USUARIO. 
@@ -133,10 +176,11 @@ const eliminarFila = (boton) => {
             let fila = boton.parentNode.parentNode;
             fila.remove();
             actTotal();
+            actualizarLocalStorage();
             
-
+            
             //! INICIO DE DELETE DE FILA DE USUARIO
-
+            
             if (userLogin) {
                 let fila = boton.parentNode.parentNode;
                 fila.remove();
@@ -152,6 +196,7 @@ const eliminarFila = (boton) => {
         });
 };
 
+
 //FUNCION PARA BORRAR LA TABLA DEL USUARIO LOGEADO
 const eliminarTabla = () => {
     Swal.fire({
@@ -166,7 +211,7 @@ const eliminarTabla = () => {
             tabla.deleteRow(0);
             }
             actTotal();
-            localStorage.removeItem(userLogin.toLowerCase());
+            localStorage.clear()
             // FUNCION SWEETALERT
             sweetAlert('Deleted','success', 'Done', false);
         };
@@ -188,7 +233,41 @@ const actTotal = () => {
     document.getElementById("output").innerHTML = `
     <p><strong>TOTAL $ ${totalSuma.toFixed(2)}</strong></p>
     `;
+    localStorage.setItem("totalSuma",  JSON.stringify(totalSuma))
+
 };
+
+// FUNCION PARA ACTUALIZAR EL LOCALSTORAGE DESPUÉS DE BORRAR UNA FILA
+const actualizarLocalStorage = () => {
+    const tabla = document.getElementById("tablas");
+    const filas = tabla.getElementsByTagName("tr");
+    const listaEntrada = [];
+
+    for (let i = 0; i < filas.length; i++) {
+        const celdas = filas[i].getElementsByTagName("td");
+        const nombre = celdas[0].textContent;
+        const cantidad = parseInt(celdas[1].textContent);
+        const precio = parseFloat(celdas[2].textContent.replace("$", ""));
+        listaEntrada.push({ nombre, cantidad, precio });
+    }
+
+    localStorage.setItem("listaEntrada", JSON.stringify(listaEntrada));
+
+    // Actualizar el total en el localStorage
+    actTotal();
+};
+
+// Llamar a actualizarLocalStorage también en la carga inicial para garantizar que los datos estén sincronizados
+actualizarLocalStorage();
+
+const datosGuardados = localStorage.getItem("totalSuma");
+if (datosGuardados) {
+    // Si hay datos en el localStorage, cargarlos en this.listaEntrada
+    this.totalSuma = JSON.parse(datosGuardados);
+    document.getElementById("output").innerHTML = `
+    <p><strong>TOTAL $ ${totalSuma.toFixed(2)}</strong></p>
+    `;
+}
 
 // FUNCION PARA LOGIN
 let userLogin;
@@ -410,6 +489,7 @@ document.getElementById("btn_add").addEventListener("mouseup", funcionColorUpBtn
 document.getElementById("btn_src").addEventListener("click", funcionBuscar);
 document.getElementById("btn_src").addEventListener("mousedown", funcionColorDownBtnSrc);
 document.getElementById("btn_src").addEventListener("mouseup", funcionColorUpBtnSrc);
+
 
 // LIBRERIA SCROLL REVEAL
 ScrollReveal('.smooth', { easing: 'ease-in' });
