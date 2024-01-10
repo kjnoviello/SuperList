@@ -3,7 +3,7 @@
 
 [Go to Super List](https://kjnoviello.github.io/SuperList/)
 
-[Imagen de portada](/img/preview-superlist.gif "Esta es una previsualizacion del proyecto.")
+![Imagen de portada](/img/preview-superlist.gif "Esta es una previsualizacion del proyecto.")
 
 [Video comercial de la app](https://drive.google.com/drive/u/0/folders/1dvLZ-o6xIAoKkxwhaiI9GJHY_LanvTqk)
 
